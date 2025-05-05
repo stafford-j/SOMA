@@ -1,0 +1,406 @@
+/**
+ * Dashboard.css - SOMA Colleague Provider Styling
+ * 
+ * This stylesheet contains the custom styling for the SOMA Colleague provider interface,
+ * including professional clinical colors and components for healthcare providers.
+ * 
+ * Color scheme:
+ * - Purple: Primary professional color (#8A2BE2)
+ * - Medical blue: Secondary color for clinical data (#0066CC)
+ * - Neutral grays for data emphasis
+ * 
+ * Major components styled:
+ * - Provider dashboard layout
+ * - Patient cards and lists
+ * - Clinical record displays
+ * - Medical data visualization
+ * - Documentation interfaces
+ * 
+ * @author SOMA Colleague Team
+ * @version 1.0.0
+ */
+
+:root {
+  --provider-purple: #8A2BE2;
+  --provider-purple-light: rgba(138, 43, 226, 0.1);
+  --provider-purple-border: rgba(138, 43, 226, 0.2);
+  --medical-blue: #0066CC;
+  --medical-blue-light: rgba(0, 102, 204, 0.1);
+  --dark-text: #333;
+  --light-bg: #f8f9fa;
+  --gray-text: #6c757d;
+  --alert-red: #DC3545;
+  --warning-yellow: #FFC107;
+  --success-green: #28A745;
+}
+
+/* Main Container Styles */
+.colleague-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--light-bg);
+  min-height: 100vh;
+}
+
+/* Dashboard Header */
+.colleague-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  border-bottom: 1px solid var(--provider-purple-border);
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.colleague-logo {
+  height: 40px;
+  margin-right: 1rem;
+}
+
+.colleague-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--provider-purple);
+  margin: 0;
+}
+
+.provider-subtitle {
+  font-size: 0.9rem;
+  color: var(--gray-text);
+  margin: 0;
+}
+
+/* Patient List Section */
+.patient-list-section {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--provider-purple-border);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--provider-purple);
+  margin: 0;
+}
+
+.patient-count {
+  background-color: var(--provider-purple);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Patient Cards */
+.patient-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.patient-card {
+  border: 2px solid var(--provider-purple);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-card:hover {
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+}
+
+.patient-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--provider-purple);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.patient-info {
+  flex: 1;
+}
+
+.patient-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin: 0 0 0.25rem 0;
+}
+
+.patient-meta {
+  color: var(--gray-text);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.view-button {
+  background-color: transparent;
+  color: var(--provider-purple);
+  border: 2px solid var(--provider-purple);
+  padding: 0.5rem 1.25rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.view-button:hover {
+  background-color: var(--provider-purple);
+  color: white;
+}
+
+/* Patient Record View */
+.record-view-section {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.record-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.record-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  background-color: var(--provider-purple);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.record-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--provider-purple);
+  margin: 0 0 0.25rem 0;
+}
+
+.record-meta {
+  color: var(--gray-text);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.record-content {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.data-section {
+  background-color: var(--provider-purple-light);
+  border: 2px solid var(--provider-purple-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.data-section-title {
+  color: var(--provider-purple);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--provider-purple-border);
+}
+
+.data-row:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.data-label {
+  color: var(--dark-text);
+  font-weight: 500;
+}
+
+.data-value {
+  color: var(--dark-text);
+  text-align: right;
+}
+
+.provider-notes {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.provider-notes-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.provider-notes-title .icon {
+  margin-right: 0.5rem;
+  color: var(--provider-purple);
+}
+
+.clinical-notes-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.record-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.primary-button {
+  background-color: var(--provider-purple);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.primary-button:hover {
+  background-color: #7823d6;
+}
+
+/* Access Note */
+.access-note {
+  border-top: 1px solid var(--provider-purple-border);
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+  color: var(--provider-purple);
+  font-size: 0.875rem;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+}
+
+.access-note i {
+  margin-right: 0.5rem;
+}
+
+/* Record creation area */
+.record-creation {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.form-row {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .patient-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .view-button {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
