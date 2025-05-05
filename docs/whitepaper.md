@@ -4,6 +4,8 @@
 
 **IMPORTANT NOTICE: This whitepaper contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
+![SOMA Health Platform](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+
 ## Abstract
 
 SOMA provides individuals with complete ownership of their health records, identity documents, and essential information through secure, private vaults built on the revolutionary Autonomi network. This whitepaper outlines the technical architecture, security model, and implementation roadmap for the SOMA platform.

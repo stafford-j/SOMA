@@ -102,6 +102,17 @@ Visit `http://localhost:3001` in your browser
   - `/src/components/dashboard`: Clinical interface components
   - `/src/pages`: Provider workflow pages
 
+## Screenshots
+
+### SOMA Companion (Patient Dashboard)
+![SOMA Companion Dashboard](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+
+### SOMA Colleague (Provider View)
+![SOMA Colleague Interface](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+
+### Synchronized Care Plans
+![Care Plan Synchronization](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+
 ## Usage Scenarios
 
 ### Patient Experience (SOMA Companion)

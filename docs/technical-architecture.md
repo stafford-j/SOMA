@@ -4,6 +4,10 @@
 
 **IMPORTANT NOTICE: This document contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
+## Demo Video
+
+[![SOMA Platform Demo](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)](https://www.youtube.com/watch?v=your_video_id)
+
 ## System Overview
 
 SOMA is architected as a multi-layered ecosystem with clear separation of concerns between user interfaces, business logic, data storage, and network communication.
