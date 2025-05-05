@@ -1,4 +1,8 @@
-# SOMA Health Ecosystem
+# SOMA Health Platform
+
+**© 2025 Conas Consulting. All Rights Reserved.**
+
+**IMPORTANT NOTICE: This repository contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
 A comprehensive health data management ecosystem with both patient and provider interfaces.
 
@@ -104,11 +108,13 @@ Visit `http://localhost:3001` in your browser
 - Add clinical notes and documentation to patient records
 - Create new structured medical records with appropriate clinical fields
 
-## License
+## Copyright and License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+**© 2025 Conas Consulting. All Rights Reserved.**
+
+This project is proprietary software owned by Conas Consulting. No license is granted for commercial use, modification, or distribution. This repository is shared for demonstration and portfolio purposes only.
 
 ## Acknowledgments
 
-- SOMA Health for design inspiration
+- Conas Consulting design team for the SOMA platform concept
 - Claude from Anthropic for assistance with development
