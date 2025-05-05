@@ -107,4 +107,6 @@ SOMA is seeking strategic investment to:
 ## Contact
 
 For more information, please contact:
-[CONTACT INFORMATION]
+
+James Stafford, Creator SOMA  
+james@ruleyproductions.com

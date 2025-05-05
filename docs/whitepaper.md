@@ -384,5 +384,5 @@ Through strategic partnerships, phased implementation, and a sustainable busines
 
 For more information, please contact:
 
-Conas Consulting  
-[CONTACT INFORMATION]
+James Stafford, Creator SOMA  
+james@ruleyproductions.com
