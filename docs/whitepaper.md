@@ -4,7 +4,7 @@
 
 **IMPORTANT NOTICE: This whitepaper contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
-![SOMA Health Platform](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+![SOMA Health Platform](https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png)
 
 ## Abstract
 
@@ -20,6 +20,8 @@ In an increasingly mobile world, individuals face significant challenges in main
 
 The patient-facing application that provides a seamless interface for managing, viewing, and sharing health records.
 
+![SOMA ID](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png)
+
 ### 2.2 SOMA Colleague 
 
 The provider-facing application that allows healthcare professionals to access shared records and contribute to a patient's health record in a standardized format.
@@ -27,6 +29,8 @@ The provider-facing application that allows healthcare professionals to access s
 ### 2.3 Autonomi Network
 
 The underlying infrastructure that enables secure, decentralized storage and verification of health records while maintaining individual ownership.
+
+![SOMA Bridge](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)
 
 ## 3. Technical Architecture
 

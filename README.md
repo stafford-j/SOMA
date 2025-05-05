@@ -6,7 +6,7 @@
 
 SOMA gives you complete ownership of your personal information through secure, private vaults built on the revolutionary Autonomi network. Whether you're moving countries or rebuilding after displacement, SOMA ensures your health records, identity, and essential documentation remain accessible, portable, and always under your control.
 
-![SOMA Logo](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+![SOMA Health Platform](https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png)
 
 ## 📋 Documentation
 
@@ -102,16 +102,24 @@ Visit `http://localhost:3001` in your browser
   - `/src/components/dashboard`: Clinical interface components
   - `/src/pages`: Provider workflow pages
 
-## Screenshots
+## Screenshots and Demos
 
 ### SOMA Companion (Patient Dashboard)
-![SOMA Companion Dashboard](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+![SOMA Companion Dashboard](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png)
+
+#### SOMA Companion Video Demo
+[![SOMA Companion Video Demo](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png)](https://video.wixstatic.com/video/afc39f_00b381825dae4ef6a8bae53b3a350744/1080p/mp4/file.mp4)
+*Click the image above to view the demo video*
 
 ### SOMA Colleague (Provider View)
-![SOMA Colleague Interface](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+![SOMA Colleague Interface](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)
 
-### Synchronized Care Plans
-![Care Plan Synchronization](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+#### SOMA Colleague Video Demo
+[![SOMA Colleague Video Demo](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)](https://video.wixstatic.com/video/afc39f_f40f1cd5fca241b4998b3f551a51c627/1080p/mp4/file.mp4)
+*Click the image above to view the demo video*
+
+### SOMA Bridge for Cross-Border Health Information
+![SOMA Bridge](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)
 
 ## Usage Scenarios
 

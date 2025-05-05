@@ -4,9 +4,15 @@
 
 **IMPORTANT NOTICE: This document contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
-## Demo Video
+## Demo Videos
 
-[![SOMA Platform Demo](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)](https://www.youtube.com/watch?v=your_video_id)
+### SOMA Companion Demo
+[![SOMA Companion Demo](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png)](https://video.wixstatic.com/video/afc39f_00b381825dae4ef6a8bae53b3a350744/1080p/mp4/file.mp4)
+*Click image above to view demo*
+
+### SOMA Colleague Demo
+[![SOMA Colleague Demo](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)](https://video.wixstatic.com/video/afc39f_f40f1cd5fca241b4998b3f551a51c627/1080p/mp4/file.mp4)
+*Click image above to view demo*
 
 ## System Overview
 
