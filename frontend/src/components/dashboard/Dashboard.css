@@ -188,7 +188,6 @@ body {
 }
 
 .progress-circle svg {
-  transform: rotate(-90deg);
   overflow: visible;
 }
 

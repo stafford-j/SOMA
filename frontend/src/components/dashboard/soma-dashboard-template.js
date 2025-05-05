@@ -290,7 +290,7 @@ const SOMADashboardTemplate = ({ records = [], loading = false, error = null, us
           <div className="card-content">
             <div className="progress-indicator">
               <div className="progress-circle">
-                <svg viewBox="0 0 36 36">
+                <svg viewBox="0 0 36 36" style={{ transform: 'rotate(0deg)' }}>
                   <path className="progress-bg"
                     d="M18 2.0845
                       a 15.9155 15.9155 0 0 1 0 31.831
@@ -308,8 +308,9 @@ const SOMADashboardTemplate = ({ records = [], loading = false, error = null, us
                     strokeWidth="2.5"
                     strokeDasharray={`${65}, 100`}
                     strokeLinecap="round"
+                    transform="rotate(-90, 18, 18)"
                   />
-                  <text x="18" y="21" textAnchor="middle" fill="#228B22" fontWeight="bold" fontSize="9px">65%</text>
+                  <text x="18" y="21" textAnchor="middle" fill="#228B22" fontWeight="bold" fontSize="9px" style={{ transform: 'rotate(0deg)', transformOrigin: 'center' }}>65%</text>
                 </svg>
               </div>
               <p style={{ fontWeight: 'bold', color: '#228B22' }}>Overall Progress</p>
