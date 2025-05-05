@@ -16,12 +16,13 @@ SOMA gives you complete ownership of your personal information through secure, p
 - [Concept Ownership](docs/CONCEPT_OWNERSHIP.md) - Intellectual property declaration
 - [Changelog](CHANGELOG.md) - Development progress and version history
 
-This repository contains two complementary applications:
+This repository contains the three core components of the SOMA ecosystem:
 
 1. **SOMA Companion** - Patient-facing health records dashboard
 2. **SOMA Colleague** - Provider-facing clinical interface
+3. **SOMA Bridge** - Connection to the Autonomi network for secure data storage
 
-Both applications include sample data, so you can run them locally without any backend services.
+All components include sample data, so you can run them locally without external dependencies.
 
 ## SOMA Companion (Patient Dashboard)
 
@@ -80,7 +81,7 @@ A clinical interface for healthcare providers to access patient-shared records w
 
 #### SOMA Companion (Patient Dashboard)
 ```bash
-cd frontend
+cd companion
 npm start
 ```
 Visit `http://localhost:3000` in your browser
@@ -92,15 +93,27 @@ npm start
 ```
 Visit `http://localhost:3001` in your browser
 
+#### SOMA Bridge (Autonomi Network Interface)
+```bash
+cd autonomi-bridge
+npm install
+node index.js
+```
+Visit `http://localhost:8088/health` to verify the service is running
+
 ## Project Structure
 
-- `/frontend`: SOMA Companion patient application
+- `/companion`: SOMA Companion patient application
   - `/src/components/dashboard`: Dashboard components
   - `/src/pages`: Application pages
   
 - `/colleague`: SOMA Colleague provider application
   - `/src/components/dashboard`: Clinical interface components
   - `/src/pages`: Provider workflow pages
+  
+- `/autonomi-bridge`: SOMA Bridge network interface
+  - `index.js`: Main bridge service implementation
+  - REST API endpoints for health data exchange
 
 ## Screenshots and Demos
 
@@ -118,8 +131,24 @@ Visit `http://localhost:3001` in your browser
 [![SOMA Colleague Video Demo](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)](https://video.wixstatic.com/video/afc39f_f40f1cd5fca241b4998b3f551a51c627/1080p/mp4/file.mp4)
 *Click the image above to view the demo video*
 
-### SOMA Bridge for Cross-Border Health Information
+## SOMA Bridge (Autonomi Network Interface)
+
+SOMA Bridge connects the Companion and Colleague applications to the Autonomi network, enabling secure, decentralized storage of health records with complete user ownership and portable identity.
+
+### Key Features
+
+- **Decentralized Storage**: Secure, encrypted data storage on the Autonomi network
+- **Zero-Knowledge Proofs**: Verify data authenticity without revealing contents
+- **Cross-Border Compatibility**: Seamless access to health records regardless of location
+- **Identity Verification**: Self-sovereign identity management without centralized authorities
+- **Offline Capabilities**: Critical information remains available even without internet connectivity
+
+### SOMA Bridge Architecture
 ![SOMA Bridge](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)
+
+#### SOMA Bridge Video Demo
+[![SOMA Bridge Video Demo](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)](https://video.wixstatic.com/video/afc39f_00b381825dae4ef6a8bae53b3a350744/1080p/mp4/file.mp4)
+*Click the image above to view the demo video*
 
 ## Usage Scenarios
 
