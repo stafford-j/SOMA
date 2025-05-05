@@ -4,9 +4,17 @@
 
 **IMPORTANT NOTICE: This repository contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
-A comprehensive health data management ecosystem with both patient and provider interfaces.
+SOMA gives you complete ownership of your personal information through secure, private vaults built on the revolutionary Autonomi network. Whether you're moving countries or rebuilding after displacement, SOMA ensures your health records, identity, and essential documentation remain accessible, portable, and always under your control.
 
 ![SOMA Logo](https://static.wixstatic.com/media/afc39f_da0a94021ba6434399c2fbd4fd0ee013~mv2.png)
+
+## 📋 Documentation
+
+- [Executive Summary](docs/executive-summary.md) - High-level overview of SOMA platform and market opportunity
+- [Whitepaper](docs/whitepaper.md) - Detailed explanation of technology and implementation
+- [Technical Architecture](docs/technical-architecture.md) - System design and component relationships
+- [Concept Ownership](docs/CONCEPT_OWNERSHIP.md) - Intellectual property declaration
+- [Changelog](CHANGELOG.md) - Development progress and version history
 
 This repository contains two complementary applications:
 
