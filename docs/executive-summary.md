@@ -4,7 +4,7 @@
 
 **IMPORTANT NOTICE: This document contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
-![SOMA Health Platform](https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png =400x)
+<img src="https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png" alt="SOMA Health Platform" width="400"/>
 
 ## Executive Summary
 
@@ -44,7 +44,7 @@ SOMA creates a paradigm shift in personal data ownership through:
 - Granular sharing controls for provider access
 - Cross-border care coordination
 
-![SOMA ID](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png =300x)
+<img src="https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png" alt="SOMA ID" width="300"/>
 
 #### 2. SOMA Colleague (Provider Application)
 - Seamless access to patient-shared records
@@ -59,7 +59,7 @@ SOMA creates a paradigm shift in personal data ownership through:
 * Features offline capability, multi-language support, and humanitarian organization integration
 * Designed for refugees, displaced professionals, and those navigating new systems
 
-![SOMA Bridge](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png =300x)
+<img src="https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png" alt="SOMA Bridge" width="300"/>
 
 ## Founding Team
 
