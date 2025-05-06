@@ -42,26 +42,19 @@ SOMA creates a paradigm shift in personal data ownership through:
 - Documentation tools that respect patient data rights
 - Integration with existing healthcare systems
 
-### 3. SOMA Bridge (Autonomi Network)
-- Decentralized infrastructure for data sovereignty
-- Zero-knowledge verification of credentials
-- End-to-end encryption and privacy by design
-- Borderless access with local compliance
-- Offline capabilities for connectivity challenges
+### 3. SOMA Bridge (Longterm humaniarian mission)
+* Portable digital vault for displaced individuals to carry essential records across borders
+* Supports identity verification, medical history access, and credential presentation  
+* Features offline capability, multi-language support, and humanitarian organization integration
+* Designed for refugees, displaced professionals, and those navigating new systems
 
 ![SOMA Bridge](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)
 
 ## Market Opportunity
 
-The global digital health market is projected to reach $767 billion by 2030 with a CAGR of 17.7%. SOMA addresses multiple segments:
-
-- **Digital Health Records**: $42B market (2025)
-- **Healthcare Interoperability**: $5.2B market (2025)
-- **Identity Management**: $24.6B market (2025)
-- **Cross-Border Healthcare**: $180B market (2025)
+Pending 
 
 ## Competitive Advantage
-
 Unlike existing solutions, SOMA:
 
 1. **Centers Individual Ownership** - True data sovereignty, not just access
@@ -71,33 +64,26 @@ Unlike existing solutions, SOMA:
 5. **Serves Both Individuals and Systems** - Balancing personal control with clinical workflows
 
 ## Business Model
-
 SOMA employs a multi-tiered revenue strategy:
 
-1. **Freemium Consumer Model** - Basic personal vault is free, premium features for synchronization
+1. **Freemium Consumer Model** - Basic personal vault - pay once yours forever with add on benefits
 2. **Provider Subscriptions** - SOMA Colleague professional licenses
 3. **Integration Services** - API access and enterprise implementation
 4. **Strategic Partnerships** - NGO and government programs for refugee and displacement contexts
 
-## Traction & Roadmap
+### The Founding Team
+The founding team for SOMA consists of **James Stafford** and **Catherine Conaghan**:
 
-- **Q2 2025**: Beta testing with international expatriate communities
-- **Q3 2025**: Launch of SOMA Companion 1.0 and SOMA Colleague 1.0
-- **Q4 2025**: First healthcare system integration in EU market
-- **Q1 2026**: Expansion to migration corridors in Africa and Middle East
-- **Q2 2026**: Refugee population pilot with international aid organizations
+- [**James Stafford**](https://www.linkedin.com/in/james-stafford-50334962/) is an experienced product, project, and brand manager with extensive global experience, including roles at Red Bull and Web Summit.
 
-## Team
+- [**Catherine Conaghan**](https://www.linkedin.com/in/catherine-conaghan/) is a chartered PMP and Agile Scrum coach, with a strong track record of delivering high-complexity technical projects.
 
-The SOMA platform is created by Conas Consulting, a team with deep expertise in:
-- Global health infrastructure
-- Cross-border data regulations
-- Humanitarian technology deployment
-- Identity management systems
-- Decentralized architecture design
+We have recruited an extensive advisory board covering finance, technical expertise, and content development.
+
+Once the product vision is finalized, we will expand the team, with a primary focus on development.
+
 
 ## Investment Opportunity
-
 SOMA is seeking strategic investment to:
 1. Accelerate platform development
 2. Expand clinical partnerships
