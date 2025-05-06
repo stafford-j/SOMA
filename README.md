@@ -6,21 +6,20 @@
 
 SOMA gives you complete ownership of your personal information through secure, private vaults built on the revolutionary Autonomi network. Whether you're moving countries or rebuilding after displacement, SOMA ensures your health records, identity, and essential documentation remain accessible, portable, and always under your control.
 
-![SOMA Health Platform](https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png)
+<img src="https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png" alt="SOMA Health Platform" width="400"/>
 
 ## 📋 Documentation
 
-- [Executive Summary](docs/executive-summary.md) - High-level overview of SOMA platform and market opportunity
-- [Whitepaper](docs/whitepaper.md) - Detailed explanation of technology and implementation
-- [Technical Architecture](docs/technical-architecture.md) - System design and component relationships
-- [Concept Ownership](docs/CONCEPT_OWNERSHIP.md) - Intellectual property declaration
+- [Executive Summary](ConceptDocs/executive-summary.md) - High-level overview of SOMA platform and market opportunity
+- [Whitepaper](ConceptDocs/whitepaper.md) - Detailed explanation of technology and implementation
+- [Concept Ownership](ConceptDocs/CONCEPT_OWNERSHIP.md) - Intellectual property declaration
 - [Changelog](CHANGELOG.md) - Development progress and version history
 
 This repository contains the three core components of the SOMA ecosystem:
 
 1. **SOMA Companion** - Patient-facing health records dashboard
 2. **SOMA Colleague** - Provider-facing clinical interface
-3. **SOMA Bridge** - Connection to the Autonomi network for secure data storage
+3. **SOMA Bridge** - Identity & health record continuity solution for displaced populations
 
 All components include sample data, so you can run them locally without external dependencies.
 
@@ -81,74 +80,71 @@ A clinical interface for healthcare providers to access patient-shared records w
 
 #### SOMA Companion (Patient Dashboard)
 ```bash
-cd companion
+cd "SOMA Companion (Individual)"
 npm start
 ```
 Visit `http://localhost:3000` in your browser
 
 #### SOMA Colleague (Provider Dashboard)
 ```bash
-cd colleague
+cd "SOMA Colleague (Provider Platform)"
 npm start
 ```
 Visit `http://localhost:3001` in your browser
 
-#### SOMA Bridge (Autonomi Network Interface)
-```bash
-cd autonomi-bridge
-npm install
-node index.js
-```
-Visit `http://localhost:8088/health` to verify the service is running
-
 ## Project Structure
 
-- `/companion`: SOMA Companion patient application
+- `/SOMA Companion (Individual)`: SOMA Companion patient application
   - `/src/components/dashboard`: Dashboard components
   - `/src/pages`: Application pages
   
-- `/colleague`: SOMA Colleague provider application
+- `/SOMA Colleague (Provider Platform)`: SOMA Colleague provider application
   - `/src/components/dashboard`: Clinical interface components
   - `/src/pages`: Provider workflow pages
-  
-- `/autonomi-bridge`: SOMA Bridge network interface
-  - `index.js`: Main bridge service implementation
-  - REST API endpoints for health data exchange
 
 ## Screenshots and Demos
 
 ### SOMA Companion (Patient Dashboard)
-![SOMA Companion Dashboard](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png)
+<img src="https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png" alt="SOMA ID" width="300"/>
 
 #### SOMA Companion Video Demo
-[![SOMA Companion Video Demo](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png)](https://video.wixstatic.com/video/afc39f_00b381825dae4ef6a8bae53b3a350744/1080p/mp4/file.mp4)
+[![SOMA Companion Video Demo](https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png =250x)](https://video.wixstatic.com/video/afc39f_00b381825dae4ef6a8bae53b3a350744/1080p/mp4/file.mp4)
 *Click the image above to view the demo video*
 
 ### SOMA Colleague (Provider View)
-![SOMA Colleague Interface](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)
+<img src="https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png" alt="SOMA Bridge" width="300"/>
 
 #### SOMA Colleague Video Demo
-[![SOMA Colleague Video Demo](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)](https://video.wixstatic.com/video/afc39f_f40f1cd5fca241b4998b3f551a51c627/1080p/mp4/file.mp4)
+[![SOMA Colleague Video Demo](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png =250x)](https://video.wixstatic.com/video/afc39f_f40f1cd5fca241b4998b3f551a51c627/1080p/mp4/file.mp4)
 *Click the image above to view the demo video*
 
-## SOMA Bridge (Autonomi Network Interface)
+## SOMA Bridge
 
-SOMA Bridge connects the Companion and Colleague applications to the Autonomi network, enabling secure, decentralized storage of health records with complete user ownership and portable identity.
+SOMA Bridge is designed for individuals who have been uprooted by conflict, disaster, or the search for a new life, when proving your identity, qualifications, and health history becomes essential. It provides a portable, private vault that travels with the individual across borders and systems, supporting continuity, access, and stability.
+
+### Core Functions
+
+- Carry essential records across systems and borders
+- Rebuild lost or fragmented identity and medical history
+- Present qualifications and credentials for work, education, or resettlement
+- Ensure access to critical care and services in unfamiliar settings
 
 ### Key Features
 
-- **Decentralized Storage**: Secure, encrypted data storage on the Autonomi network
-- **Zero-Knowledge Proofs**: Verify data authenticity without revealing contents
-- **Cross-Border Compatibility**: Seamless access to health records regardless of location
-- **Identity Verification**: Self-sovereign identity management without centralized authorities
-- **Offline Capabilities**: Critical information remains available even without internet connectivity
+- Built on SOMA ID with granular sharing permissions
+- Works offline via secure, durable local storage (Home Vault)
+- Multi-language record display and translation support
+- Printable summaries for use in clinics, borders, or aid centres
+- Integrates with humanitarian workflows and registration systems
 
-### SOMA Bridge Architecture
-![SOMA Bridge](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)
+### Use Cases
 
-#### SOMA Bridge Video Demo
-[![SOMA Bridge Video Demo](https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png)](https://video.wixstatic.com/video/afc39f_00b381825dae4ef6a8bae53b3a350744/1080p/mp4/file.mp4)
-*Click the image above to view the demo video*
+- Refugees re-entering healthcare systems
+- Displaced professionals needing to transfer qualifications
+- People navigating new countries with limited digital infrastructure
+- Aid organizations assisting individuals with continuity of care
+
+<img src="https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png" alt="SOMA Bridge" width="300"/>
 
 ## Usage Scenarios
 
