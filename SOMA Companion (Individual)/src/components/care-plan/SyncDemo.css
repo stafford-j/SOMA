@@ -1,0 +1,594 @@
+/**
+ * SyncDemo.css - Styling for the synchronization demonstration
+ * 
+ * This stylesheet contains styles for the SOMA Care Plan synchronization demo,
+ * showcasing the real-time data flow between patient and provider apps.
+ * 
+ * Visual elements include:
+ * - Split screen app views
+ * - Animated data synchronization flow
+ * - Event log timeline
+ * - Feature highlights
+ */
+
+:root {
+  --patient-color: #20B2AA;
+  --provider-color: #8A2BE2;
+  --sync-bg-dark: #2C3E50;
+  --sync-bg-light: #ECF0F1;
+  --sync-text: #333;
+  --success-green: #27AE60;
+  --warning-orange: #F39C12;
+  --dark-text: #2C3E50;
+  --light-text: #ECF0F1;
+}
+
+/* Main container */
+.sync-demo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--sync-text);
+}
+
+.sync-demo-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sync-demo-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 0.5rem;
+}
+
+.sync-demo-header p {
+  font-size: 1.1rem;
+  color: var(--dark-text);
+  opacity: 0.8;
+}
+
+/* App windows layout */
+.sync-demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.app-container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  height: 600px;
+}
+
+.app-window {
+  flex: 1;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+}
+
+.app-header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.app-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.app-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.sync-indicator i {
+  color: #aaa;
+}
+
+.sync-indicator i.syncing {
+  color: var(--success-green);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sync-count {
+  background-color: #f5f5f5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+.app-body {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+/* Sync visualization */
+.sync-visualization {
+  width: 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sync-path {
+  width: 100%;
+  height: 6px;
+  background-color: #e9ecef;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sync-particle {
+  width: 20px;
+  height: 6px;
+  background-color: #adb5bd;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+
+.sync-path.patient-to-provider .sync-particle {
+  animation: moveRight 2s ease-in-out;
+  background-color: var(--patient-color);
+}
+
+.sync-path.provider-to-patient .sync-particle {
+  animation: moveLeft 2s ease-in-out;
+  background-color: var(--provider-color);
+}
+
+.sync-path .sync-particle:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.sync-path .sync-particle:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.sync-path .sync-particle:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes moveRight {
+  0% { left: -20px; opacity: 1; }
+  100% { left: 100%; opacity: 1; }
+}
+
+@keyframes moveLeft {
+  0% { right: -20px; opacity: 1; }
+  100% { right: 100%; opacity: 1; }
+}
+
+/* Patient app specific styling */
+.patient-app .app-header {
+  background-color: rgba(32, 178, 170, 0.1);
+  border-bottom: 3px solid var(--patient-color);
+}
+
+.patient-app .app-title {
+  color: var(--patient-color);
+}
+
+/* Provider app specific styling */
+.provider-app .app-header {
+  background-color: rgba(138, 43, 226, 0.1);
+  border-bottom: 3px solid var(--provider-color);
+}
+
+.provider-app .app-title {
+  color: var(--provider-color);
+}
+
+/* Mock app content */
+.patient-app-mock, 
+.provider-app-mock {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.patient-data-card,
+.patient-tasks-card,
+.patient-alert-card,
+.provider-patient-card,
+.provider-data-card,
+.provider-adherence-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
+.patient-data-card h3,
+.patient-tasks-card h3,
+.patient-alert-card h3,
+.provider-patient-card h3,
+.provider-data-card h3,
+.provider-adherence-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.patient-metric,
+.provider-metric {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.metric-label {
+  flex: 1;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.metric-indicator {
+  font-size: 0.9rem;
+}
+
+.metric-indicator.normal {
+  color: var(--success-green);
+}
+
+.metric-indicator.warning {
+  color: var(--warning-orange);
+}
+
+.patient-task {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.patient-task input[type="checkbox"] {
+  margin-right: 0.75rem;
+}
+
+.patient-task label {
+  flex: 1;
+}
+
+.provider-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: rgba(138, 43, 226, 0.1);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  position: relative;
+}
+
+.provider-note i {
+  color: var(--provider-color);
+  font-size: 1.2rem;
+}
+
+.provider-note p {
+  flex: 1;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.sync-badge {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: var(--success-green);
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.provider-patient-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--provider-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.patient-details {
+  flex: 1;
+}
+
+.patient-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.patient-info {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.provider-chart {
+  margin-top: 1rem;
+}
+
+.chart-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.chart-mock {
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.3rem;
+  padding-top: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.chart-point {
+  flex: 1;
+  background-color: #ddd;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+}
+
+.chart-point.active {
+  background-color: var(--patient-color);
+}
+
+.adherence-stat {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.adherence-label {
+  width: 100px;
+  font-weight: 500;
+}
+
+.adherence-progress {
+  flex: 1;
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--success-green);
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+.adherence-value {
+  font-weight: 600;
+  width: 40px;
+  text-align: right;
+}
+
+.adherence-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+/* Sync events panel */
+.sync-events-panel {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+}
+
+.sync-events-panel h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.events-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.event-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-left: 3px solid #ddd;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 0 4px 4px 0;
+}
+
+.event-item.to-provider {
+  border-left-color: var(--patient-color);
+}
+
+.event-item.to-patient {
+  border-left-color: var(--provider-color);
+}
+
+.event-time {
+  font-size: 0.85rem;
+  color: #666;
+  width: 80px;
+}
+
+.event-direction {
+  font-size: 0.85rem;
+  font-weight: 500;
+  width: 170px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-item.to-provider .event-direction {
+  color: var(--patient-color);
+}
+
+.event-item.to-patient .event-direction {
+  color: var(--provider-color);
+}
+
+.event-description {
+  flex: 1;
+}
+
+.no-events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  color: #999;
+  text-align: center;
+}
+
+.no-events i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Features section */
+.sync-demo-features {
+  margin-top: 3rem;
+}
+
+.sync-demo-features h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--patient-color), var(--provider-color));
+  color: white;
+}
+
+.feature-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .app-container {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .app-window {
+    width: 100%;
+    height: 400px;
+  }
+  
+  .sync-visualization {
+    width: 100%;
+    height: 60px;
+    transform: rotate(90deg);
+  }
+  
+  .sync-demo-container {
+    padding: 1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
