@@ -4,7 +4,7 @@
 
 **IMPORTANT NOTICE: This repository contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
-SOMA gives you complete ownership of your personal information through secure, private vaults built on the revolutionary Autonomi network. Whether you're moving countries or rebuilding after displacement, SOMA ensures your health records, identity, and essential documentation remain accessible, portable, and always under your control.
+SOMA aims to give you complete ownership of your personal information through secure, private vaults designed to leverage the revolutionary Autonomi network. Whether you're moving countries or rebuilding after displacement, SOMA's vision is to ensure your health records, identity, and essential documentation remain accessible, portable, and always under your control.
 
 <img src="https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png" alt="SOMA Health Platform" width="400"/>
 
