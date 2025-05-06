@@ -2,387 +2,353 @@
 
 **© 2025 Conas Consulting. All Rights Reserved.**
 
-**IMPORTANT NOTICE: This whitepaper contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
-
-<img src="https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png" alt="SOMA Health Platform" width="600"/>
-
-## Abstract
-
-SOMA provides individuals with complete ownership of their health records, identity documents, and essential information through secure, private vaults built on the revolutionary Autonomi network. This whitepaper outlines the technical architecture, security model, and implementation roadmap for the SOMA platform.
-
-## 1. Introduction
-
-In an increasingly mobile world, individuals face significant challenges in maintaining consistent access to their health records and identity information when crossing borders, changing healthcare providers, or rebuilding after displacement. SOMA addresses these challenges through a decentralized architecture that prioritizes individual data ownership while maintaining high security standards.
-
-The SOMA platform represents a paradigm shift in how personal data is stored, shared, and verified. By leveraging blockchain technology and zero-knowledge proofs, SOMA creates a system where individuals have complete sovereignty over their information while enabling controlled sharing with healthcare providers, government agencies, and other authorized parties.
-
-### 1.1 The Problem of Fragmented Health Records
-
-Healthcare systems worldwide operate as isolated silos, making it difficult for individuals to maintain a comprehensive health history when they:
-
-- Travel internationally for business or leisure
-- Relocate between countries for work or immigration
-- Seek refugee status due to conflict or natural disasters
-- Access healthcare across different providers or systems
-- Need emergency care away from their primary healthcare provider
-
-This fragmentation leads to dangerous information gaps, duplicated tests, medication errors, and difficulty accessing specialized care. For vulnerable populations like refugees and migrants, these challenges can become life-threatening.
-
-### 1.2 The Limitations of Existing Solutions
-
-Current approaches to healthcare information management suffer from critical limitations:
-
-- **Centralized Control**: Electronic Health Record (EHR) systems are owned and controlled by institutions, not individuals
-- **Jurisdictional Boundaries**: Health information rarely crosses borders effectively
-- **Interoperability Challenges**: Different standards and formats prevent seamless information exchange
-- **Privacy Concerns**: Sharing sensitive data often requires compromising privacy
-- **Verification Difficulties**: Proving the authenticity of medical records across systems is problematic
-- **Digital Divides**: Many solutions exclude those with limited technology access
-
-### 1.3 The SOMA Vision
-
-SOMA offers a revolutionary approach that addresses these limitations by providing:
-
-- **Individual Data Ownership**: Personal vaults with complete user control
-- **Global Accessibility**: Borderless access to personal health information
-- **Secure Verification**: Zero-knowledge proofs for privacy-preserving verification
-- **Interoperability**: Standards-agnostic data model with automated translation
-- **Inclusive Design**: Functionality that works across digital divides
-- **Real-time Synchronization**: Concurrent updates across all authorized devices
-- **Comprehensive Documentation**: Support for all personal records, not just health
-
-## 2. Core Components
-
-### 2.1 SOMA Companion
-
-The patient-facing application that provides a seamless interface for managing, viewing, and sharing health records.
-
-<img src="https://static.wixstatic.com/media/afc39f_570d18746af94c1194c513b7b23a3945~mv2.png" alt="SOMA ID" width="500"/>
-
-SOMA Companion serves as the personal interface to an individual's health vault. It empowers users to:
-
-- **Import Records**: Scan, upload, or directly connect to existing health systems
-- **Organize Information**: Categorize and sort health information by type, date, or provider
-- **Control Access**: Grant and revoke access to specific records or categories
-- **Verify Data**: Prove the authenticity of records without exposing their contents
-- **Share Selectively**: Choose exactly what information to share with each provider
-- **Maintain Privacy**: Keep sensitive information secure with end-to-end encryption
-- **Access Offline**: Critical information remains available even without internet connectivity
-- **Travel Confidently**: Access healthcare abroad with complete medical history
-
-The application features a unique "Data/Opinion" toggle that separates verifiable clinical records from AI-generated insights, ensuring users and providers can distinguish between factual data and interpretive information.
-
-### 2.2 SOMA Colleague 
-
-The provider-facing application that allows healthcare professionals to access shared records and contribute to a patient's health record in a standardized format.
-
-SOMA Colleague is designed for healthcare providers and offers:
-
-- **Streamlined Access**: View patient-shared records in a clinically-optimized interface
-- **Professional Documentation**: Create and sign clinical notes and assessments
-- **Standards Compliance**: Ensure all contributions meet relevant regulatory standards
-- **Cross-Border Interpretation**: Automatically translate between healthcare coding systems
-- **Consent Management**: Clear visibility of patient-granted permissions
-- **Clinical Workflow Integration**: Compatibility with existing healthcare IT systems
-- **Medical Terminology Support**: Automatic mapping between different regional terminologies
-- **Audit Capability**: Complete transparency of all access and modifications
-
-The application is designed to integrate with existing healthcare information systems while respecting the patient's ultimate ownership of their data. Providers can contribute to the patient's record, but ultimate control over access and sharing remains with the individual.
-
-### 2.3 Autonomi Network
-
-The underlying infrastructure that enables secure, decentralized storage and verification of health records while maintaining individual ownership.
-
-<img src="https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png" alt="SOMA Bridge" width="500"/>
-
-SOMA is built on the Autonomi Network, a breakthrough blockchain architecture specifically designed for personal data sovereignty. Key features include:
-
-- **Decentralized Storage**: Encrypted data shards distributed across the network
-- **Zero-Knowledge Proofs**: Verify data authenticity without revealing contents
-- **Self-Sovereign Identity**: User-controlled digital identity that requires no central authority
-- **Smart Contracts**: Automated, trustless execution of healthcare data permissions
-- **Cross-Chain Compatibility**: Integration with multiple blockchains for maximum flexibility
-- **Quantum-Resistant Encryption**: Future-proof security measures
-- **Offline Verification**: Capability to verify credentials without internet connectivity
-- **Minimal Resource Requirements**: Functions on limited-resource devices common in developing regions
-
-The Autonomi Network uses a novel consensus mechanism that minimizes energy consumption while maintaining high security, making it suitable for global deployment even in resource-constrained environments.
-
-## 3. Technical Architecture
-
-SOMA employs a multi-layered architecture designed for security, flexibility, and resilience:
-
-### 3.1 User Interface Layer
-
-- **Responsive Web Application**: Works across device types and screen sizes
-- **Native Mobile Applications**: iOS and Android with offline functionality
-- **Progressive Web App**: For environments with limited installation capabilities
-- **Accessibility Compliance**: WCAG 2.1 AAA compatibility
-- **Multilingual Support**: 12 languages at launch with community translation framework
-- **Low-bandwidth Mode**: Functional on 2G connections and intermittent connectivity
-
-### 3.2 Application Logic Layer
-
-- **Modular Microservices**: Independent components for specific functionality
-- **API-First Design**: Well-documented interfaces for third-party integration
-- **Event-Driven Architecture**: Real-time updates across all connected devices
-- **Caching Mechanisms**: Optimized for offline-first operation
-- **Background Synchronization**: Efficient data reconciliation when connectivity resumes
-- **Cross-Border Compliance Engine**: Regional adaptation of data processing rules
-
-### 3.3 Data Management Layer
-
-- **Document Database**: Flexible schema for diverse health record types
-- **Blockchain Ledger**: Immutable audit trail of all access and modifications
-- **IPFS Integration**: Distributed file storage for larger medical images and documents
-- **Local Encrypted Storage**: Secure on-device data persistence
-- **Conflict Resolution**: Deterministic reconciliation of concurrent modifications
-- **Granular Permissions Model**: Record-level access control
-
-### 3.4 Security Layer
-
-- **End-to-End Encryption**: Zero access to unencrypted data by the platform
-- **Multi-Factor Authentication**: Biometric, knowledge, and possession factors
-- **Hierarchical Deterministic Keys**: Derived encryption keys for different record types
-- **Secure Enclaves**: Utilization of hardware security features when available
-- **Zero-Knowledge Proofs**: Verify claims without revealing underlying data
-- **Key Recovery Mechanisms**: Distributed backup protocols for disaster recovery
-- **Regular Security Audits**: Independent verification by security researchers
-
-## 4. User Experience Design
-
-SOMA's user experience is designed around key principles:
-
-### 4.1 Patient Experience
-
-- **Intuitive Organization**: Records categorized by specialty, condition, and provider
-- **Timeline View**: Chronological history of health interactions
-- **Card-Based Interface**: Summary cards with expanding details
-- **Import Wizard**: Step-by-step guidance for adding new records
-- **Sharing Controls**: Simple permission granting with expiration settings
-- **Emergency Access**: One-tap disclosure of critical information
-- **Travel Mode**: Location-aware adaptation for international healthcare
-- **Data/Opinion Toggle**: Clear distinction between verified records and AI insights
-
-### 4.2 Provider Experience
-
-- **Patient List**: Overview of individuals who have granted access
-- **Clinical View**: Profession-specific organization of health information
-- **Documentation Tools**: Templates for common clinical scenarios
-- **Reference Integration**: Context-aware links to medical resources
-- **Verification Indicators**: Clear visibility of record authenticity status
-- **Collaboration Features**: Secure messaging with other care team members
-- **Contribution Workflow**: Structured process for adding to the health record
-- **Patient Permissions**: Clear indicators of access restrictions
-
-### 4.3 Cross-Border Features
-
-- **Language Adaptation**: Automatic translation of key medical terminology
-- **Terminology Mapping**: Conversion between different coding systems
-- **Cultural Context**: Regionally-appropriate presentation of health information
-- **Regulatory Compliance**: Jurisdiction-aware information handling
-- **Universal Identifiers**: Integration with international ID systems
-- **Travel Planning**: Pre-travel health information organization
-- **Vaccination Records**: Standardized format for international requirements
-- **Medication Mapping**: Cross-border pharmaceutical equivalents
-
-## 5. Implementation and Use Cases
-
-### 5.1 Refugee and Displacement Contexts
-
-The SOMA platform addresses critical challenges faced by refugees and displaced persons:
-
-- **Documentation Preservation**: Secure backup of essential identity documents
-- **Medical History Continuity**: Preservation of critical health information
-- **Credential Verification**: Proof of qualifications and education without original documents
-- **Family Reconnection**: Secure sharing of contact information
-- **NGO Coordination**: Reduction of duplicative aid registration processes
-- **Cross-Border Care**: Seamless health information transfer between countries
-- **Self-Sovereign Identity**: Digital identity verification independent of government IDs
-
-Implementation partners include UNHCR, Médecins Sans Frontières, the International Rescue Committee, and local NGOs in key migration corridors.
-
-### 5.2 Global Mobility and Expatriate Care
-
-For international business travelers, expatriates, and digital nomads, SOMA provides:
-
-- **Insurance Portability**: Streamlined claims across international insurers
-- **Provider Network Access**: Identification of compatible healthcare providers
-- **Prescription Continuity**: Cross-border medication management
-- **Specialist Referrals**: International care coordination
-- **Telehealth Integration**: Remote consultation with home-country providers
-- **Medical Translation**: Accurate conversion of medical terminology
-- **Evacuation Planning**: Critical information availability for emergency situations
-
-Implementation partnerships include international health insurance providers, global employer healthcare programs, and expatriate support services.
-
-### 5.3 Healthcare System Integration
-
-SOMA bridges existing healthcare systems through:
-
-- **EHR Connectors**: Direct integration with major electronic health record systems
-- **HL7 FHIR Compatibility**: Standards-compliant data exchange
-- **DICOM Support**: Medical imaging format standardization
-- **Legacy System Adapters**: Integration with older healthcare IT infrastructure
-- **Laboratory Result Formatting**: Standardization of diagnostic information
-- **Billing Code Translation**: Cross-border financial reconciliation
-- **Provider Directory Integration**: Authentication with existing clinical systems
-
-Integration partners include regional health information exchanges, national health services, and private healthcare systems.
-
-## 6. Security and Privacy Framework
-
-SOMA's security approach is rooted in three core principles:
-
-1. **Zero Trust Architecture**: Continuous verification of all system access
-2. **Privacy by Design**: Data minimization and purpose limitation
-3. **User-Controlled Encryption**: Keys remain exclusively with the end user
-
-### 6.1 Technical Security Measures
-
-- **Homomorphic Encryption**: Computation on encrypted data without decryption
-- **Forward Secrecy**: Protection of past communications if keys are compromised
-- **Secure Multi-Party Computation**: Distributed processing without data exposure
-- **Encrypted Search**: Query encrypted data without decryption
-- **Hardware Security Modules**: Physical protection of cryptographic keys
-- **Formal Verification**: Mathematical proof of security properties
-- **Frequent Penetration Testing**: Regular security assessments
-
-### 6.2 Regulatory Compliance
-
-SOMA is designed to comply with global privacy regulations, including:
-
-- **GDPR**: European data protection standards
-- **HIPAA**: U.S. healthcare privacy requirements
-- **PIPEDA**: Canadian personal information protection
-- **CCPA/CPRA**: California privacy regulations
-- **APPI**: Japanese data protection law
-- **POPIA**: South African privacy act
-- **Local Health Data Regulations**: Country-specific healthcare information rules
-
-The platform's modular compliance engine adapts data handling practices to the specific requirements of each jurisdiction.
-
-### 6.3 Ethical Data Handling
-
-SOMA adheres to strict ethical principles beyond regulatory requirements:
-
-- **Informed Consent**: Clear communication of all data uses
-- **Purpose Limitation**: Data used only for explicitly authorized purposes
-- **Minimal Collection**: Only essential information is gathered
-- **Transparent Processing**: No hidden data manipulation
-- **User Autonomy**: Individuals can modify or delete their data at any time
-- **Algorithmic Accountability**: Clear explanation of all automated processing
-- **Bias Prevention**: Regular auditing for discriminatory patterns
-
-## 7. Business Model and Sustainability
-
-SOMA employs a multi-faceted business model designed to ensure platform sustainability while keeping essential services accessible to all users.
-
-### 7.1 Individual Subscription Tiers
-
-- **Basic (Free)**: Personal health vault with limited storage and sharing
-- **Standard ($4.99/month)**: Expanded storage, additional sharing options, premium features
-- **Family ($9.99/month)**: Management of family members' records with integrated sharing
-- **Premium ($14.99/month)**: Unlimited storage, priority support, advanced analytics
-
-### 7.2 Healthcare Provider Licensing
-
-- **Individual Provider**: $29/month per practitioner
-- **Small Practice**: $249/month for up to 10 providers
-- **Enterprise**: Custom pricing based on volume and integration requirements
-- **Public Health Systems**: Special pricing and subsidies for government healthcare
-
-### 7.3 Integration Services
-
-- **API Access**: Usage-based pricing for third-party integrations
-- **Custom Connectors**: Development services for specialized systems
-- **Workflow Integration**: Implementation services for clinical systems
-- **Training Programs**: Provider education and certification
-
-### 7.4 Humanitarian Partnerships
-
-- **NGO Program**: Discounted access for humanitarian organizations
-- **Refugee Support**: Grant-funded implementations in displacement contexts
-- **Public Health Initiatives**: Special programs for underserved communities
-- **Research Collaboration**: Data collaboration with academic institutions
-
-The SOMA platform is committed to ensuring that basic health information access remains available regardless of ability to pay, while building a sustainable business through premium features and institutional partnerships.
-
-## 8. Development Roadmap
-
-### 8.1 Phase 1: Foundation (Q2-Q4 2025)
-
-- Initial release of SOMA Companion (mobile and web)
-- Core personal health record functionality
-- Basic sharing capabilities
-- Simplified SOMA Colleague for provider access
-- Implementation of the Autonomi Network foundation
-- Development of core security architecture
-
-### 8.2 Phase 2: Expansion (Q1-Q3 2026)
-
-- Enhanced cross-border functionality
-- Expanded language support
-- Integration with major EHR systems
-- Advanced sharing controls
-- Improved offline capabilities
-- Refugee pilot programs in select regions
-- Development of the verification framework
-
-### 8.3 Phase 3: Ecosystem (Q4 2026-Q2 2027)
-
-- Third-party developer APIs
-- Integration with wearable health devices
-- Enhanced AI capabilities for health insights
-- Advanced clinical decision support
-- Cross-border insurance integration
-- Global humanitarian partnerships
-- Open standards for health data sovereignty
-
-### 8.4 Phase 4: Global Scale (Q3 2027 onward)
-
-- Comprehensive global coverage
-- Full regulatory compliance in all major jurisdictions
-- Integration with national health systems
-- Advanced cross-border capabilities
-- Enhanced security for emerging threats
-- Expanded identity verification ecosystem
-- Research and academic partnerships
-
-## 9. Team and Leadership
-
-The SOMA platform is developed by a multidisciplinary team with expertise in:
-
-- Global health systems
-- Blockchain architecture
-- Security engineering
-- User experience design
-- Regulatory compliance
-- Humanitarian technology
-- Cross-border healthcare
-- Clinical informatics
-
-Our advisory board includes leaders from:
-
-- International healthcare organizations
-- Refugee assistance programs
-- Global health policy
-- Digital identity initiatives
-- Privacy advocacy
-- Medical informatics
-- Blockchain governance
-
-## 10. Conclusion
-
-SOMA represents a paradigm shift in how individuals own and manage their health information. By combining blockchain technology, zero-knowledge proofs, and user-centered design, SOMA creates a platform that transcends borders, bridges systems, and returns data ownership to individuals.
-
-The global challenges of fragmented health records, cross-border care coordination, and refugee health management require innovative solutions that work at scale. SOMA's approach addresses these challenges while maintaining the highest standards of security, privacy, and usability.
-
-Through strategic partnerships, phased implementation, and a sustainable business model, SOMA aims to transform health information management from a system-centered model to an individual-centered approach, ultimately improving healthcare outcomes for people around the world.
-
----
-
-For more information, please contact:
-
-James Stafford, Creator SOMA  
-james@ruleyproductions.com
+# SOMA: Your Data, Your Control
+Somavault.io
+Executive Summary
+SOMA  is a secure, decentralized platform that aims to give individuals complete control over their critical personal information, starting with Health. 
+Currently in development, our vision is to build on the revolutionary Autonomi network (autonomi.com), creating a comprehensive ecosystem where personal data would be private by design and wholly owned by the individual:
+SOMA Health Companion - Personal health management for individuals navigating complex healthcare systems
+SOMA Health Colleague - Provider platform for seamless, patient-controlled health information sharing
+SOMA Bridge - Identity & health record continuity solution for displaced populations
+At launch, SOMA will focus on two key markets:
+Global Citizens: For those building lives in new places, while their health records get left behind. SOMA helps people navigate fragmented systems, disconnected histories, and the frustration of starting over every time they need care.
+Displaced Populations - Working with humanitarian organizations to provide continuity of care and identity verification for those who have lost access to their medical records
+Moving forward in life shouldn't mean losing your past.
+Key innovations in our concept include:
+Three-tier storage system ensuring security, accessibility, and offline resilience
+SOMA ID foundation provides a secure identity with granular access controls
+Clear separation between factual data and user-controlled AI insights
+Multi-language support and translations for global accessibility
+Partnerships with humanitarian organizations to serve displaced populations
+Our Vision for the Future
+SOMA is more than a platform—it is a new model for how individuals carry, protect, and activate their most important information. Whether navigating complex health systems or rebuilding after displacement, SOMA aims to restore agency, access, and continuity.
+This vision includes:
+A world where identity, health records, and qualifications travel with individuals across borders, systems, and stages of life
+AI support that is user-controlled, clearly sourced, and shaped by diverse medical perspectives
+True data sovereignty that rebalances power—from systems back to individuals
+Health insights grounded in both cutting-edge research and historical wisdom
+Tools that serve the most vulnerable as thoughtfully as they do the most privileged
+By building on the Autonomi network, SOMA lays the foundation for a future in which trust, resilience, and individual autonomy are not features but defaults.
+As the platform evolves, there is an opportunity to expand into a broader suite of personal vaults—supporting not just health and identity, but memories, finances, and more.
+
+The Autonomi Opportunity
+The launch of Autonomi represents a once-in-a-generation shift in digital architecture—the emergence of a truly decentralized network that enables user-owned data vaults with unprecedented security and privacy. 
+Autonomi's Impossible Futures platform provides an accelerated market entry pathway, allowing builders to gain visibility while the Autonomi ecosystem develops. 
+Note: At the time of writing (April 22) SOMA has qualified for phase two of Possible Futures. We plan to build a team and secure funding to progress the SOMA Health concept regardless of the outcome.
+The SOMA Suite
+SOMA's vision is to create a suite of personal vaults for what matters most to the individual—health, identity, memories, and beyond. Built on the Autonomi network, each vault is private by design and wholly owned by the user.
+We begin with three integrated applications:
+SOMA Health Companion – Personal health management for individuals navigating complex healthcare systems
+SOMA Health Colleague – Provider platform for seamless, patient-controlled health information sharing
+SOMA Bridge – Identity and health record continuity for displaced populations
+These three pillars lay the foundation for a broader ecosystem of user-controlled tools.
+SOMA Health
+SOMA Health envisions a world where individuals have complete control over their health information—securely stored, transparently interpreted, and easily shared on their terms. The platform combines personal agency, advanced AI insights, and smooth, provider-compatible collaboration.
+It includes two independent but connected applications:
+SOMA Health Companion – A personal health vault that helps individuals manage their medical history, track treatments, understand their health through user-directed AI insights, and communicate clearly across languages and systems.
+
+
+SOMA Health Colleague – A provider-facing platform that enables clinicians to access patient-shared records, contribute notes, and collaborate—all within a permissioned, patient-controlled environment.
+Together, they offer a structured yet flexible approach to modern health management.
+Our concept aims to address the universal problem of fragmented medical records through:
+A unified, secure, and user-controlled health vault that travels with individuals 
+A dual-focused ecosystem combining patient experience (SOMA Companion) with provider interface (SOMA Colleague)
+A foundation built on trust, transparency, and user control
+Clear separation between factual medical data and user-controlled AI-powered insights through our Data Mode and Opinion Mode toggle
+Underpinned by SOMA ID, our foundational identity layer. Note: We may also integrate with existing identity solutions being developed on Autonomi
+This approach establishes a new future in health information management, where individuals always know the source and nature of the health information they are viewing.
+SOMA Health Companion
+SOMA Health Companion is a personal health vault designed to help individuals manage their health information across different systems, borders, and life stages. It provides a straightforward, structured interface for managing records, generating user-directed insights, and communicating effectively with providers on the user's terms.
+
+User Experience Vision
+Clean, minimalist design with a clear information dashboard & hierarchy
+Simple sharing tools that let users choose exactly what to share—and for how long
+Language toggle to support communication across systems, borders, and care settings
+'Smart-ingestion' pipeline for easy upload—manual entry or email submission with automatic matching, tagging, and record classification
+Data Mode vs. Opinion Mode
+At the heart of SOMA Health Companion is a simple but powerful concept: users decide how their health information is presented and interpreted. The Opinion Mode feature inspired the name "Companion"—like a trusted guide who offers perspective but never replaces professional care.
+Data Mode:
+Raw health record data with no interpretation
+Factual information only (default view)
+Ideal for clinical sharing
+No AI-generated content
+Opinion Mode:
+AI-generated insights based on sources the user selects and locks in
+Multiple medical perspectives (e.g., GP, physio, holistic)
+Full source transparency
+Activated only by user choice
+
+
+Specialized Health Tracking
+Modules for chronic conditions, mental health, and rehab
+Recovery tracking and progress monitoring
+Preventive screening prompts
+Support for complementary and alternative therapies
+
+
+Provider Sharing Controls
+Time-limited, permissioned data sharing
+Access logs for complete visibility
+Instantly revocable sharing
+
+SOMA Health Colleague
+SOMA Colleague offers healthcare professionals secure, patient-controlled access to health information. While it's designed to function independently or alongside SOMA Health Companion, its value grows over time: each new provider who joins the platform strengthens the network and improves the patient experience across the system.
+Provider Dashboard
+View only explicitly shared patient records 
+Chronological timeline of patient health events
+Organization by clinical categories
+Powerful search capabilities
+Data-Only View (factual information without AI interpretations)
+Patient list management with access status indicators
+Clinical Documentation Tools
+Visit notes and observations
+Treatment plans and care recommendations
+Medication changes and instructions
+Aftercare and follow-up guidance
+Condition-specific educational resources
+Health status progress tracking
+System Integration
+Patients remain the data owners—providers are granted access, not control
+Standalone system for independent practitioners
+Long-term interoperability with existing EHR systems
+Support for healthcare data standards
+Integration with clinical workflows
+System-agnostic and easy to adopt—no significant IT lift required
+Clinical Documentation Tools
+SOMA Colleague provides healthcare professionals with powerful tools to create, manage, and share clinical documentation while maintaining the patient's ultimate control over their health information.
+At the heart of SOMA Colleague's clinical documentation capabilities are Synchronized Care Plans - a revolutionary approach to care coordination designed for globally mobile individuals and those navigating fragmented healthcare systems.
+Key Features:
+Real-time Bidirectional Synchronization: Care plans created in SOMA Colleague instantly appear in the patient's SOMA Companion app, while patient-logged data flows back to providers in real-time
+Multiple Provider Collaboration: Enable seamless coordination between specialists across different healthcare systems and geographic boundaries
+Global Adaptability: Automatically adjust medication schedules, monitoring requirements, and recommendations based on the patient's current time zone and location
+Data/Opinion Mode Integration: Maintains SOMA's core philosophy by clearly separating provider instructions (Data Mode) from AI-assisted implementation guidance (Opinion Mode)
+
+
+Implementation Example: Managing Chronic Conditions Across Borders
+For patients with conditions requiring consistent monitoring and management, Synchronized Care Plans ensure continuity regardless of location changes:
+The primary provider creates a structured care plan with monitoring schedules, medication regimens, and treatment goals
+Additional specialists can contribute to specific aspects of the care plan from their respective locations
+The patient receives a unified plan in their SOMA Companion app with clear tasks, reminders, and monitoring prompts
+As the patient logs data or completes tasks, their entire care team receives real-time updates
+When traveling to different time zones or regions, the plan automatically adjusts without disrupting the overall care approach
+
+
+Visit Documentation
+Beyond care plans, SOMA Colleague allows providers to create comprehensive visit documentation that becomes part of the patient's secure health record:
+Structured clinical notes with standardized templates
+Treatment recommendations and care instructions
+Medication changes with detailed rationales
+Follow-up scheduling and coordination
+Educational resources specific to the patient's condition
+Document Exchange
+Secure, permission-based document exchange enables providers to:
+Share diagnostic results with contextual interpretation
+Provide medical necessity documentation
+Exchange referral information between specialists
+Deliver patient education materials
+Request additional information from previous providers (with patient permission)
+All clinical documentation in SOMA Colleague adheres to healthcare data standards while maintaining the patient's ultimate ownership and control through SOMA's decentralized architecture.
+
+Founder's Story and Motivation
+Co-creators James Stafford and Catherine Conaghan conceived SOMA Health from their personal experiences with fragmented healthcare:
+James's year-long back pain journey led to conflicting specialist advice and misdiagnosis until a Sakra healer identified the actual condition
+Their daughter's eye condition received contradictory treatment recommendations from specialists, and transferring records between providers proved unnecessarily complex.
+Despite growing up with centralized healthcare, both founders' adult lives across multiple countries created scattered medical records across different systems, languages, and standards. This highlights how international lifestyles lead to medical information being dispersed across patient portals, email attachments, and various apps—everything saved somewhere, yet nothing easily accessible when needed.
+
+
+
+SOMA BRIDGE 
+SOMA Bridge is designed for individuals who have been uprooted by conflict, disaster, or the search for a new life, when proving your identity, qualifications, and health history becomes essential. It provides a portable, private vault that travels with the individual across borders and systems, supporting continuity, access, and stability.
+Core Functions
+Carry essential records across systems and borders
+Rebuild lost or fragmented identity and medical history
+Present qualifications and credentials for work, education, or resettlement
+Ensure access to critical care and services in unfamiliar settings
+Key Features
+Built on SOMA ID with granular sharing permissions
+Works offline via secure, durable local storage (Home Vault)
+Multi-language record display and translation support
+Printable summaries for use in clinics, borders, or aid centres
+Integrates with humanitarian workflows and registration systems
+Use Cases
+Refugees re-entering healthcare systems
+Displaced professionals needing to transfer qualifications
+People navigating new countries with limited digital infrastructure
+Aid organizations assisting individuals with continuity of care
+Narrative Concept: Stories in Transition
+As part of our broader vision for SOMA Bridge, we are exploring a storytelling initiative to follow the real-world journeys of individuals using the platform to rebuild their lives. These narrative threads—shared as blog updates, short videos, or first-person reflections—would illustrate how displaced professionals use SOMA to carry their identity, health history, and qualifications into new systems.
+Example storylines under consideration:
+A Ukrainian pharmacist navigating integration into the Portuguese healthcare system
+A Syrian engineer assembling a credential portfolio for employment in the EU
+A Congolese midwife using SOMA to access past training and treatment records in a new host country
+These stories, shared on somavault.io (built on the Autonomi network), are a way to humanize decentralized tech, build empathy, and demonstrate the practical impact of SOMA Bridge in action.
+Platform Architecture
+SOMA ID: Identity Foundation
+SOMA ID is envisioned as a foundational identity layer, creating a central hub for digital identity within the health ecosystem. It would securely store:
+Essential identification (name, birthdate, contact information, scan of physical ID such as passport/government ID)
+Emergency contacts and care preferences 
+Consent directives and sharing permissions
+Authentication credentials and access controls
+Three-Tier Storage System
+SOMA plans to offer users three synchronized storage options for their health information:
+Autonomi Network Storage: Primary storage on the decentralized Autonomi network providing maximum security
+Personal Vault Server: An optional physical device that would serve as a tangible backup, providing offline access to health records even during internet outages or system failures
+Organized Paper Backups: Integrated printing system with standardized formats for critical health documents, ensuring access regardless of technological availability
+Security and Privacy Framework
+While SOMA Health remains in the concept phase, the platform is being designed with best-in-class privacy and security principles at its core—drawing on established protections such as end-to-end encryption, zero-knowledge architecture, and multi-factor authentication, alongside user-controlled access, decentralized storage, and transparent data practices. We will align our implementation with Autonomi platform protocols to ensure seamless integration and maximum security.
+Competitive Landscape
+SOMA emerges in a fragmented digital identity ecosystem.. Unlike our competitors, SOMA offers a unique approach to health data management that prioritizes:
+True user data ownership
+Decentralized storage
+AI-powered insights
+Global accessibility
+Offline resilience
+Most existing platforms are:
+Cloud-dependent
+Enterprise-controlled
+Wellness-centric
+Limited in geographic scope
+For a comprehensive examination of our competitive positioning, refer to Appendix 1, "Competitive Landscape Analysis."
+Business Model | SOMA Health
+"If you have to pay somebody to access your information, it's no longer your information." — Sarah Buxton (Bux), CEO of Autonomi
+At SOMA, we believe your data should always be yours—permanently accessible, without gatekeepers, rent, or restrictions.
+This principle drives the business model behind SOMA Health, designed to be sustainable without ever compromising user ownership. Revenue is never tied to access or control. Instead, monetization comes from value-added services, enhanced features, and ethical, user-centric partnerships.
+It's important to note this model applies specifically to SOMA Health—our product for individuals and families navigating fragmented healthcare systems. By contrast, SOMA Bridge forms part of SOMA's broader humanitarian mission. Bridge deployments will be funded through partnerships with aid agencies, NGOs, and global institutions committed to restoring access, identity, and continuity for displaced populations.
+SOMA Health and SOMA Bridge share infrastructure, but serve very different realities, and are supported by distinct funding strategies.
+SOMA Health Companion | Business Model
+SOMA Health Companion is built on the principle that individuals should retain full, unrestricted access to their personal health information. The model is simple: a one-time purchase provides lasting access, with optional features available for those who want deeper insight, greater convenience, or physical tools.
+One-Time Vault Purchase (€X Individual / €Y Family)
+Permanent SOMA Vault with a fixed storage limit (e.g. 1 GB individual / 5 GB family)
+Includes offline sync, print-ready formatting, and a base storage cap
+7-day free trial (no credit card required)
+Optional Features (Priced Separately)
+Insight View – AI-powered guidance based on sources the user selects
+ Recurring: €X/month or €X/year
+Vault Expansion – Add more storage as your records grow
+ Recurring: €X per GB/month
+Print & Post – Receive printed summaries every 6 or 12 months
+ Fixed: €X per delivery
+Home Vault – Durable personal server for offline/local access
+ Fixed: €X one-time purchase
+Biometric Access Devices – Optional fingerprint or eye scanner
+ Fixed: €X one-time purchase
+
+
+This flexible structure supports full user ownership while offering scalable, high-value tools for those who need more. It reflects our belief that people should never pay to access their information, but may choose to enhance how they protect, understand, or share it.
+
+SOMA Health Colleague | Business Model
+Patients remain the data owners—providers are granted access, not control.
+This foundational principle shapes every part of the SOMA Health Colleague platform. Providers can view, annotate, and request records—but never store, sell, or take ownership of patient data. Access is always consent-driven, time-limited, and can be revoked by the individual at any time.
+SOMA Health Colleague is designed for healthcare professionals, clinics, and practices that need reliable access to structured health data, without the overhead of traditional EHR systems. The business model is simple, scalable, and aligned with provider workflows.
+Pricing Structure (Early-Stage Framework)
+Solo Practitioner – €X/month
+ For individual GPs, therapists, and allied health professionals
+ Includes record review, note entry, and dashboard access
+Small Practice – €X/month
+ For clinics with 2–5 providers
+ Adds shared dashboards and basic admin tools
+Mid-Sized Practice – €X/month
+ For 6–20 providers or multi-specialty groups
+ Includes role-based access and enhanced audit logs
+Enterprise / Institutional – Custom Pricing
+ Tailored for networks, insurers, and health systems
+ Includes branding, integration support, and priority onboarding
+Optional Features
+Provider Vaults – Workspace for private case notes, care templates, and annotations
+Secure Team Messaging – For intra-practice communication
+Training & Support – Priority onboarding and live support
+
+
+
+Partnerships
+SOMA's partnership approach is a deliberate strategy to create an ecosystem that enables data sovereignty across three critical domains:
+Technology Partners
+Instead of reinventing core technological infrastructure, SOMA approaches its platform like a "Formula 1 car" -assembling best-in-class components from strategic partners who gain a first-mover advantage on the groundbreaking Autonomi network and join SOMA's humanitarian mission.
+Enterprise-grade infrastructure providers
+Decentralized identity platforms
+Secure communication technologies
+Open-source health record initiatives
+Humanitarian Partners
+UN Refugee Agency (UNHCR)
+International humanitarian health organizations
+Refugee support networks
+Global health crisis response teams
+Global Citizens Partners
+Remote work platforms
+Global mobility consultancies
+International healthcare networks
+Cross-border health insurance providers
+
+
+Creator Note
+If you've made it this far, thank you. 
+We have no illusions about the scale of what we are proposing, the difficulties we will face, or the vastness of the issues we aim to solve. 
+In conversations of late, I have been using a no doubt overused but equally apt term - that we are looking to form a 'team of avengers' to help us with SOMA. 
+I'm working back through 40+ years of my life to find the very best and nicest people I've met along the way to help join our mission. 
+Our sense is we could build something great here, but we won't be able to do it alone. 
+We are always open to new collaborators, so feel free to introduce yourself or somebody else to james@ruleyproductions.com 
+Thanks, James & Catherine
+
+
+
+
+
+
+
+[This document contains confidential information protected under applicable privacy laws. Partnership and investment inquiries welcome. ]
+Appendix 1: SOMA Health Competitive Landscape Analysis
+Competitive Overview
+The health data management space includes several established and emerging players, each with distinct approaches and limitations:
+Epic MyChart
+Provider-tethered portal; deep integration with hospital systems
+Limitation: Data controlled by providers, siloed per institution
+SOMA Differentiator: Portable, user-owned, AI insights, no reliance on provider IT
+Apple Health Records
+Aggregates health data from connected providers via iPhone
+Limitation: Data stored locally on iPhone; no decentralization
+SOMA Differentiator: Platform-agnostic, decentralized, richer AI features, offline access
+Microsoft HealthVault (Defunct)
+Early cloud PHR attempt; shut down due to low engagement
+Limitation: Users had to enter/upload data manually
+SOMA Differentiator: Modern APIs, AI, decentralized storage, physical/paper backup
+HealthBlocks (Web3)
+Wellness-focused; wearable integration and token rewards
+Limitation: Data stored on hybrid decentralized network; market-driven data sharing
+SOMA Differentiator: Focus on clinical records, provider sharing, AI toggle, offline tiers
+MediBloc
+Blockchain-based health ecosystem; dual provider/patient platforms
+Limitation: Uses DIDs, token incentives, and data permissioning
+SOMA Differentiator: Non-blockchain storage, greater UX/AI focus, paper device backup
+Patientory
+Hybrid model with mobile app and enterprise dashboard
+Limitation: Chronic condition focus; partially decentralized, B2B growth path
+SOMA Differentiator: Individual-focused, no enterprise gatekeeping, direct user ownership
+OpenMined (non-consumer, AI toolkit)
+Provides privacy-preserving AI tech (federated learning, etc.)
+Limitation: Supports decentralized AI insights without centralizing data
+SOMA Differentiator: Could leverage OpenMined for future-proof, privacy-preserving AI model training
+Google Health
+Large ecosystem with access to vast data and AI resources
+Limitation: Centralized data storage, privacy concerns, commercial interests in data
+SOMA Differentiator: True user ownership, decentralized architecture, no commercial interest in user data
+Babylon Health
+AI-powered symptom checking and virtual consultations
+Limitation: Primarily focused on telehealth rather than comprehensive health record management
+SOMA Differentiator: Complete health record ownership, multi-modal storage options, focus on data continuity
+PicnicHealth
+Medical record collection service that aggregates records from different providers
+Limitation: Centralized storage, subscription-based access to your own data
+SOMA Differentiator: No ongoing fees to access your own data, decentralized storage, offline access options
+Citizen Health
+Blockchain-based health record platform with community governance
+Limitation: Still developing, complex blockchain architecture may limit adoption
+SOMA Differentiator: Simpler user experience, three-tier storage approach, focus on humanitarian applications
+Regional Systems (My Health Record, Estonia e-Health)
+Government-supported national health record systems
+Limitation: Limited to specific regions/countries, government control of data
+SOMA Differentiator: Global accessibility, user-controlled without government oversight, more comprehensive privacy
+Key Competitive Advantages
+SOMA's key competitive advantage: True data ownership + AI + decentralization + offline resilience
+Most competitors are cloud-dependent, enterprise-led, or wellness-centric
+None offer our combined approach targeting both global citizens and displaced populations
+Our user-controlled AI toggle creates unprecedented transparency lacking in all alternatives
