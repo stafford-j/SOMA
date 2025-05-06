@@ -1,0 +1,19 @@
+# SOMA and Colony Partnership Exploration
+
+SOMA is pleased to announce we've agreed to explore a strategic partnership with Colony to integrate their Autonomi network capabilities into our health data platform.
+
+## About Colony
+
+"Colony is a native cross-platform (Linux, Windows, Mac) desktop application written in Rust leveraging the Slint GUI framework. It enables users to upload, download, share, and search for files on the Autonomi network. There are no servers, no oracles, and no curated databases of information."
+
+## Integration Concept
+
+As Colony's founder describes: "For SOMA you could use the master private key used by Colony to generate provider specific pods. Each pod would contain your SOMA ID information as well as links to all of the information you would want to share with that particular provider. It would cost pennies to create a new pod (just a single 4MB scratchpad) and since you would share that with only one provider at a time, once you're done sharing that information with them, simply clear it out, now it's gone."
+
+This approach aligns perfectly with SOMA's commitment to user data ownership and our three-tier storage system concept.
+
+For more details about Colony, visit their [GitHub repository](https://github.com/zettawatt1/Colony).
+
+---
+
+*For more information, please contact james@ruleyproductions.com*
