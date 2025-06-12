@@ -234,6 +234,30 @@ const AddRecord = () => {
                 placeholder="Describe the visit, findings, treatments, or any other relevant details..."
               />
             </div>
+
+            {/* File Upload */}
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-aldr-dark mb-2">
+                <i className="fas fa-paperclip mr-2"></i>
+                Attach Files
+              </label>
+              <div className="relative">
+                <input
+                  type="file"
+                  multiple
+                  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-aldr-teal focus:border-transparent opacity-50 cursor-not-allowed"
+                  disabled
+                />
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-50 border border-gray-300 rounded-md">
+                  <div className="text-center">
+                    <i className="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-2"></i>
+                    <p className="text-sm text-gray-500">File upload coming soon!</p>
+                    <p className="text-xs text-gray-400">PDF, images, and documents</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Submit Buttons */}
