@@ -426,12 +426,26 @@ body {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
+    padding: 1rem;
   }
   
   .header-actions {
-    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
     width: 100%;
-    gap: 0.5rem;
+  }
+  
+  .dashboard-button {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .dashboard-button i {
+    margin-right: 0.3rem;
   }
   
   .dashboard-cards {
@@ -445,6 +459,28 @@ body {
   }
   
   .activity-icon {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    gap: 0.3rem;
+  }
+  
+  .dashboard-button {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.75rem;
+    flex: 1;
+    max-width: calc(50% - 0.15rem);
+    justify-content: center;
+  }
+  
+  .dashboard-button span {
+    display: none;
+  }
+  
+  .dashboard-button i {
     margin-right: 0;
   }
 }

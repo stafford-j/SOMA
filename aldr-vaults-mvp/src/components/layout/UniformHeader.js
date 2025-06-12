@@ -30,11 +30,11 @@ const UniformHeader = ({ title = "Aldr Health Companion" }) => {
       <div className="header-actions">
         <Link to="/aldr-id" className="dashboard-button white">
           <i className="fas fa-id-card"></i>
-          Aldr ID
+          <span className="hidden sm:inline">Aldr ID</span>
         </Link>
         <Link to="/add-record" className="dashboard-button white">
           <i className="fas fa-plus"></i>
-          Add New Record
+          <span className="hidden sm:inline">Add New Record</span>
         </Link>
         <div className="relative">
           <button 
@@ -42,7 +42,7 @@ const UniformHeader = ({ title = "Aldr Health Companion" }) => {
             onClick={handleLanguageClick}
           >
             <i className="fas fa-globe"></i>
-            EN
+            <span className="hidden sm:inline">EN</span>
           </button>
           {showLanguageTooltip && (
             <div className="absolute top-full right-0 mt-2 bg-gray-800 text-white px-3 py-2 rounded-lg shadow-lg whitespace-nowrap z-50">
@@ -56,11 +56,11 @@ const UniformHeader = ({ title = "Aldr Health Companion" }) => {
           className="dashboard-button white"
         >
           <i className="fas fa-envelope"></i>
-          Contact
+          <span className="hidden sm:inline">Contact</span>
         </a>
         <button className="dashboard-button white" onClick={() => alert('Logout functionality to be implemented')}>
           <i className="fas fa-sign-out-alt"></i>
-          Log Out
+          <span className="hidden sm:inline">Log Out</span>
         </button>
       </div>
     </header>
