@@ -1,12 +1,12 @@
-# SOMA Health Platform
+# Aldr Ecosystem
 
 **© 2025 Conas Consulting. All Rights Reserved.**
 
 **IMPORTANT NOTICE: This repository contains proprietary concepts and intellectual property owned exclusively by Conas Consulting. This material is shared publicly for demonstration purposes only.**
 
-SOMA aims to give you complete ownership of your personal information through secure, private vaults designed to leverage the revolutionary Autonomi network. Whether you're moving countries or rebuilding after displacement, SOMA's vision is to ensure your health records, identity, and essential documentation remain accessible, portable, and always under your control.
+Aldr aims to give you complete ownership of your personal information through secure, private vaults. Whether you're managing health records, legal documents, or identity information, Aldr ensures your essential documentation remains accessible, portable, and always under your control.
 
-<img src="https://static.wixstatic.com/media/afc39f_d083e6a050b841a0bc83b72924531191~mv2.png" alt="SOMA Health Platform" width="400"/>
+<img src="https://static.wixstatic.com/media/afc39f_ca3a562fc9ab4f2fa58e3db782784e50~mv2.png" alt="Aldr Health Platform" width="400"/>
 
 ## 📋 Documentation
 
@@ -15,21 +15,23 @@ SOMA aims to give you complete ownership of your personal information through se
 - [Concept Ownership](ConceptDocs/CONCEPT_OWNERSHIP.md) - Intellectual property declaration
 - [Changelog](CHANGELOG.md) - Development progress and version history
 
-This repository contains the three core components of the SOMA ecosystem:
+This repository contains the core components of the Aldr ecosystem:
 
-1. **SOMA Companion** - Patient-facing health records dashboard
-2. **SOMA Colleague** - Provider-facing clinical interface
-3. **SOMA Bridge** - Identity & health record continuity solution for displaced populations
+1. **Aldr Vaults MVP** - Main platform and navigation hub
+2. **Aldr Health Companion** - Personal health record management (formerly SOMA Companion)
+3. **Aldr Legal Companion** - Legal document management system
+4. **Aldr ID** - Personal health profile and identity management
+5. **SOMA Colleague** - Provider-facing clinical interface (legacy)
 
 All components include sample data, so you can run them locally without external dependencies.
 
-## SOMA Companion (Patient Dashboard)
+## Aldr Health Companion (Patient Dashboard)
 
-A modern SOMA-styled health records dashboard allowing patients to manage and explore their health information with AI insights.
+A modern health records dashboard allowing patients to manage and explore their health information with advanced AI insights across multiple medical perspectives.
 
 ### Key Features
 
-- **Modern SOMA-styled UI**: Clean, professional healthcare interface
+- **Modern Aldr-styled UI**: Clean, professional healthcare interface with teal/purple branding
 - **Health Records Management**: View all health records in a single dashboard
 - **Health Categories**: Medical, dental, mental health, and alternative care
 - **AI Insights**: Toggle between data mode and AI opinion mode 
@@ -64,8 +66,8 @@ A clinical interface for healthcare providers to access patient-shared records w
 
 1. Clone this repository
    ```bash
-   git clone https://github.com/your-username/soma-ecosystem.git
-   cd soma-ecosystem
+   git clone https://github.com/stafford-j/SOMA.git
+   cd SOMA
    ```
 
 2. Run the setup script and choose which application(s) to install
@@ -78,14 +80,23 @@ A clinical interface for healthcare providers to access patient-shared records w
 
 ### Starting the Applications
 
-#### SOMA Companion (Patient Dashboard)
+#### Aldr Vaults MVP (Main Platform)
 ```bash
-cd "SOMA Companion (Individual)"
+cd aldr-vaults-mvp
+npm install
 npm start
 ```
 Visit `http://localhost:3000` in your browser
 
-#### SOMA Colleague (Provider Dashboard)
+#### Aldr Health Companion (Standalone)
+```bash
+cd aldr-health-companion
+npm install
+npm start
+```
+Visit `http://localhost:3000` in your browser (different port if MVP is running)
+
+#### SOMA Colleague (Provider Dashboard - Legacy)
 ```bash
 cd "SOMA Colleague (Provider Platform)"
 npm start
@@ -94,11 +105,15 @@ Visit `http://localhost:3001` in your browser
 
 ## Project Structure
 
-- `/SOMA Companion (Individual)`: SOMA Companion patient application
-  - `/src/components/dashboard`: Dashboard components
-  - `/src/pages`: Application pages
+- `/aldr-vaults-mvp`: Main Aldr platform and navigation hub
+  - `/src/pages`: AldrHealth.js, AldrId.js, AldrLegal.js
+  - `/src/components`: UniformHeader, sample data
   
-- `/SOMA Colleague (Provider Platform)`: SOMA Colleague provider application
+- `/aldr-health-companion`: Standalone health companion application
+  - `/src/components/dashboard`: Health dashboard components
+  - `/src/pages`: Health record management pages
+
+- `/SOMA Colleague (Provider Platform)`: Provider application (legacy)
   - `/src/components/dashboard`: Clinical interface components
   - `/src/pages`: Provider workflow pages
 

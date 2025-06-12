@@ -1,8 +1,10 @@
-# SOMA Health Companion
+# Aldr Health Companion
+
+**Repository:** https://github.com/stafford-j/SOMA
 
 **A personal health vault designed to help individuals manage their health information across different systems, borders, and life stages.**
 
-SOMA Health Companion is a personal health vault designed to help individuals manage their health information across different systems, borders, and life stages. It provides a straightforward, structured interface for managing records, generating user-directed insights, and communicating effectively with providers on the user's terms.
+Aldr Health Companion is a personal health vault designed to help individuals manage their health information across different systems, borders, and life stages. It provides a straightforward, structured interface for managing records, generating user-directed insights, and communicating effectively with providers on the user's terms.
 
 ## Core Features
 
@@ -15,7 +17,7 @@ SOMA Health Companion is a personal health vault designed to help individuals ma
 
 ### Data Mode vs. Opinion Mode
 
-At the heart of SOMA Health Companion is a simple but powerful concept: users decide how their health information is presented and interpreted. The Opinion Mode feature inspired the name "Companion"—like a trusted guide who offers perspective but never replaces professional care.
+At the heart of Aldr Health Companion is a simple but powerful concept: users decide how their health information is presented and interpreted. The Opinion Mode feature inspired the name "Companion"—like a trusted guide who offers perspective but never replaces professional care.
 
 **Data Mode:**
 
