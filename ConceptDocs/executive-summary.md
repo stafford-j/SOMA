@@ -53,11 +53,11 @@ SOMA creates a paradigm shift in personal data ownership through:
 - Documentation tools that respect patient data rights
 - Integration with existing healthcare systems
 
-#### 3. SOMA Bridge (Longterm humanitarian mission)
-- Portable digital vault for displaced individuals to carry essential records across borders
-- Supports identity verification, medical history access, and credential presentation  
-- Features offline capability, multi-language support, and humanitarian organization integration
-- Designed for refugees, displaced professionals, and those navigating new systems
+#### 3. SOMA Bridge (Longterm humaniarian mission)
+* Portable digital vault for displaced individuals to carry essential records across borders
+* Supports identity verification, medical history access, and credential presentation  
+* Features offline capability, multi-language support, and humanitarian organization integration
+* Designed for refugees, displaced professionals, and those navigating new systems
 
 <img src="https://static.wixstatic.com/media/afc39f_02068bd3082742128ba57b3e17af2e5b~mv2.png" alt="SOMA Bridge" width="300"/>
 

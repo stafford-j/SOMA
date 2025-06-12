@@ -44,6 +44,6 @@ All notable changes to the SOMA Health Platform will be documented in this file.
 ### Added
 - Initial project scaffolding
 - Core architecture design
-- Initial framework for decentralized personal health vaults
+- Proof of concept for Autonomi integration
 - Basic React components for health records
 - Development environment setup
