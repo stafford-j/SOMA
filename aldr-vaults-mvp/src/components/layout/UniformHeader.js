@@ -12,7 +12,7 @@ const UniformHeader = ({ title = "Aldr Health Companion" }) => {
   return (
     <header className="dashboard-header">
       <div className="header-left">
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex flex-col">
           <img 
             src="https://static.wixstatic.com/media/afc39f_ca3a562fc9ab4f2fa58e3db782784e50~mv2.png"
             alt="Aldr Health Logo" 
@@ -22,6 +22,9 @@ const UniformHeader = ({ title = "Aldr Health Companion" }) => {
               maxWidth: '200px'
             }}
           />
+          <div className="text-sm text-white italic ml-1 mt-1 hidden sm:block">
+            Aldr /ˈɑːl-dər/ — life, age, lifetime
+          </div>
         </Link>
       </div>
       <div className="header-actions">
