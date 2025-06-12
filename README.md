@@ -1,6 +1,6 @@
-# Aldr Ecosystem
-
 **We have Rebranded - Please note this platform is now known as Aldr with Aldr Health, Aldr Legal, and Aldr ID sub-domains going forward**
+
+# Aldr Vaults
 
 **© 2025 Conas Consulting. All Rights Reserved.**
 
