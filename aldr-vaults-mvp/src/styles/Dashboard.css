@@ -1,0 +1,450 @@
+/**
+ * Dashboard.css - Aldr Branded Styling
+ * 
+ * This stylesheet contains the custom styling for the Aldr dashboard interface,
+ * including brand colors, component styling, and responsive layout rules.
+ * 
+ * Color scheme:
+ * - Teal: Primary brand color (#20B2AA)
+ * - Purple: Secondary brand color (#8A2BE2)
+ * - Specialty colors: Medical blue, Holistic green, Mental purple, etc.
+ * 
+ * Major components styled:
+ * - Dashboard container and layout
+ * - Header elements
+ * - Cards and statistics
+ * - Activity lists and feeds
+ * - Buttons and interactive elements
+ * - Loading states and indicators
+ * 
+ * @author Aldr Team
+ * @version 1.0.0
+ */
+:root {
+  --primary-teal: #20B2AA;
+  --primary-purple: #8A2BE2;
+  --dark-text: #333;
+  --light-bg: #f8f9fa;
+  --gray-text: #6c757d;
+  --medical-blue: #4169E1;
+  --holistic-green: #228B22;
+  --mental-purple: #9932CC;
+  --warning-red: #DC2626;
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 5px 15px rgba(32, 178, 170, 0.15);
+  --shadow-lg: 0 8px 30px rgba(138, 43, 226, 0.2);
+  --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background-color: var(--light-bg);
+}
+
+/* Main container styles */
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header section with gradient */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-teal), var(--primary-purple));
+  border-radius: 12px;
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-logo {
+  height: 50px;
+  margin-right: 1rem;
+  background-color: white;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.dashboard-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Dashboard cards with SOMA branding */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Limit to 3 columns max on larger screens */
+@media (min-width: 1200px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-standard);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+  color: white;
+  background: var(--primary-teal);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.card-content {
+  color: var(--gray-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.card-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+/* Specialty-specific card colors */
+.dashboard-card.medical .card-icon {
+  background: var(--medical-blue);
+}
+
+.dashboard-card.holistic .card-icon {
+  background: var(--holistic-green);
+}
+
+.dashboard-card.mental .card-icon {
+  background: var(--mental-purple);
+}
+
+.dashboard-card.physiotherapy .card-icon {
+  background: var(--holistic-green);
+}
+
+.dashboard-card.dentistry .card-icon {
+  background: var(--primary-teal);
+}
+
+.dashboard-card.massage .card-icon {
+  background: var(--mental-purple);
+}
+
+.dashboard-card.mental_health .card-icon {
+  background: var(--mental-purple);
+}
+
+.dashboard-card.nutrition .card-icon {
+  background: var(--holistic-green);
+}
+
+.dashboard-card.alternative .card-icon {
+  background: var(--primary-purple);
+}
+
+.dashboard-card.chiropractic .card-icon {
+  background: var(--holistic-green);
+}
+
+.dashboard-card.optometry .card-icon {
+  background: var(--medical-blue);
+}
+
+.dashboard-card.other .card-icon {
+  background: var(--primary-teal);
+}
+
+/* Progress indicator styling */
+.progress-indicator {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.progress-circle {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 0.5rem;
+}
+
+.progress-circle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-bg {
+  stroke: #f0f0f0;
+}
+
+.progress-fill {
+  stroke: var(--holistic-green);
+}
+
+/* Button styling */
+.dashboard-button {
+  background: var(--primary-teal);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dashboard-button:hover {
+  background: var(--primary-purple);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard-button.outline {
+  background: transparent;
+  color: var(--primary-teal);
+  border: 2px solid var(--primary-teal);
+}
+
+.dashboard-button.outline:hover {
+  background: var(--primary-teal);
+  color: white;
+}
+
+.dashboard-button.white {
+  background: white;
+  color: var(--primary-teal);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dashboard-button.white:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--primary-purple);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard-button.placeholder {
+  filter: grayscale(50%);
+  opacity: 0.7;
+  cursor: default;
+  position: relative;
+}
+
+.dashboard-button.placeholder::after {
+  content: "Coming Soon";
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #f39c12;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 0.6rem;
+  font-weight: bold;
+}
+
+/* Activity feed styling */
+.recent-activity {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-teal);
+}
+
+.activity-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-teal);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.activity-info {
+  flex-grow: 1;
+}
+
+.activity-text {
+  font-weight: 500;
+  color: var(--dark-text);
+  margin: 0 0 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+.activity-time {
+  color: var(--gray-text);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Loading states */
+.loading-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--primary-teal);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-right: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error states */
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid #fee;
+}
+
+.modal-header {
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  color: var(--warning-red);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-content {
+  color: var(--gray-text);
+  line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .activity-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .activity-icon {
+    margin-right: 0;
+  }
+}

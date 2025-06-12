@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --teal: #20B2AA;
+  --purple: #8A2BE2;
+  --dark: #333333;
+  --light: #F8F9FA;
+  --gray: #6C757D;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply bg-aldr-light;
+  color: var(--dark);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-aldr-gradient text-white font-semibold py-3 px-7 rounded-pill;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border border-aldr-teal text-aldr-teal font-semibold py-3 px-7 rounded-pill;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+  
+  .heading-gradient {
+    @apply bg-clip-text text-transparent bg-aldr-gradient font-bold;
+  }
+}
