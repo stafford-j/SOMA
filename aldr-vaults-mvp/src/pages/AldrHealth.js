@@ -184,30 +184,47 @@ const AldrHealth = () => {
             <h2 className="card-title">Diabetes Management</h2>
           </div>
           <div className="card-content">
-            <div className="progress-indicator">
-              <div className="progress-circle">
-                <svg viewBox="0 0 36 36" style={{ transform: 'rotate(0deg)' }}>
-                  <path className="progress-bg"
-                    d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831
-                      a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="#f0f0f0"
-                    strokeWidth="2"
-                  />
-                  <path className="progress-fill"
-                    d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831
-                      a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="#228B22"
-                    strokeWidth="2.5"
-                    strokeDasharray={`${65}, 100`}
-                    strokeLinecap="round"
-                    transform="rotate(-90, 18, 18)"
-                  />
-                  <text x="18" y="21" textAnchor="middle" fill="#228B22" fontWeight="bold" fontSize="9px" style={{ transform: 'rotate(0deg)', transformOrigin: 'center' }}>65%</text>
-                </svg>
+            <div style={{ textAlign: 'center', margin: '1rem 0', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+              <div style={{ width: '80px', height: '80px', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+                <div style={{ position: 'relative', width: '80px', height: '80px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <svg viewBox="0 0 36 36" style={{ width: '100%', height: '100%' }}>
+                    <path className="progress-bg"
+                      d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="#f0f0f0"
+                      strokeWidth="2"
+                    />
+                    <path className="progress-fill"
+                      d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="#228B22"
+                      strokeWidth="2.5"
+                      strokeDasharray={`${65}, 100`}
+                      strokeLinecap="round"
+                      transform="rotate(-90, 18, 18)"
+                    />
+                  </svg>
+                  <div style={{
+                    position: 'absolute',
+                    top: '0',
+                    left: '0',
+                    right: '0',
+                    bottom: '0',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    color: '#228B22',
+                    fontWeight: 'bold',
+                    fontSize: '14px',
+                    textAlign: 'center'
+                  }}>
+                    65%
+                  </div>
+                </div>
               </div>
               <p style={{ fontWeight: 'bold', color: '#228B22' }}>Overall Progress</p>
             </div>
