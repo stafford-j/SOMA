@@ -1,0 +1,536 @@
+/**
+ * Dashboard.css - SOMA Branded Styling
+ * 
+ * This stylesheet contains the custom styling for the SOMA dashboard interface,
+ * including brand colors, component styling, and responsive layout rules.
+ * 
+ * Color scheme:
+ * - Teal: Primary brand color (#20B2AA)
+ * - Purple: Secondary brand color (#8A2BE2)
+ * - Specialty colors: Medical blue, Holistic green, Mental purple, etc.
+ * 
+ * Major components styled:
+ * - Dashboard container and layout
+ * - Header elements
+ * - Cards and statistics
+ * - Activity lists and feeds
+ * - Buttons and interactive elements
+ * - Loading states and indicators
+ * 
+ * @author SOMA Companion Team
+ * @version 1.0.0
+ */
+:root {
+  --primary-teal: #20B2AA;
+  --primary-purple: #8A2BE2;
+  --dark-text: #333;
+  --light-bg: #f8f9fa;
+  --gray-text: #6c757d;
+  --medical-blue: #4169E1;
+  --holistic-green: #228B22;
+  --mental-purple: #9932CC;
+  --warning-red: #DC2626;
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 5px 15px rgba(32, 178, 170, 0.15);
+  --shadow-lg: 0 8px 30px rgba(138, 43, 226, 0.2);
+  --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background-color: var(--light-bg);
+}
+
+/* Main container styles */
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header section with gradient */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-teal), var(--primary-purple));
+  border-radius: 12px;
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-logo {
+  height: 50px;
+  margin-right: 1rem;
+  background-color: white;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.dashboard-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+/* Dashboard cards with SOMA branding */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  transition: var(--transition-standard);
+  border-top: 4px solid var(--primary-teal);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.dashboard-card.medical {
+  border-top-color: var(--medical-blue);
+}
+
+.dashboard-card.holistic {
+  border-top-color: var(--holistic-green);
+}
+
+.dashboard-card.mental {
+  border-top-color: var(--mental-purple);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-icon {
+  margin-right: 0.75rem;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--light-bg);
+  color: var(--primary-teal);
+}
+
+.medical .card-icon {
+  color: var(--medical-blue);
+}
+
+.holistic .card-icon {
+  color: var(--holistic-green);
+}
+
+.mental .card-icon {
+  color: var(--mental-purple);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.card-content {
+  color: var(--gray-text);
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-purple);
+  margin: 0.5rem 0;
+}
+
+/* Progress indicator styling */
+.progress-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.progress-circle {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+
+.progress-circle svg {
+  overflow: visible;
+}
+
+.progress-bg {
+  stroke-width: 2;
+  stroke: #f0f0f0;
+}
+
+.progress-fill {
+  stroke-dashoffset: 0;
+  transition: stroke-dasharray 1s ease;
+}
+
+/* Recent activity section */
+.recent-activity {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  transition: var(--transition-standard);
+  margin-top: 2rem;
+}
+
+.recent-activity:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Loading spinner */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--light-bg);
+  border-top: 5px solid var(--primary-teal);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--primary-teal);
+}
+
+.activity-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.activity-list {
+  list-style: none;
+  padding: 0;
+}
+
+.activity-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  transition: var(--transition-standard);
+}
+
+.activity-item:hover {
+  background-color: rgba(32, 178, 170, 0.05);
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--light-bg);
+  color: var(--primary-teal);
+}
+
+.activity-info {
+  flex: 1;
+}
+
+.activity-text {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.activity-time {
+  font-size: 0.8rem;
+  color: var(--gray-text);
+}
+
+/* Button styles matching SOMA branding */
+.dashboard-button {
+  background-color: var(--primary-teal);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  box-shadow: 0 2px 10px rgba(32, 178, 170, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dashboard-button:hover {
+  background-color: var(--primary-purple);
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+}
+
+.dashboard-button.purple {
+  background-color: var(--primary-purple);
+}
+
+.dashboard-button.purple:hover {
+  background-color: var(--mental-purple);
+}
+
+.dashboard-button.outline {
+  background-color: transparent;
+  border: 2px solid var(--primary-teal);
+  color: var(--primary-teal);
+}
+
+.dashboard-button.outline:hover {
+  background-color: var(--primary-teal);
+  color: white;
+}
+
+/* Form elements */
+.form-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  transition: var(--transition-standard);
+  font-family: inherit;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-teal);
+  box-shadow: 0 0 0 3px rgba(32, 178, 170, 0.1);
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: var(--dark-text);
+}
+
+/* Tabs for sections */
+.tab-container {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.tab-list {
+  display: flex;
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}
+
+.tab-item {
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  font-weight: 500;
+  color: var(--gray-text);
+  position: relative;
+}
+
+.tab-item.active {
+  color: var(--primary-teal);
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary-teal);
+}
+
+.tab-item:hover:not(.active) {
+  color: var(--dark-text);
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  transition: var(--transition-standard);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--primary-teal);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--gray-text);
+  transition: var(--transition-standard);
+}
+
+.modal-close:hover {
+  color: var(--primary-purple);
+}
+
+/* Category filters */
+.category-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.category-filter {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  background-color: var(--light-bg);
+  color: var(--gray-text);
+}
+
+.category-filter.active, .category-filter:hover {
+  background-color: var(--primary-teal);
+  color: white;
+}
+
+.category-filter.medical {
+  background-color: rgba(65, 105, 225, 0.1);
+  color: var(--medical-blue);
+}
+
+.category-filter.medical.active, .category-filter.medical:hover {
+  background-color: var(--medical-blue);
+  color: white;
+}
+
+.category-filter.holistic {
+  background-color: rgba(34, 139, 34, 0.1);
+  color: var(--holistic-green);
+}
+
+.category-filter.holistic.active, .category-filter.holistic:hover {
+  background-color: var(--holistic-green);
+  color: white;
+}
+
+.category-filter.mental {
+  background-color: rgba(153, 50, 204, 0.1);
+  color: var(--mental-purple);
+}
+
+.category-filter.mental.active, .category-filter.mental:hover {
+  background-color: var(--mental-purple);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-list {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+  
+  .category-filters {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 0.5rem;
+    flex-wrap: nowrap;
+  }
+}
