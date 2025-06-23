@@ -429,6 +429,21 @@ body {
     padding: 1rem;
   }
   
+  /* Vault header text adjustments for mobile */
+  .dashboard-header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .dashboard-header .flex.items-center {
+    justify-content: center;
+  }
+  
+  /* Icon sizing for mobile */
+  .dashboard-header i {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+  }
+  
   .header-actions {
     display: flex;
     flex-wrap: wrap;
@@ -474,6 +489,52 @@ body {
     flex: 1;
     max-width: calc(50% - 0.15rem);
     justify-content: center;
+  }
+  
+  /* Even smaller adjustments for small mobile */
+  .dashboard-header h1 {
+    font-size: 1rem;
+  }
+  
+  .dashboard-header .text-sm {
+    font-size: 0.7rem;
+  }
+  
+  .dashboard-header i {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+  }
+  
+  /* Card and form improvements for mobile */
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  /* Ensure buttons don't get too small */
+  .btn-primary, .btn-secondary {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Form input improvements */
+  input, select, textarea {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Email/document card improvements */
+  .divide-y > div {
+    padding: 1rem 0.5rem;
+  }
+  
+  /* Flex layouts for mobile */
+  .flex.space-x-2, .flex.space-x-4 {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .flex.space-x-2 > *, .flex.space-x-4 > * {
+    margin-right: 0;
   }
   
   .dashboard-button span {

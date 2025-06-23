@@ -1,0 +1,385 @@
+:root {
+  --teal: #006666;
+  --purple: #8A2BE2;
+  --dark: #333;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --green: #228B22;
+  --orange: #FF8C00;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+/* BETA Banner */
+.banner {
+  background: linear-gradient(45deg, var(--teal), var(--purple));
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.landing-container {
+  min-height: 100vh;
+  background: var(--light);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background: white;
+  padding: 20px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.tagline {
+  color: var(--gray);
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 4px;
+  max-width: 300px;
+}
+
+.nav-logo {
+  height: 60px;
+  width: auto;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav-button, .contact-button {
+  background-color: var(--teal);
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.nav-button:hover, .contact-button:hover {
+  background-color: var(--purple);
+}
+
+/* Vault Selection */
+.vaults-section {
+  padding: 20px 0 80px 0;
+  background: var(--light);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--teal);
+  margin-bottom: 50px;
+  font-weight: 600;
+}
+
+.vaults-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vault-card {
+  background: white;
+  border-radius: 16px;
+  border: 3px solid var(--teal);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.vault-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.vault-card.coming-soon {
+  opacity: 0.8;
+}
+
+.vault-card.custom {
+  border-color: var(--orange);
+}
+
+.vault-header {
+  background: linear-gradient(135deg, var(--teal) 0%, rgba(0,102,102,0.8) 100%);
+  padding: 30px 20px;
+  text-align: center;
+  position: relative;
+  min-height: 160px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.vault-card.custom .vault-header {
+  background: linear-gradient(135deg, var(--orange) 0%, rgba(255,140,0,0.8) 100%);
+}
+
+.vault-logo {
+  height: 80px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.vault-icon {
+  font-size: 4rem;
+  color: var(--orange);
+  margin-bottom: 15px;
+}
+
+.status-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--green);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.coming {
+  background: var(--purple);
+}
+
+.status-badge.custom-badge {
+  background: var(--orange);
+}
+
+.vault-body {
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.vault-body h3 {
+  color: var(--dark);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.vault-body p {
+  color: var(--gray);
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.vault-button {
+  background: linear-gradient(45deg, var(--teal), var(--purple));
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  width: 100%;
+  justify-content: center;
+}
+
+.vault-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(16,93,91,0.3);
+}
+
+.vault-button.outline {
+  background: transparent;
+  border: 2px solid var(--purple);
+  color: var(--purple);
+}
+
+.vault-button.outline:hover {
+  background: var(--purple);
+  color: white;
+}
+
+.vault-button.secondary {
+  background: linear-gradient(45deg, var(--orange), var(--purple));
+}
+
+.vault-button.secondary:hover {
+  box-shadow: 0 4px 16px rgba(255,140,0,0.3);
+}
+
+/* Security Section */
+.security-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.security-item {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.security-item i {
+  font-size: 3rem;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+
+.security-item h4 {
+  font-size: 1.2rem;
+  color: var(--dark);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.security-item p {
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vaults-grid { 
+    grid-template-columns: 1fr; 
+    gap: 30px; 
+  }
+  .security-grid { 
+    grid-template-columns: 1fr; 
+    gap: 30px; 
+  }
+  .header-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .header-buttons {
+    justify-content: center;
+  }
+  
+  /* Mobile header optimizations */
+  .dashboard-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .header-left .flex.items-center {
+    justify-content: center;
+  }
+  
+  .header-left h1 {
+    font-size: 1.25rem;
+  }
+  
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title { 
+    font-size: 1.5rem; 
+  }
+  .banner { 
+    padding: 8px 15px; 
+    font-size: 12px; 
+  }
+  .vault-header {
+    padding: 20px;
+  }
+  .vault-body {
+    padding: 20px;
+  }
+  
+  /* Small mobile header adjustments */
+  .header-left h1 {
+    font-size: 1rem;
+  }
+  
+  .header-left .text-sm {
+    font-size: 0.7rem;
+  }
+  
+  .header-left img {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  /* Vault cards mobile optimization */
+  .vault-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .vault-header {
+    min-height: 120px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .vault-logo {
+    height: 60px;
+    max-width: 120px;
+  }
+  
+  /* Navigation buttons mobile spacing */
+  .dashboard-button {
+    min-height: 44px;
+    margin: 0.2rem;
+  }
+}

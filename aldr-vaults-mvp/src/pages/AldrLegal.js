@@ -20,6 +20,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import sampleLegalRecords from '../data/legal-records';
+import '../styles/Dashboard.css';
 
 const AldrLegal = () => {
   // Scroll to top when component mounts
@@ -135,24 +136,62 @@ const AldrLegal = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto animate-fade-in">
-      <header className="flex justify-between items-center mb-8 card">
-        <div className="flex items-center">
-          <div className="w-12 h-12 rounded-full bg-aldr-purple flex items-center justify-center mr-4 text-white">
-            <i className="fas fa-scale-balanced text-xl"></i>
-          </div>
-          <h1 className="text-3xl font-bold heading-gradient" style={{ fontFamily: 'Playfair Display, serif' }}>
-            Aldr Legal
-          </h1>
+    <div className="dashboard-container">
+      {/* Header matching Aldr Health and ID style */}
+      <header className="dashboard-header">
+        <div className="header-left">
+          <Link to="/" className="flex flex-col">
+            <div className="flex items-center">
+              <i className="fas fa-balance-scale text-white text-3xl mr-4"></i>
+              <div>
+                <h1 className="text-white text-xl font-bold" style={{ fontFamily: 'Playfair Display, serif' }}>Aldr Legal</h1>
+                <div className="text-sm text-white italic mt-1">
+                  Aldr /ˈɑːl-dər/ — life, age, lifetime
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
-        <div>
-          <Link to="/add-record" className="btn-primary">
-            <i className="fas fa-plus mr-2"></i>
-            Add New Document
+        <div className="header-actions">
+          <button className="dashboard-button white" onClick={() => alert('Document sharing functionality coming soon!')}>
+            <i className="fas fa-share"></i>
+            <span className="hidden sm:inline">Share Documents</span>
+          </button>
+          <a 
+            href="mailto:james@ruleyproduction.com" 
+            className="dashboard-button white"
+          >
+            <i className="fas fa-envelope"></i>
+            <span className="hidden sm:inline">Contact</span>
+          </a>
+          <Link to="/" className="dashboard-button white">
+            <i className="fas fa-arrow-left"></i>
+            <span className="hidden sm:inline">Back to Vaults</span>
           </Link>
         </div>
       </header>
 
+      <div className="max-w-6xl mx-auto animate-fade-in">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="card overflow-hidden">
+            <div className="bg-aldr-gradient px-6 py-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-4 text-white">
+                    <i className="fas fa-scale-balanced text-xl"></i>
+                  </div>
+                  <h1 className="text-2xl font-bold text-white" style={{ fontFamily: 'Playfair Display, serif' }}>
+                    Legal Documents
+                  </h1>
+                </div>
+                <Link to="/add-record" className="dashboard-button white">
+                  <i className="fas fa-plus mr-2"></i>
+                  Add Document
+                </Link>
+              </div>
+            </div>
+
+            <div className="p-6">
       {/* Legal Stats Summary */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div className="card bg-aldr-gradient text-white">
@@ -267,7 +306,7 @@ const AldrLegal = () => {
                 <p className="text-sm text-aldr-gray mb-4">{formatDate(record.date)}</p>
                 <p className="text-sm text-aldr-gray mb-4">{record.description}</p>
 
-                <button className="btn-secondary w-full text-sm">
+                <button className="btn-secondary w-full text-sm" onClick={() => alert('Demo Mode: Full document details coming in production version')}>
                   View Details
                 </button>
               </div>
@@ -320,7 +359,7 @@ const AldrLegal = () => {
                           : record.description}
                       </p>
 
-                      <button className="btn-secondary text-sm w-full">
+                      <button className="btn-secondary text-sm w-full" onClick={() => alert('Demo Mode: Full document details coming in production version')}>
                         View Details
                       </button>
                     </div>
@@ -401,6 +440,10 @@ const AldrLegal = () => {
           © 2025 Aldr. All rights reserved.
         </p>
       </footer>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

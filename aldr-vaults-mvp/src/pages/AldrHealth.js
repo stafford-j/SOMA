@@ -329,9 +329,9 @@ const AldrHealth = () => {
                   <p>{record.description || "No description available"}</p>
                 </div>
 
-                <Link to={`/record/${record.id}`} className="dashboard-button outline" style={{ marginTop: '1rem' }}>
+                <button className="dashboard-button outline" style={{ marginTop: '1rem' }} onClick={() => alert('Demo Mode: Full health record details coming in production version')}>
                   View Details
-                </Link>
+                </button>
               </div>
             ))}
           </div>
@@ -360,9 +360,9 @@ const AldrHealth = () => {
                 <p className="activity-text">{appointment.title}</p>
                 <p className="activity-time">{formatDate(appointment.date)}</p>
               </div>
-              <Link to={`/record/${appointment.id}`} className="dashboard-button outline" style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }}>
+              <button className="dashboard-button outline" style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }} onClick={() => alert('Demo Mode: Full appointment details coming in production version')}>
                 Details
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
@@ -477,13 +477,13 @@ const AldrHealth = () => {
                                 </p>
                               )}
 
-                              <Link to={`/record/${record.id}`} className="dashboard-button outline" style={{
+                              <button className="dashboard-button outline" style={{
                                 padding: '0.4rem 0.8rem',
                                 fontSize: '0.8rem',
                                 display: 'inline-block'
-                              }}>
+                              }} onClick={() => alert('Demo Mode: Full health record details coming in production version')}>
                                 View Details
-                              </Link>
+                              </button>
                             </div>
                           ))}
                         </div>

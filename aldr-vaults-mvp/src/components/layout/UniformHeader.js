@@ -13,25 +13,18 @@ const UniformHeader = ({ title = "Aldr Health Companion" }) => {
     <header className="dashboard-header">
       <div className="header-left">
         <Link to="/" className="flex flex-col">
-          <img 
-            src="https://static.wixstatic.com/media/afc39f_ca3a562fc9ab4f2fa58e3db782784e50~mv2.png"
-            alt="Aldr Health Logo" 
-            className="h-12 w-auto object-contain mr-4"
-            style={{ 
-              imageRendering: 'high-quality',
-              maxWidth: '200px'
-            }}
-          />
-          <div className="text-sm text-white italic ml-1 mt-1 hidden sm:block">
-            Aldr /ˈɑːl-dər/ — life, age, lifetime
+          <div className="flex items-center">
+            <i className="fas fa-heartbeat text-white text-3xl mr-4"></i>
+            <div>
+              <h1 className="text-white text-xl font-bold" style={{ fontFamily: 'Playfair Display, serif' }}>Aldr Health</h1>
+              <div className="text-sm text-white italic mt-1">
+                Aldr /ˈɑːl-dər/ — life, age, lifetime
+              </div>
+            </div>
           </div>
         </Link>
       </div>
       <div className="header-actions">
-        <Link to="/aldr-id" className="dashboard-button white">
-          <i className="fas fa-id-card"></i>
-          <span className="hidden sm:inline">Aldr ID</span>
-        </Link>
         <Link to="/add-record" className="dashboard-button white">
           <i className="fas fa-plus"></i>
           <span className="hidden sm:inline">Add New Record</span>
@@ -58,10 +51,10 @@ const UniformHeader = ({ title = "Aldr Health Companion" }) => {
           <i className="fas fa-envelope"></i>
           <span className="hidden sm:inline">Contact</span>
         </a>
-        <button className="dashboard-button white" onClick={() => alert('Logout functionality to be implemented')}>
-          <i className="fas fa-sign-out-alt"></i>
-          <span className="hidden sm:inline">Log Out</span>
-        </button>
+        <Link to="/" className="dashboard-button white">
+          <i className="fas fa-arrow-left"></i>
+          <span className="hidden sm:inline">Back to Vaults</span>
+        </Link>
       </div>
     </header>
   );
