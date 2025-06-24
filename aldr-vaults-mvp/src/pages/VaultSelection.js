@@ -91,7 +91,7 @@ const VaultSelection = () => {
             <div className="vault-card available">
               <div className="vault-header">
                 <i className="fas fa-id-card text-4xl text-white"></i>
-                <img src="https://static.wixstatic.com/media/afc39f_858a86c0d96f4779b594892464cdbdf3~mv2.png" alt="Aldr Identity" className="vault-logo" />
+                <h3 className="vault-title" style={{ fontFamily: 'Playfair Display, serif', color: 'white' }}>Aldr Identity</h3>
               </div>
               <div className="vault-body">
                 <p>Store your identity documents securely. Passport, ID cards, and personal credentials in one encrypted vault.</p>
@@ -106,7 +106,7 @@ const VaultSelection = () => {
             <div className="vault-card available">
               <div className="vault-header">
                 <i className="fas fa-heartbeat text-4xl text-white"></i>
-                <img src="https://static.wixstatic.com/media/afc39f_25568bb9581b4405b731b19af283837f~mv2.png" alt="Aldr Health" className="vault-logo" />
+                <h3 className="vault-title" style={{ fontFamily: 'Playfair Display, serif', color: 'white' }}>Aldr Health</h3>
               </div>
               <div className="vault-body">
                 <p>Organize your complete health history. Medical records, prescriptions, and health data under your control.</p>
@@ -121,7 +121,7 @@ const VaultSelection = () => {
             <div className="vault-card available">
               <div className="vault-header">
                 <i className="fas fa-balance-scale text-4xl text-white"></i>
-                <img src="https://static.wixstatic.com/media/afc39f_bef7c9dd4d4f48ce908637fbb64d5731~mv2.png" alt="Aldr Legal" className="vault-logo" />
+                <h3 className="vault-title" style={{ fontFamily: 'Playfair Display, serif', color: 'white' }}>Aldr Legal</h3>
               </div>
               <div className="vault-body">
                 <p>Manage your legal documents, contracts, and important papers. Estate planning made simple.</p>
@@ -136,7 +136,7 @@ const VaultSelection = () => {
             <div className="vault-card available">
               <div className="vault-header">
                 <i className="fas fa-plane text-4xl text-white"></i>
-                <img src="https://static.wixstatic.com/media/afc39f_6dffa8a312684af5877b172a934f347b~mv2.png" alt="Aldr Travel" className="vault-logo" />
+                <h3 className="vault-title" style={{ fontFamily: 'Playfair Display, serif', color: 'white' }}>Aldr Travel</h3>
               </div>
               <div className="vault-body">
                 <p>Organize travel documents, bookings, and itineraries. Your passport data links intelligently to Aldr Identity.</p>
@@ -151,7 +151,7 @@ const VaultSelection = () => {
             <div className="vault-card available">
               <div className="vault-header">
                 <i className="fas fa-heart text-4xl text-white"></i>
-                <img src="https://static.wixstatic.com/media/afc39f_b392a0a663664601a85077210ce117be~mv2.png" alt="Aldr Memoirs" className="vault-logo" />
+                <h3 className="vault-title" style={{ fontFamily: 'Playfair Display, serif', color: 'white' }}>Aldr Memoirs</h3>
               </div>
               <div className="vault-body">
                 <p>Document family journals, preserve heritage stories, and build your family tree. Legacy planning connects seamlessly to Aldr Legal.</p>
@@ -166,7 +166,7 @@ const VaultSelection = () => {
             <div className="vault-card available">
               <div className="vault-header">
                 <i className="fas fa-graduation-cap text-4xl text-white"></i>
-                <img src="https://static.wixstatic.com/media/afc39f_5c5dbbdd6a5d4d57b72e34c8487ace88~mv2.png" alt="Aldr Learning" className="vault-logo" />
+                <h3 className="vault-title" style={{ fontFamily: 'Playfair Display, serif', color: 'white' }}>Aldr Learning</h3>
               </div>
               <div className="vault-body">
                 <p>Store education credentials, certifications, and professional development records securely.</p>
@@ -181,7 +181,7 @@ const VaultSelection = () => {
             <div className="vault-card custom">
               <div className="vault-header">
                 <i className="fas fa-tools text-4xl text-white"></i>
-                <img src="https://static.wixstatic.com/media/afc39f_a14d742211ca47ec9e099b6a98c9f3d1~mv2.png" alt="Aldr Builder" className="vault-logo" />
+                <h3 className="vault-title" style={{ fontFamily: 'Playfair Display, serif', color: 'white' }}>Aldr Builder</h3>
               </div>
               <div className="vault-body">
                 <p>Create custom vaults with your own organization system. Add tags, categories, and workflows that work for you.</p>

@@ -137,14 +137,27 @@ const HomePage = () => {
           {vaults.map(vault => (
             <div 
               key={vault.id} 
-              className="card vault-card hover:shadow-lg transition-all duration-300"
+              className="vault-card hover:shadow-lg transition-all duration-300"
+              style={{
+                background: 'linear-gradient(135deg, rgba(16, 93, 91, 0.1), rgba(138, 43, 226, 0.1))',
+                borderRadius: '0.5rem',
+                padding: '1.5rem',
+                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+              }}
             >
               <div className="flex items-center mb-4">
                 <div className={`w-12 h-12 rounded-full ${vault.color} flex items-center justify-center mr-4 text-white`}>
                   <i className={`fas ${vault.icon} text-xl`}></i>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-aldr-dark" style={{ fontFamily: 'Playfair Display, serif' }}>{vault.name}</h3>
+                  <div className="flex items-center">
+                    <h3 className="text-xl font-bold text-aldr-dark mr-2" style={{ fontFamily: 'Playfair Display, serif' }}>{vault.name}</h3>
+                    <img 
+                      src="https://static.wixstatic.com/media/afc39f_0893f0ab1268414aa42e4126925267ff~mv2.png" 
+                      alt="Aldr Vaults Lock" 
+                      className="w-5 h-5 opacity-70"
+                    />
+                  </div>
                   <p className="text-aldr-gray text-sm">{vault.recordCount} records</p>
                 </div>
               </div>
