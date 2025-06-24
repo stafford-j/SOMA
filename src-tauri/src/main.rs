@@ -6,6 +6,11 @@ use tracing_subscriber::{filter, prelude::*};
 
 #[tokio::main]
 async fn main() {
+    // Load environment variables from .env file
+    if let Err(_) = dotenv::dotenv() {
+        println!("No .env file found, continuing without environment variables");
+    }
+
     let subscriber = tracing_subscriber::registry()
         .with(filter::Targets::new()
             .with_target("colonylib", Level::DEBUG) // INFO level for colonylib

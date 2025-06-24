@@ -1,31 +1,30 @@
 <header class="">
-  <div class="navbar bg-base-100 shadow-sm">
-    <div class="flex-1">
-      <a href="/screens/app-info" class="btn btn-ghost text-xl">
-        <span><img src="/logo.svg" class="logo svelte-kit" alt="Colony Logo" width="24" height="24"/></span>
-        Colony
-      </a>
+  <nav class="bg-teal-600 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="/" class="flex items-center">
+              <img
+                src="/aldr-logo.png"
+                alt="Aldr Logo"
+                class="h-8 mr-2 bg-white p-1 rounded"
+              />
+              <span class="text-white font-bold text-xl" style="font-family: 'Playfair Display', serif;">Aldr ID</span>
+            </a>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <div class="space-x-4">
+              <a 
+                href="/screens/aldr-id"
+                class="text-white hover:bg-teal-700 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Identity Vault
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="flex-3 flex justifiy-center">
-      <ul class="menu menu-horizontal px-1 flex justify-between w-full">
-        <li><a href="/screens/search">Search</a></li>
-        <!-- <li><a href="/screens/pod-management/uploads">Pod Management</a></li> -->
-        <li>
-          <details>
-            <summary>Pod Management (dropdown)</summary>
-            <ul class="bg-base-100 rounded-t-none p-2" style="z-index: 1000;">
-              <li><a href="/screens/pod-management/your-pods">Your Pods</a></li>
-              <li><a>Uploads</a></li>
-              <li><a href="/screens/pod-management/downloads">Downloads</a></li>
-            </ul>
-          </details>
-        </li>
-        <li><a>Colonies</a></li>
-        <li><a href="/screens/wallet">Wallet</a></li>
-        <li><a href="/screens/configuration">Configuration</a></li>
-        <li><a href="/welcome-intro">Intro</a></li>
-      </ul>
-    </div>
-    <div class="flex-1"></div>  <!-- Added this empty div for balance -->
-  </div>
+  </nav>
 </header>

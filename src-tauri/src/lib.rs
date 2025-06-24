@@ -845,14 +845,35 @@ async fn get_subject_data(
 async fn initialize_autonomi_client(
     state: State<'_, Mutex<AppState>>,
     wallet_key: String,
+    network: String,
 ) -> Result<String, Error> {
-    //FIXME: do we want to hard code this or have an argument to set this in the frontend?
-    let environment = "local";
-    let client = init_client(environment).await?;
+    let client = init_client(&network).await?;
     let evm_network = client.evm_network();
     info!("EVM network: {evm_network:?}");
-    //FIXME: need to grap the wallet error and remove this unwrap()
-    let wallet = Wallet::new_from_private_key(evm_network.clone(), &wallet_key).unwrap();
+    
+    // Handle environment variable case
+    let actual_wallet_key = if wallet_key == "auto" {
+        match std::env::var("WALLET_PRIVATE_KEY") {
+            Ok(env_key) => {
+                info!("Using private key from WALLET_PRIVATE_KEY environment variable");
+                env_key
+            },
+            Err(_) => {
+                return Err(Error::Message("Environment variable WALLET_PRIVATE_KEY not found. Please set it in your .env file or use a different wallet input method.".to_string()));
+            }
+        }
+    } else {
+        wallet_key
+    };
+    
+    // Validate private key format before creating wallet
+    if actual_wallet_key.len() != 64 {
+        return Err(Error::Message(format!("Invalid private key length: {} (expected 64 hex characters)", actual_wallet_key.len())));
+    }
+    
+    // Create wallet with proper error handling
+    let wallet = Wallet::new_from_private_key(evm_network.clone(), &actual_wallet_key)
+        .map_err(|e| Error::Message(format!("Failed to create wallet from private key: {}", e)))?;
 
     // Lock the state and update the client
     let state = state.lock().unwrap();

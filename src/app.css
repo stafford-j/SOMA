@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
 .h1 {
   @apply text-5xl font-extrabold dark:text-white;
