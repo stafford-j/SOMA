@@ -161,20 +161,32 @@ const AldrLearning = () => {
 
   return (
     <div className="dashboard-container">
-      {/* Header matching other Aldr vaults */}
+      {/* Header matching homepage style */}
       <header className="dashboard-header">
         <div className="header-left">
-          <Link to="/" className="flex flex-col">
-            <div className="flex items-center">
-              <i className="fas fa-graduation-cap text-white text-3xl mr-4"></i>
-              <div>
-                <h1 className="text-white text-xl font-bold" style={{ fontFamily: 'Playfair Display, serif' }}>Aldr Learning</h1>
-                <div className="text-sm text-white italic mt-1">
-                  Aldr /ˈɑːl-dər/ — life, age, lifetime
-                </div>
-              </div>
-            </div>
+          <Link 
+            to="/"
+            className="hover:opacity-80 transition-opacity"
+            title="Back to Home"
+          >
+            <img 
+              src="https://static.wixstatic.com/media/afc39f_0893f0ab1268414aa42e4126925267ff~mv2.png"
+              alt="Home" 
+              className="h-16 w-16 object-contain"
+              style={{ 
+                imageRendering: 'high-quality'
+              }}
+            />
           </Link>
+        </div>
+        <div className="header-center flex flex-col items-center justify-center">
+          <div className="flex items-center">
+            <i className="fas fa-graduation-cap text-white text-2xl mr-3"></i>
+            <h1 className="text-white text-4xl" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>Aldr Learning</h1>
+          </div>
+          <div className="text-base text-white italic mt-1">
+            Aldr /ˈɑːl-dər/ — life, age, lifetime
+          </div>
         </div>
         <div className="header-actions">
           <button className="dashboard-button white" onClick={() => alert('Add learning credential features coming soon!')}>
@@ -195,27 +207,8 @@ const AldrLearning = () => {
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto animate-fade-in">
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          <div className="card overflow-hidden">
-            <div className="bg-aldr-gradient px-6 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-4 text-white">
-                    <i className="fas fa-graduation-cap text-xl"></i>
-                  </div>
-                  <h1 className="text-2xl font-bold text-white" style={{ fontFamily: 'Playfair Display, serif' }}>
-                    Learning & Credentials
-                  </h1>
-                </div>
-                <button className="dashboard-button white" onClick={() => alert('Add new credential coming soon!')}>
-                  <i className="fas fa-plus mr-2"></i>
-                  Add Credential
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6">
+      <div className="w-full animate-fade-in">
+        <div className="w-full px-8 py-8">
               {/* Learning Stats Summary */}
               <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                 <div className="card bg-aldr-gradient text-white">
@@ -526,8 +519,6 @@ const AldrLearning = () => {
                   © 2025 Aldr. All rights reserved.
                 </p>
               </footer>
-            </div>
-          </div>
         </div>
       </div>
     </div>

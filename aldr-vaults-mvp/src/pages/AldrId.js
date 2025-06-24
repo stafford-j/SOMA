@@ -272,17 +272,29 @@ const AldrId = () => {
       {/* Header matching Aldr Health style */}
       <header className="dashboard-header">
         <div className="header-left">
-          <Link to="/" className="flex flex-col">
-            <div className="flex items-center">
-              <i className="fas fa-id-card text-white text-3xl mr-4"></i>
-              <div>
-                <h1 className="text-white text-xl font-bold" style={{ fontFamily: 'Playfair Display, serif' }}>Aldr Identity</h1>
-                <div className="text-sm text-white italic mt-1">
-                  Aldr /ˈɑːl-dər/ — life, age, lifetime
-                </div>
-              </div>
-            </div>
+          <Link 
+            to="/"
+            className="hover:opacity-80 transition-opacity"
+            title="Back to Home"
+          >
+            <img 
+              src="https://static.wixstatic.com/media/afc39f_0893f0ab1268414aa42e4126925267ff~mv2.png"
+              alt="Home" 
+              className="h-16 w-16 object-contain"
+              style={{ 
+                imageRendering: 'high-quality'
+              }}
+            />
           </Link>
+        </div>
+        <div className="header-center flex flex-col items-center justify-center">
+          <div className="flex items-center">
+            <i className="fas fa-id-card text-white text-2xl mr-3"></i>
+            <h1 className="text-white text-4xl" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>Aldr Identity</h1>
+          </div>
+          <div className="text-base text-white italic mt-1">
+            Aldr /ˈɑːl-dər/ — life, age, lifetime
+          </div>
         </div>
         <div className="header-actions">
           <button className="dashboard-button white" onClick={() => alert('Sharing functionality coming soon!')}>
@@ -296,15 +308,11 @@ const AldrId = () => {
             <i className="fas fa-envelope"></i>
             <span className="hidden sm:inline">Contact</span>
           </a>
-          <Link to="/" className="dashboard-button white">
-            <i className="fas fa-arrow-left"></i>
-            <span className="hidden sm:inline">Back to Vaults</span>
-          </Link>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto animate-fade-in">
-        <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="w-full animate-fade-in">
+        <div className="w-full px-8 py-8">
           <div className="card overflow-hidden">
             <div className="bg-aldr-gradient px-6 py-4">
               <div className="flex items-center justify-between">
@@ -330,7 +338,7 @@ const AldrId = () => {
             {isEditing ? (
               <div className="p-6">
                 <h3 className="text-lg font-semibold text-aldr-dark mb-4">Personal Information</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
                   <div>
                     <label className="block text-aldr-dark font-medium mb-2">Full Name</label>
                     <input
@@ -406,7 +414,7 @@ const AldrId = () => {
                 </div>
 
                 <h3 className="text-lg font-semibold text-aldr-dark mb-4">Physical Information</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
                   <div>
                     <label className="block text-aldr-dark font-medium mb-2">Height</label>
                     <input
@@ -508,7 +516,7 @@ const AldrId = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-aldr-dark font-medium mb-2">Allergies</label>
                       <div className="space-y-2">
@@ -618,7 +626,7 @@ const AldrId = () => {
               </div>
             ) : (
               <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
                   <div className="card bg-aldr-light">
                     <h3 className="text-lg font-semibold text-aldr-dark mb-4">Personal Information</h3>
                     <div className="space-y-3">
@@ -659,7 +667,7 @@ const AldrId = () => {
                 </div>
 
                 {/* Enhanced Health Information Section */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                   <div className="card bg-aldr-light">
                     <h3 className="text-lg font-semibold text-aldr-dark mb-4">
                       <i className="fas fa-stethoscope text-red-500 mr-2"></i>

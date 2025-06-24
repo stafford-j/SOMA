@@ -48,8 +48,8 @@ body {
 /* Main container styles */
 .dashboard-container {
   padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 
 /* Header section with gradient */
@@ -60,9 +60,10 @@ body {
   margin-bottom: 2rem;
   padding: 1.5rem;
   background: linear-gradient(135deg, var(--primary-teal), var(--primary-purple));
-  border-radius: 12px;
+  border-radius: 0px;
   color: white;
   box-shadow: var(--shadow-md);
+  position: relative;
 }
 
 .header-left {
@@ -250,7 +251,9 @@ body {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
 }
 
 .dashboard-button:hover {
@@ -457,6 +460,10 @@ body {
     font-size: 0.8rem;
     min-height: 44px;
     min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   
   .dashboard-button i {
@@ -494,6 +501,10 @@ body {
   /* Even smaller adjustments for small mobile */
   .dashboard-header h1 {
     font-size: 1rem;
+  }
+  
+  .dashboard-header .text-base {
+    font-size: 0.8rem;
   }
   
   .dashboard-header .text-sm {
