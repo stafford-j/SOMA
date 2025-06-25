@@ -4,6 +4,7 @@ import smartSuggestionsData from '../data/smart-suggestions-data';
 const SmartSuggestions = () => {
   const [showAllReminders, setShowAllReminders] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState(null);
+  const [showInfo, setShowInfo] = useState(false);
 
   const { reminders, crossVaultIntelligence } = smartSuggestionsData;
   
@@ -43,6 +44,20 @@ const SmartSuggestions = () => {
       month: 'long', 
       year: 'numeric' 
     });
+  };
+
+  const getDaysUntilDue = (dateString) => {
+    const dueDate = new Date(dateString);
+    const today = new Date();
+    const diffTime = dueDate - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays < 0) return { text: `Overdue by ${Math.abs(diffDays)} days`, color: '#FF4444', textColor: '#FFFFFF' };
+    if (diffDays === 0) return { text: 'Due today', color: '#FF4444', textColor: '#FFFFFF' };
+    if (diffDays === 1) return { text: 'Due in: 1 day', color: '#FF4444', textColor: '#FFFFFF' };
+    if (diffDays <= 7) return { text: `Due in: ${diffDays} days`, color: '#FF4444', textColor: '#FFFFFF' };
+    if (diffDays <= 30) return { text: `Due in: ${diffDays} days`, color: '#FFB84D', textColor: '#000000' };
+    return { text: `Due in: ${diffDays} days`, color: '#4CAF50', textColor: '#FFFFFF' };
   };
 
   const handleReminderClick = (reminder) => {
@@ -155,15 +170,19 @@ const SmartSuggestions = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-600 to-purple-600 flex items-center justify-center mr-6">
-                <i className="fas fa-lightbulb text-3xl text-white"></i>
+                <i className="fas fa-bell text-3xl text-white"></i>
               </div>
-              <div>
-                <h2 className="text-2xl mb-2 text-gray-800" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>
-                  Smart Suggestions
+              <div className="flex items-center gap-3">
+                <h2 className="text-2xl text-gray-800" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>
+                  Reminders
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Your life admin assistant. Connects the dots between vaults and reminds you what needs attention.
-                </p>
+                <button 
+                  className="w-6 h-6 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 flex items-center justify-center transition-colors text-xs"
+                  onClick={() => setShowInfo(!showInfo)}
+                  title="Information"
+                >
+                  <i className="fas fa-info"></i>
+                </button>
               </div>
             </div>
             <button 
@@ -174,6 +193,14 @@ const SmartSuggestions = () => {
               <i className="fas fa-cog text-xl"></i>
             </button>
           </div>
+          
+          {showInfo && (
+            <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-gray-700">
+                Your life admin assistant. Connects the dots between vaults and reminds you what needs attention.
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="space-y-3 mb-6 flex-grow">
@@ -189,23 +216,58 @@ const SmartSuggestions = () => {
                           className="w-3 h-3 rounded-full"
                           style={{ backgroundColor: getUrgencyColor(reminder.urgency) }}
                         ></div>
-                        <div>
-                          <h4 className="font-semibold text-gray-800">{reminder.title}</h4>
+                        <div className="flex-grow">
+                          <div className="flex items-start gap-3 mb-1">
+                            <h4 className="font-semibold text-gray-800">{reminder.title}</h4>
+                            {(() => {
+                              const dueInfo = getDaysUntilDue(reminder.dueDate);
+                              return (
+                                <span 
+                                  className="px-3 py-1 rounded text-sm font-medium bg-white border"
+                                  style={{ 
+                                    color: dueInfo.color,
+                                    borderColor: dueInfo.color
+                                  }}
+                                >
+                                  {dueInfo.text}
+                                </span>
+                              );
+                            })()}
+                          </div>
                           <p className="text-sm text-gray-600">
-                            Due {formatDate(reminder.dueDate)} • {reminder.vaultName}
-                            {reminder.cost && ` • Previous Cost: ${reminder.cost}`}
+                            {reminder.cost && `Previous Cost: ${reminder.cost}`}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <span 
-                          className="px-2 py-1 rounded text-xs font-medium text-white"
-                          style={{ 
-                            backgroundColor: getUrgencyColor(reminder.urgency)
+                        <button 
+                          style={{
+                            background: 'linear-gradient(to right, #20B2AA, #8A2BE2)',
+                            color: 'white',
+                            padding: '10px 18px',
+                            borderRadius: '8px',
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            border: 'none',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            transition: 'opacity 0.2s',
+                            width: '200px',
+                            justifyContent: 'center'
                           }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Navigate to vault - you can add navigation logic here
+                            alert(`Navigate to ${reminder.vaultName}`);
+                          }}
+                          onMouseEnter={(e) => e.target.style.opacity = '0.9'}
+                          onMouseLeave={(e) => e.target.style.opacity = '1'}
                         >
-                          {getUrgencyLabel(reminder.urgency)}
-                        </span>
+                          <i className="fas fa-chevron-right"></i>
+                          {reminder.vaultName} Vault
+                        </button>
                         <i className="fas fa-chevron-right text-gray-400"></i>
                       </div>
                     </div>

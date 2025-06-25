@@ -59,6 +59,14 @@ const VaultSelection = () => {
     });
   };
 
+  const formatFullDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IE', { 
+      day: 'numeric', 
+      month: 'long'
+    });
+  };
+
   const getUrgencyColor = (urgency) => {
     switch (urgency) {
       case 'red': return '#FF4444';
@@ -178,52 +186,67 @@ const VaultSelection = () => {
 
   const vaults = [
     { 
-      id: 'identity', 
-      name: 'Aldr Identity',
-      icon: 'fa-id-card',
-      color: 'bg-blue-600',
-      description: 'Store your identity documents securely. Passport, ID cards, and personal credentials in one encrypted vault.',
-      reminders: smartSuggestionsData.vaultSpecificReminders.identity?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
-    },
-    { 
       id: 'health', 
-      name: 'Aldr Health',
+      name: 'Health',
+      fullName: 'Aldr Health',
       icon: 'fa-heartbeat',
       color: 'bg-red-600',
       description: 'Organize your complete health history. Medical records, prescriptions, and health data under your control.',
       reminders: smartSuggestionsData.vaultSpecificReminders.health?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
     },
     { 
+      id: 'identity', 
+      name: 'Identity',
+      fullName: 'Aldr Identity',
+      icon: 'fa-id-card',
+      color: 'bg-blue-600',
+      description: 'Store your identity documents securely. Passport, ID cards, and personal credentials in one encrypted vault.',
+      reminders: smartSuggestionsData.vaultSpecificReminders.identity?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
+    },
+    { 
+      id: 'learning', 
+      name: 'Learning',
+      fullName: 'Aldr Learning',
+      icon: 'fa-graduation-cap',
+      color: 'bg-green-600',
+      description: 'Store education credentials, certifications, and professional development records securely.',
+      reminders: smartSuggestionsData.vaultSpecificReminders.learning?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
+    },
+    { 
       id: 'legal', 
-      name: 'Aldr Legal',
+      name: 'Legal',
+      fullName: 'Aldr Legal',
       icon: 'fa-balance-scale',
       color: 'bg-purple-600',
       description: 'Manage your legal documents, contracts, and important papers. Estate planning made simple.',
       reminders: smartSuggestionsData.vaultSpecificReminders.legal?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
     },
     { 
-      id: 'travel', 
-      name: 'Aldr Travel',
-      icon: 'fa-plane',
-      color: 'bg-indigo-600',
-      description: 'Organize travel documents, bookings, and itineraries. Your passport data links intelligently to Aldr Identity.',
-      reminders: smartSuggestionsData.vaultSpecificReminders.travel?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
-    },
-    { 
       id: 'memoirs', 
-      name: 'Aldr Memoirs',
+      name: 'Memoirs',
+      fullName: 'Aldr Memoirs',
       icon: 'fa-heart',
       color: 'bg-pink-600',
       description: 'Document family journals, preserve heritage stories, and build your family tree. Legacy planning connects seamlessly to Aldr Legal.',
       reminders: smartSuggestionsData.vaultSpecificReminders.memoirs?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
     },
     { 
-      id: 'learning', 
-      name: 'Aldr Learning',
-      icon: 'fa-graduation-cap',
-      color: 'bg-green-600',
-      description: 'Store education credentials, certifications, and professional development records securely.',
-      reminders: smartSuggestionsData.vaultSpecificReminders.learning?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
+      id: 'travel', 
+      name: 'Travel',
+      fullName: 'Aldr Travel',
+      icon: 'fa-plane',
+      color: 'bg-indigo-600',
+      description: 'Organize travel documents, bookings, and itineraries. Your passport data links intelligently to Aldr Identity.',
+      reminders: smartSuggestionsData.vaultSpecificReminders.travel?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
+    },
+    { 
+      id: 'builder', 
+      name: 'Vault Builder',
+      fullName: 'Aldr Vault Builder',
+      icon: 'fa-tools',
+      color: 'bg-orange-600',
+      description: 'Create custom vaults with your own organization system. Add tags, categories, and workflows that work for you.',
+      reminders: smartSuggestionsData.vaultSpecificReminders.builder?.slice(0, 3).sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)) || []
     }
   ];
 
@@ -348,13 +371,14 @@ const VaultSelection = () => {
         </div>
       </header>
 
-      {/* Smart Features Section - Side by Side */}
-      <section className="pt-8 pb-8">
+      {/* Main Content Section - 50/50 Layout */}
+      <section className="main-content-section">
         <div className="w-full px-8">
-          <div className="max-w-none mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Smart Suggestions */}
-              <div>
+          <div className="main-content-grid-new">
+            {/* Left: Smart Features (50%) */}
+            <div className="smart-features-section">
+              {/* Notifications (formerly Smart Suggestions) */}
+              <div className="mb-8">
                 <SmartSuggestions />
               </div>
               
@@ -363,47 +387,75 @@ const VaultSelection = () => {
                 <SmartIngest />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Vault Selection */}
-      <section className="vaults-section">
-        <div className="w-full px-8">
-          <div className="vaults-grid">
-            {vaults.map((vault) => (
-              <div key={vault.id} className="vault-card available">
-                <div className="vault-header">
-                  <i className={`fas ${vault.icon} text-4xl text-white`}></i>
-                  <h3 className="vault-title" style={{ fontFamily: getVaultFont(vault.id), color: 'white' }}>
-                    {vault.name}
-                  </h3>
-                </div>
-                <div className="vault-body">
-                  <div 
-                    className="vault-info-icon"
-                    onClick={() => handleInfoClick(vault)}
-                    title="View vault information"
-                  >
-                    <i className="fas fa-info"></i>
-                  </div>
-                  
-                  <div>
+            
+            {/* Right: Vault Cards with Reminders (50%) */}
+            <div className="vault-cards-section">
+              <div className="vaults-grid-new">
+                {vaults.map((vault) => (
+                  <div key={vault.id} className="vault-card-with-reminder">
+                    {/* Vault Button */}
+                    <button 
+                      className="vault-button-with-reminder" 
+                      onClick={() => {
+                        const routeMap = {
+                          'identity': '/vault/aldr-id',
+                          'health': '/vault/aldr-health', 
+                          'legal': '/vault/aldr-legal',
+                          'travel': '/vault/aldr-travel',
+                          'memoirs': '/vault/aldr-memoirs',
+                          'learning': '/vault/aldr-learning',
+                          'builder': '/vault/aldr-builder'
+                        };
+                        if (vault.id === 'builder') {
+                          showComingSoon('Custom vault builder coming soon!');
+                        } else {
+                          handleVaultNavigation(routeMap[vault.id] || `/vault/aldr-${vault.id}`);
+                        }
+                      }}
+                    >
+                      {/* Icon */}
+                      <i className={`fas ${vault.icon} vault-icon-reminder`} style={{ color: 'var(--teal)' }}></i>
+                      
+                      {/* Vault Name with Info Button */}
+                      <div className="vault-name-section-reminder">
+                        <span className="vault-name-reminder" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>
+                          {vault.name}
+                        </span>
+                        
+                        {/* Info icon - inline after name */}
+                        <div 
+                          className="vault-info-icon-reminder"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleInfoClick(vault);
+                          }}
+                          title="View vault information"
+                        >
+                          <i className="fas fa-info"></i>
+                        </div>
+                      </div>
+                      
+                      {/* Open Vault Button - styled like View All Reminders */}
+                      <div className="vault-open-button-reminder">
+                        <i className="fas fa-chevron-right mr-1"></i>
+                        {vault.id === 'builder' ? vault.fullName : `${vault.fullName} Vault`}
+                      </div>
+                    </button>
                     
+                    {/* Reminder Section */}
                     {vault.reminders.length > 0 && (
-                      <div className="vault-reminders">
-                        <h4 className="text-sm font-semibold mb-2 text-gray-700">Upcoming Reminders:</h4>
-                        {vault.reminders.map((reminder) => {
+                      <div className="vault-reminder-display">
+                        {vault.reminders.slice(0, 1).map((reminder) => {
                           const fullReminder = smartSuggestionsData.reminders.find(r => r.id === reminder.id) || reminder;
                           return (
                             <div 
                               key={reminder.id}
-                              className={`vault-reminder-item urgency-${reminder.urgency}`}
+                              className="reminder-item-format"
                               onClick={() => handleReminderClick(fullReminder)}
                             >
-                              <div>
-                                <div className="vault-reminder-title">{reminder.title}</div>
-                                <div className="vault-reminder-date">Due {formatDate(reminder.dueDate)}</div>
+                              <div className="reminder-details-single-line">
+                                <span className="up-next-label">Up Next:</span> {fullReminder.title || reminder.title} | {formatFullDate(fullReminder.dueDate || reminder.dueDate)}
+                                {fullReminder.cost && ` | ${fullReminder.cost}`}
                               </div>
                             </div>
                           );
@@ -411,28 +463,9 @@ const VaultSelection = () => {
                       </div>
                     )}
                   </div>
-                  
-                  <button 
-                    className="vault-button primary" 
-                    onClick={() => {
-                      const routeMap = {
-                        'identity': '/vault/aldr-id',
-                        'health': '/vault/aldr-health', 
-                        'legal': '/vault/aldr-legal',
-                        'travel': '/vault/aldr-travel',
-                        'memoirs': '/vault/aldr-memoirs',
-                        'learning': '/vault/aldr-learning'
-                      };
-                      handleVaultNavigation(routeMap[vault.id] || `/vault/aldr-${vault.id}`);
-                    }}
-                  >
-                    <i className="fas fa-arrow-right"></i>
-                    Open Vault
-                  </button>
-                </div>
+                ))}
               </div>
-            ))}
-
+            </div>
           </div>
         </div>
       </section>
