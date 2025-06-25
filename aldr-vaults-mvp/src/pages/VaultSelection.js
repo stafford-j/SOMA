@@ -12,8 +12,18 @@ const VaultSelection = () => {
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [showVaultDropdown, setShowVaultDropdown] = useState(false);
   const [showBuilderInfo, setShowBuilderInfo] = useState(false);
+  const [showJamesIntro, setShowJamesIntro] = useState(false);
+  const [showLanguageTooltip, setShowLanguageTooltip] = useState(false);
   const dropdownRef = useRef(null);
   const builderRef = useRef(null);
+
+  // Show intro modal on first visit
+  useEffect(() => {
+    const hasSeenIntro = localStorage.getItem('aldr-peter-intro-seen');
+    if (!hasSeenIntro) {
+      setShowJamesIntro(true);
+    }
+  }, []);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -49,6 +59,11 @@ const VaultSelection = () => {
 
   const handleReminderClick = (reminder) => {
     setSelectedDocument(reminder);
+  };
+
+  const handleCloseJamesIntro = () => {
+    setShowJamesIntro(false);
+    localStorage.setItem('aldr-peter-intro-seen', 'true');
   };
 
   const formatDate = (dateString) => {
@@ -176,6 +191,95 @@ const VaultSelection = () => {
                 onClick={onClose}
               >
                 Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // James Stafford Intro Modal Component
+  const JamesIntroModal = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-lg max-w-3xl max-h-[90vh] overflow-y-auto w-full">
+          <div className="p-6 border-b">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-teal-600" style={{ fontFamily: 'Playfair Display, serif' }}>
+                Aldr Demo | Peter Murphy
+              </h2>
+              <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+                <i className="fas fa-times text-xl"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div className="p-6">
+            <div className="space-y-6">
+              {/* Personal Introduction */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-gray-800">Personal Introduction</h3>
+                <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+                  <p><strong>Peter Murphy, 41, International Project Manager</strong></p>
+                  <p>Irish citizen (DOB: 15 August 1984), currently living in Lagos, Portugal</p>
+                  <p><strong>Languages:</strong> English, very basic Portuguese</p>
+                </div>
+              </div>
+
+              {/* Background Context */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-gray-800">Background Context</h3>
+                <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+                  <p><strong>Countries lived in:</strong> Ireland, Canada, Australia, Austria, Barbados, Portugal</p>
+                  <p><strong>Education:</strong> Bachelor of Commerce (UCD), Masters of Science (Smurfit Business School)</p>
+                  <p><strong>Health challenge:</strong> Managing herniated disk across multiple healthcare systems</p>
+                </div>
+              </div>
+
+              {/* Current Life Admin Challenges */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-gray-800">Current Life Admin Challenges</h3>
+                <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+                  <p>Managing life admin across countries: car insurance, tax, house insurance, tax returns</p>
+                  <p>Tracking all the dates and "stuff" that comes with international living</p>
+                </div>
+              </div>
+
+              {/* Demo Purpose */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-gray-800">Demo Purpose</h3>
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200 space-y-2">
+                  <p>This demo shows Peter's real-world use of Aldr for managing life across borders</p>
+                  <p>See how Aldr handles health records, identity documents, legal affairs, and daily admin</p>
+                </div>
+              </div>
+
+              {/* Navigation Instructions */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-gray-800">Navigation Instructions</h3>
+                <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+                  <p>Explore Peter's 6 vaults to see how Aldr organizes international life</p>
+                  <p>All data represents realistic scenarios faced by global citizens</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-6 pt-4 border-t flex flex-wrap gap-3">
+              <button 
+                className="bg-gradient-to-r from-teal-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex-1 max-w-sm"
+                onClick={onClose}
+              >
+                <i className="fas fa-play mr-2"></i>
+                Explore Peter's Demo
+              </button>
+              <button 
+                className="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                onClick={onClose}
+              >
+                Skip Intro
               </button>
             </div>
           </div>
@@ -364,6 +468,22 @@ const VaultSelection = () => {
             <i className="fas fa-globe"></i>
             <span className="hidden sm:inline">AldrVaults.com</span>
           </a>
+          <div className="relative">
+            <button 
+              className="dashboard-button white"
+              onMouseEnter={() => setShowLanguageTooltip(true)}
+              onMouseLeave={() => setShowLanguageTooltip(false)}
+              onClick={() => alert('Language toggle coming soon! Currently working on Portuguese translation support.')}
+            >
+              <i className="fas fa-language"></i>
+              <span className="hidden sm:inline">EN</span>
+            </button>
+            {showLanguageTooltip && (
+              <div className="absolute right-0 top-full mt-2 w-48 bg-black text-white text-sm p-2 rounded-lg shadow-lg z-50">
+                Coming Soon: Portuguese language support
+              </div>
+            )}
+          </div>
           <a href="mailto:james@ruleyproductions.com" className="dashboard-button white">
             <i className="fas fa-envelope"></i>
             <span className="hidden sm:inline">Contact</span>
@@ -495,6 +615,11 @@ const VaultSelection = () => {
       </footer>
 
       {/* Modals */}
+      <JamesIntroModal 
+        isOpen={showJamesIntro} 
+        onClose={handleCloseJamesIntro} 
+      />
+      
       <VaultInfoModal 
         vault={selectedVaultInfo} 
         isOpen={!!selectedVaultInfo} 

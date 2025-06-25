@@ -6,32 +6,32 @@ export const smartSuggestionsData = {
       title: 'Property Insurance Renewal',
       dueDate: '2025-06-15',
       urgency: 'red', // Due Soon
-      cost: '€600',
+      cost: '€890',
       vault: 'legal',
       vaultName: 'Aldr Legal',
       description: 'Annual property insurance renewal due',
       fullDocument: {
         type: 'Property Insurance Policy',
-        policyNumber: 'PI-2024-789456',
-        provider: 'Guardian Insurance Ltd.',
-        propertyAddress: '42 Grafton Street, Dublin 2, Ireland',
+        policyNumber: 'FID-2024-8834729',
+        provider: 'Fidelidade Seguros',
+        propertyAddress: 'Villa with Sea View, Lagos, Algarve, Portugal',
         coverage: {
-          building: '€450,000',
-          contents: '€75,000',
+          building: '€520,000',
+          contents: '€85,000',
           liability: '€2,000,000'
         },
-        currentPremium: '€600',
+        currentPremium: '€890',
         paymentHistory: [
-          { year: 2024, cost: '€600' },
-          { year: 2023, cost: '€580' },
-          { year: 2022, cost: '€565' },
-          { year: 2021, cost: '€545' }
+          { year: 2024, cost: '€890' },
+          { year: 2023, cost: '€845' },
+          { year: 2022, cost: '€798' },
+          { year: 2021, cost: '€756' }
         ],
         renewalTerms: 'Annual renewal with 30-day notice period',
         keyContacts: {
-          agent: 'Sarah O\'Brien',
-          phone: '+353 1 234 5678',
-          email: 'sarah.obrien@guardianinsurance.ie'
+          agent: 'João Silva',
+          phone: '+351 282 123 456',
+          email: 'joao.silva@fidelidade.pt'
         },
         documents: ['Policy Certificate', 'Premium Schedule', 'Terms & Conditions']
       }
@@ -61,15 +61,15 @@ export const smartSuggestionsData = {
           witness1: 'Michael O\'Sullivan',
           witness2: 'Claire Murphy'
         },
-        executors: ['James Martin Stafford', 'Sarah Stafford'],
+        executors: ['Peter Murphy', 'Claire Murphy'],
         beneficiaries: [
-          { name: 'Sarah Stafford', relationship: 'Spouse', allocation: '60%' },
-          { name: 'Emma Stafford', relationship: 'Daughter', allocation: '25%' },
-          { name: 'Liam Stafford', relationship: 'Son', allocation: '15%' }
+          { name: 'Claire Murphy', relationship: 'Spouse', allocation: '60%' },
+          { name: 'Ruby Murphy', relationship: 'Daughter', allocation: '20%' },
+          { name: 'Riley Murphy', relationship: 'Child', allocation: '20%' }
         ],
         assets: {
-          property: 'Primary residence at 42 Grafton Street, Dublin',
-          investments: 'Investment portfolio managed by AIB Private Banking',
+          property: 'Primary residence in Lagos, Algarve, Portugal',
+          investments: 'Investment portfolio managed by BPI Private Banking',
           personalEffects: 'Jewelry, artwork, personal collections'
         },
         amendments: [
@@ -84,40 +84,38 @@ export const smartSuggestionsData = {
       }
     },
     {
-      id: 'employment-contract-1',
-      title: 'Employment Contract Renewal',
-      dueDate: '2025-11-01',
+      id: 'company-annual-filing-1',
+      title: 'Aldr Vaults Annual Company Filing',
+      dueDate: '2025-05-31',
       urgency: 'green', // Future
       vault: 'legal',
       vaultName: 'Aldr Legal',
-      description: 'Annual employment contract review and renewal',
+      description: 'Annual corporate tax return and company filing due',
       fullDocument: {
-        type: 'Employment Contract',
-        employer: 'Ruley Productions Limited',
-        position: 'Chief Technology Officer',
-        contractStart: '2020-11-01',
-        currentTerm: '2024-11-01 to 2025-10-31',
-        salary: {
-          current: '€85,000',
+        type: 'Corporate Tax Return',
+        company: 'Aldr Vaults, Lda',
+        nipc: 'PT-515-789-456',
+        taxYear: '2024',
+        filingDeadline: '2025-05-31',
+        revenue: {
+          current: '€180,000',
           history: [
-            { period: '2024-2025', amount: '€85,000' },
-            { period: '2023-2024', amount: '€80,000' },
-            { period: '2022-2023', amount: '€75,000' },
-            { period: '2021-2022', amount: '€70,000' }
+            { period: '2024', amount: '€180,000' },
+            { period: '2023', amount: '€95,000' }
           ]
         },
-        benefits: {
-          healthInsurance: 'VHI DeCare Plus',
-          pension: '5% employer contribution',
-          holidays: '25 days + public holidays',
-          workingArrangement: 'Hybrid - 3 days office, 2 days remote'
+        obligations: {
+          corporateTax: 'Annual return due May 31',
+          vatFiling: 'Quarterly filing required',
+          socialSecurity: 'Monthly contributions for employees',
+          accountingRecords: 'Mandatory accounting books maintained'
         },
-        renewalClauses: {
-          notice: '3 months notice required for non-renewal',
-          salaryReview: 'Annual review in October',
-          performanceBonus: 'Up to 15% based on company performance'
+        taxOptimization: {
+          location: 'Portuguese tech startup benefits',
+          deductions: 'R&D tax credits available',
+          internationalTreaties: 'Double taxation treaties with Ireland'
         },
-        documents: ['Employment Contract 2024-2025', 'Job Description', 'Employee Handbook']
+        documents: ['Annual Accounts', 'Tax Calculation', 'VAT Returns', 'Corporate Book']
       }
     },
     {
@@ -143,7 +141,7 @@ export const smartSuggestionsData = {
         expiryDate: '2025-08-30',
         issuingOffice: 'Dublin Passport Office',
         emergencyContact: {
-          name: 'Catherine Conaghan',
+          name: 'Claire Murphy',
           relationship: 'Spouse',
           phone: '+353 87 123 4567'
         },
@@ -200,29 +198,29 @@ export const smartSuggestionsData = {
       vault: 'health',
       vaultName: 'Aldr Health',
       description: 'Annual health insurance plan review',
-      cost: '€1,200',
+      cost: '€1,350',
       fullDocument: {
-        type: 'Health Insurance Policy',
-        provider: 'VHI Healthcare',
-        planName: 'DeCare Plus Level 1',
-        policyNumber: 'VHI-DP-456789',
+        type: 'Portuguese Health Insurance Policy',
+        provider: 'Médis - Companhia Portuguesa de Seguros de Saúde',
+        planName: 'Médis Mais Saúde Premium',
+        policyNumber: 'MED-PT-456789',
         coverage: {
-          hospitalBenefit: 'Private room, consultant fees covered',
-          outpatient: '€125 per visit specialist consultation',
-          dental: 'Scale and polish, basic treatments',
-          optical: '€85 towards eye tests and glasses'
+          hospitalBenefit: 'Private room, specialist fees covered',
+          outpatient: '€150 per visit specialist consultation',
+          dental: 'Annual checkup, basic treatments covered',
+          optical: '€100 towards eye tests and glasses',
+          internationalCoverage: 'EU and worldwide emergency coverage'
         },
-        annualPremium: '€1,200',
-        paymentSchedule: 'Monthly direct debit €100',
+        annualPremium: '€1,350',
+        paymentSchedule: 'Monthly direct debit €112.50',
         coverageHistory: [
-          { year: 2024, premium: '€1,200', claims: '€340' },
-          { year: 2023, premium: '€1,150', claims: '€180' },
-          { year: 2022, premium: '€1,100', claims: '€520' }
+          { year: 2024, premium: '€1,350', claims: '€485' },
+          { year: 2023, premium: '€1,280', claims: '€220' }
         ],
         dependents: [
-          { name: 'Sarah Stafford', relationship: 'Spouse' },
-          { name: 'Emma Stafford', relationship: 'Daughter' },
-          { name: 'Liam Stafford', relationship: 'Son' }
+          { name: 'Claire Murphy', relationship: 'Spouse' },
+          { name: 'Ruby Murphy', relationship: 'Daughter' },
+          { name: 'Riley Murphy', relationship: 'Child' }
         ]
       }
     },
@@ -234,29 +232,30 @@ export const smartSuggestionsData = {
       vault: 'legal',
       vaultName: 'Aldr Legal',
       description: 'Annual car insurance renewal',
-      cost: '€680',
+      cost: '€720',
       fullDocument: {
         type: 'Motor Insurance Policy',
-        provider: 'AXA Insurance',
-        policyNumber: 'AXA-MOT-123456',
+        provider: 'Tranquilidade Seguros',
+        policyNumber: 'TRQ-MOT-456789',
         vehicle: {
           make: 'BMW',
           model: '320d',
           year: '2022',
-          registration: '22-D-12345',
+          registration: '12-34-AB',
           value: '€35,000'
         },
         coverage: {
-          type: 'Comprehensive',
-          excess: '€150',
-          breakdown: 'AA Roadside Assistance included',
-          europeancCover: '45 days per year'
+          type: 'Comprehensive (Todo o Risco)',
+          excess: '€200',
+          breakdown: 'ACP Roadside Assistance included',
+          europeanCover: 'Full EU coverage included',
+          greenCard: 'International travel coverage'
         },
-        annualPremium: '€680',
+        annualPremium: '€720',
         noClaims: '5 years protected',
         drivers: [
-          { name: 'James Martin Stafford', license: 'Full Irish', years: '12' },
-          { name: 'Sarah Stafford', license: 'Full Irish', years: '8' }
+          { name: 'Peter Murphy', license: 'Irish + Portuguese Exchange', years: '12' },
+          { name: 'Claire Murphy', license: 'Irish + Portuguese Exchange', years: '8' }
         ]
       }
     },
@@ -340,29 +339,29 @@ export const smartSuggestionsData = {
       vault: 'legal',
       vaultName: 'Aldr Legal',
       description: 'Fixed rate period ending - review required',
-      cost: '€1,850/month',
+      cost: '€1,620/month',
       fullDocument: {
-        type: 'Mortgage Agreement',
-        lender: 'AIB Mortgage Bank',
-        accountNumber: 'AIB-MORT-567890',
-        property: '42 Grafton Street, Dublin 2',
-        originalAmount: '€350,000',
-        currentBalance: '€280,000',
-        currentRate: '3.2% fixed until 2025-07-31',
-        monthlyPayment: '€1,850',
-        term: '25 years remaining',
+        type: 'Portuguese Mortgage Agreement',
+        lender: 'Banco Português de Investimento',
+        accountNumber: 'BPI-MORT-567890',
+        property: 'Villa with Sea View, Lagos, Algarve, Portugal',
+        originalAmount: '€485,000',
+        currentBalance: '€220,000',
+        currentRate: '2.8% fixed until 2025-07-31',
+        monthlyPayment: '€1,620',
+        term: '18 years remaining',
         rateOptions: {
-          variableRate: '4.1% (current)',
+          variableRate: '3.9% (current)',
           fixedRates: [
-            { term: '1 year', rate: '3.8%' },
-            { term: '3 years', rate: '4.0%' },
-            { term: '5 years', rate: '4.2%' }
+            { term: '1 year', rate: '3.1%' },
+            { term: '3 years', rate: '3.3%' },
+            { term: '5 years', rate: '3.5%' }
           ]
         },
         paymentHistory: {
-          totalPaid: '€105,000',
-          onTimePayments: '100% (60/60 payments)',
-          overpayments: '€15,000 additional principal'
+          totalPaid: '€265,000',
+          onTimePayments: '100% (72/72 payments)',
+          overpayments: '€0 additional principal'
         }
       }
     }

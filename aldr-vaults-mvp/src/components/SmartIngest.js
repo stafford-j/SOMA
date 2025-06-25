@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const SmartIngest = () => {
   const [selectedDocument, setSelectedDocument] = useState(null);
+  const [showInfo, setShowInfo] = useState(false);
 
   const pendingDocuments = [
     {
@@ -159,18 +160,22 @@ const SmartIngest = () => {
     <>
       <div className="card bg-white border border-gray-200 shadow-lg h-full flex flex-col">
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center mr-6">
                 <i className="fas fa-brain text-3xl text-white"></i>
               </div>
-              <div>
-                <h2 className="text-2xl mb-2 text-gray-800" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>
+              <div className="flex items-center gap-3">
+                <h2 className="text-2xl text-gray-800" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>
                   Smart Ingestion
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Forward any document by email. We'll automatically categorize it and route it to the right vault.
-                </p>
+                <button 
+                  className="w-6 h-6 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 flex items-center justify-center transition-colors text-xs"
+                  onClick={() => setShowInfo(!showInfo)}
+                  title="Information"
+                >
+                  <i className="fas fa-info"></i>
+                </button>
               </div>
             </div>
             <button 
@@ -181,6 +186,14 @@ const SmartIngest = () => {
               <i className="fas fa-cog text-xl"></i>
             </button>
           </div>
+          
+          {showInfo && (
+            <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-gray-700">
+                Forward any document by email. We'll automatically categorize it and route it to the right vault.
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="space-y-3 mb-6 flex-grow">

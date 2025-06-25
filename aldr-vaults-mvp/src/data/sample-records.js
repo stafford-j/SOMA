@@ -149,43 +149,47 @@ export const sampleRecords = [
   },
   {
     "id": "physio-001", 
-    "title": "Lower Back Assessment",
+    "title": "Herniated Disk - L4/L5 Assessment",
     "specialty": "physiotherapy",
     "recordType": "physio_assessment",
     "date": "2025-02-28",
-    "description": "Initial assessment for chronic lower back pain",
-    "provider": "Peak Performance Physiotherapy",
-    "location": "Vancouver, BC",
+    "description": "Follow-up assessment for herniated disk L4/L5 with Dr. Sofia Pereira",
+    "provider": "Centro de Fisioterapia do Algarve",
+    "location": "Lagos, Portugal",
     "findings": [
-      "Reduced lumbar flexion (40 degrees vs normal 60)",
-      "Tight hip flexors and hamstrings",
-      "Weak core stabilization muscles",
-      "No neurological deficits"
+      "Herniated disk L4/L5 confirmed via MRI (December 2024)",
+      "Reduced lumbar flexion (35 degrees vs normal 60)",
+      "Positive straight leg raise test at 45 degrees",
+      "Slight numbness in left L5 dermatome",
+      "Core weakness contributing to instability"
     ],
     "treatmentPlan": [
-      "Core strengthening exercises 3x/week",
-      "Hip flexor stretching routine",
-      "Manual therapy sessions bi-weekly",
-      "Ergonomic workplace assessment"
+      "McKenzie method exercises daily",
+      "Core stabilization program 4x/week",
+      "Manual therapy including spinal mobilization",
+      "Gradual loading progression",
+      "Home office ergonomic optimization"
     ],
     "insights": {
       "medical": {
-        "summary": "Mechanical lower back pain with muscular imbalances requiring structured rehabilitation.",
+        "summary": "L4/L5 herniated disk with mild neurological involvement responding well to conservative management.",
         "recommendations": [
-          "Follow prescribed exercise program consistently.",
-          "Consider ergonomic improvements at workstation.",
-          "Gradual return to full activity levels."
+          "Continue McKenzie exercises as prescribed.",
+          "Avoid prolonged sitting and forward flexion.",
+          "Progressive return to normal activities.",
+          "Consider MRI follow-up in 6 months if symptoms persist."
         ],
-        "sources": ["Canadian Physiotherapy Association Guidelines"]
+        "sources": ["Portuguese Society of Physical Medicine and Rehabilitation"]
       },
       "holistic": {
-        "summary": "Lower back issues often stem from lifestyle and postural habits that can be modified.",
+        "summary": "Disk herniation often related to prolonged sitting and work stress, requiring lifestyle modifications.",
         "recommendations": [
-          "Incorporate daily movement breaks during work.",
-          "Consider yoga or Pilates for flexibility and strength.",
-          "Address stress management as muscle tension contributor."
+          "Implement regular movement breaks every 30 minutes.",
+          "Consider standing desk setup for home office.",
+          "Practice stress reduction techniques to reduce muscle tension.",
+          "Swimming in ocean for low-impact exercise when possible."
         ],
-        "sources": ["Integrative Medicine Research"]
+        "sources": ["European Guidelines for Chronic Low Back Pain"]
       }
     }
   },
@@ -649,6 +653,189 @@ export const sampleRecords = [
           "Discuss naturopathic physical recommendations with your movement therapists."
         ],
         "sources": ["Naturopathic Physical Medicine", "Movement and Natural Health Research"]
+      }
+    }
+  },
+  {
+    "id": "mri-001",
+    "title": "Lumbar MRI - Herniated Disk L4/L5",
+    "specialty": "radiology",
+    "recordType": "imaging",
+    "date": "2024-12-15",
+    "description": "MRI lumbar spine showing herniated disk at L4/L5 level",
+    "provider": "Centro de Imagiologia do Algarve",
+    "location": "Portimão, Portugal",
+    "findings": [
+      "Herniated disk L4/L5 with posterior and lateral protrusion",
+      "Mild compression of left L5 nerve root",
+      "No significant spinal stenosis",
+      "Normal alignment of lumbar vertebrae",
+      "Mild degenerative changes consistent with age"
+    ],
+    "results": {
+      "impression": "L4/L5 disk herniation with mild nerve root compression",
+      "severity": "Moderate",
+      "recommendation": "Conservative management with physiotherapy"
+    },
+    "insights": {
+      "medical": {
+        "summary": "MRI confirms L4/L5 disk herniation with nerve involvement requiring conservative management.",
+        "recommendations": [
+          "Continue physiotherapy and McKenzie exercises.",
+          "Avoid activities that worsen symptoms.",
+          "Consider epidural injection if conservative treatment fails.",
+          "Follow-up MRI in 6 months if no improvement."
+        ],
+        "sources": ["Portuguese Society of Radiology", "European Spine Guidelines"]
+      },
+      "holistic": {
+        "summary": "Disk herniation may be related to prolonged computer work and can improve with lifestyle changes.",
+        "recommendations": [
+          "Evaluate workspace ergonomics thoroughly.",
+          "Consider anti-inflammatory diet modifications.",
+          "Practice stress reduction as muscle tension contributes to pain.",
+          "Swimming and water exercises ideal for low-impact movement."
+        ],
+        "sources": ["Integrative Spine Care Research"]
+      }
+    }
+  },
+  {
+    "id": "gp-portugal-001",
+    "title": "Annual Health Check - Portuguese GP",
+    "specialty": "family_medicine",
+    "recordType": "annual_physical",
+    "date": "2024-11-20",
+    "description": "Annual health assessment with Dr. Maria Santos at Centro de Saúde Lagos",
+    "provider": "Centro de Saúde de Lagos",
+    "location": "Lagos, Portugal",
+    "vitals": {
+      "bloodPressure": "128/82 mmHg",
+      "heartRate": "72 bpm",
+      "weight": "78 kg",
+      "height": "180 cm",
+      "bmi": "24.1"
+    },
+    "findings": [
+      "Overall good health status",
+      "Blood pressure slightly elevated - monitor",
+      "Recent back pain issues discussed",
+      "Work-related stress noted",
+      "Exercise routine needs improvement"
+    ],
+    "recommendations": [
+      "Continue physiotherapy for back pain",
+      "Monitor blood pressure monthly",
+      "Increase regular exercise (swimming recommended)",
+      "Consider stress management techniques",
+      "Annual blood work scheduled"
+    ],
+    "insights": {
+      "medical": {
+        "summary": "Good overall health with minor concerns related to work stress and recent back issues.",
+        "recommendations": [
+          "Continue back pain management as prescribed.",
+          "Monitor blood pressure and consider lifestyle modifications.",
+          "Maintain regular exercise routine adapted for back condition."
+        ],
+        "sources": ["Portuguese Ministry of Health Guidelines"]
+      },
+      "holistic": {
+        "summary": "Health issues may be interconnected - stress affecting both blood pressure and back pain.",
+        "recommendations": [
+          "Address work-life balance and stress management.",
+          "Consider meditation or mindfulness practices.",
+          "Take advantage of coastal location for stress-reducing beach walks."
+        ],
+        "sources": ["Lifestyle Medicine Research"]
+      }
+    }
+  },
+  {
+    "id": "dental-canada-historical",
+    "title": "Root Canal Treatment - Toronto (Historical)",
+    "specialty": "dental",
+    "recordType": "dental_procedure",
+    "date": "2019-08-15",
+    "description": "Root canal treatment on upper left molar performed in Toronto",
+    "provider": "Dr. Sarah Kim - University Dental Clinic",
+    "location": "Toronto, Ontario, Canada",
+    "findings": [
+      "Deep caries extending to pulp chamber",
+      "Periapical infection present",
+      "Tooth #14 (upper left first molar)"
+    ],
+    "treatment": [
+      "Root canal treatment completed in 2 sessions",
+      "Crown placement scheduled for follow-up",
+      "Antibiotic course prescribed"
+    ],
+    "insights": {
+      "medical": {
+        "summary": "Successful root canal treatment completed during residency in Canada. Good long-term prognosis.",
+        "recommendations": [
+          "Regular dental check-ups to monitor crown and surrounding teeth.",
+          "Maintain good oral hygiene to prevent future issues.",
+          "Consider dental records transfer to Portuguese dentist."
+        ],
+        "sources": ["Canadian Dental Association Guidelines"]
+      },
+      "holistic": {
+        "summary": "Dental health reflects overall health and stress levels. International move may require dental care coordination.",
+        "recommendations": [
+          "Find reliable Portuguese dentist for ongoing care.",
+          "Consider how diet and stress affect oral health.",
+          "Maintain consistent oral hygiene routine despite travel."
+        ],
+        "sources": ["Integrative Dental Medicine"]
+      }
+    }
+  },
+  {
+    "id": "blood-work-portugal-001",
+    "title": "Comprehensive Blood Panel - Lagos",
+    "specialty": "laboratory",
+    "recordType": "lab_results",
+    "date": "2024-10-15",
+    "description": "Annual blood work including lipid panel, glucose, and inflammatory markers",
+    "provider": "Laboratório de Análises Clínicas do Algarve",
+    "location": "Lagos, Portugal",
+    "results": {
+      "cholesterol": {
+        "total": "195 mg/dL",
+        "ldl": "118 mg/dL",
+        "hdl": "52 mg/dL",
+        "triglycerides": "125 mg/dL"
+      },
+      "glucose": "92 mg/dL",
+      "hba1c": "5.2%",
+      "crp": "2.1 mg/L (slightly elevated)",
+      "vitaminD": "28 ng/mL (low normal)"
+    },
+    "findings": [
+      "Overall results within normal ranges",
+      "Slightly elevated inflammatory markers (CRP)",
+      "Vitamin D on lower end of normal",
+      "Lipid profile acceptable for age"
+    ],
+    "insights": {
+      "medical": {
+        "summary": "Good metabolic health with minor inflammation likely related to back pain and stress.",
+        "recommendations": [
+          "Consider vitamin D supplementation given Portuguese latitude.",
+          "Anti-inflammatory diet may help with back pain and CRP levels.",
+          "Repeat inflammatory markers in 3 months."
+        ],
+        "sources": ["Portuguese Society of Clinical Pathology"]
+      },
+      "holistic": {
+        "summary": "Inflammatory markers may reflect stress and physical pain - lifestyle approach beneficial.",
+        "recommendations": [
+          "Increase omega-3 rich foods (fish, Portuguese sardines).",
+          "Mediterranean diet well-suited to Portuguese lifestyle.",
+          "Sun exposure for natural vitamin D when possible."
+        ],
+        "sources": ["Mediterranean Diet Research", "Anti-inflammatory Nutrition Studies"]
       }
     }
   }

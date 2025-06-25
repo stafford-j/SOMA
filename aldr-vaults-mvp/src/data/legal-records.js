@@ -17,56 +17,66 @@ export const sampleLegalRecords = [
     "title": "Last Will and Testament",
     "category": "estate_planning",
     "recordType": "will",
-    "date": "2024-03-15",
+    "date": "2022-03-15",
     "description": "Complete will and testament document with executor designation and asset distribution",
-    "provider": "Smith & Associates Law Firm",
-    "location": "Toronto, ON",
+    "provider": "Murphy & Associates Solicitors",
+    "location": "Dublin, Ireland",
     "expirationDate": null,
     "status": "current",
     "details": {
-      "executor": "Catherine Conaghan",
-      "witnesses": ["John Smith", "Mary Johnson"],
+      "executor": "Peter Murphy",
+      "coExecutor": "Claire Murphy", 
+      "witnesses": ["Michael O'Sullivan", "Sarah O'Brien"],
       "notarized": true,
-      "lastUpdated": "2024-03-15"
+      "lastUpdated": "2024-07-15",
+      "beneficiaries": [
+        {"name": "Claire Murphy", "relationship": "Spouse", "allocation": "60%"},
+        {"name": "Ruby Murphy", "relationship": "Daughter", "allocation": "20%"},
+        {"name": "Riley Murphy", "relationship": "Child", "allocation": "20%"}
+      ]
     },
     "insights": {
       "legal": {
-        "summary": "Will is current and properly executed with valid witnesses.",
+        "summary": "Will is current and properly executed with valid witnesses. Recent amendment updated investment portfolio allocation.",
         "recommendations": [
-          "Review will every 3-5 years or after major life changes",
-          "Ensure executor is still willing and able to serve",
-          "Consider updating beneficiary designations on accounts"
+          "Annual review due July 2025",
+          "Consider impact of recent family additions documented in Aldr Memoirs",
+          "Digital legacy planning may need updates based on memoir documentation"
         ],
-        "sources": ["Ontario Estate Planning Guidelines"]
+        "sources": ["Irish Law Society Estate Planning Guidelines"]
       }
     }
   },
   {
     "id": "legal-002",
-    "title": "House Deed - Primary Residence",
+    "title": "Property Deed - Primary Residence",
     "category": "property",
     "recordType": "property_deed",
-    "date": "2022-08-10",
-    "description": "Property deed for primary residence at 123 Main Street",
-    "provider": "Royal Bank of Canada",
-    "location": "123 Main Street, Toronto, ON",
+    "date": "2019-08-10",
+    "description": "Property deed for residence in Lagos, Portugal",
+    "provider": "Banco Português de Investimento",
+    "location": "Lagos, Algarve, Portugal",
     "expirationDate": null,
     "status": "current",
     "details": {
-      "propertyType": "Single Family Home",
-      "purchasePrice": "$650,000",
-      "mortgageNumber": "RBC-2022-8847392",
-      "landTitleNumber": "LT449832"
+      "propertyType": "Villa with Sea View",
+      "purchasePrice": "€485,000",
+      "currentValue": "€520,000",
+      "mortgageNumber": "BPI-MORT-567890",
+      "currentBalance": "€220,000",
+      "predialUrbano": "LGS-2019-4456",
+      "imt": "€19,400"
     },
     "insights": {
       "legal": {
-        "summary": "Property deed is current and mortgage is in good standing.",
+        "summary": "Property deed is current and mortgage is in good standing. Portuguese tax obligations up to date.",
         "recommendations": [
-          "Keep deed in secure location",
-          "Review property insurance annually",
-          "Consider mortgage renewal options in 2027"
+          "Fixed rate period ending - review mortgage options by August 2025",
+          "Property insurance renewal due June 2025 (Fidelidade Seguros)",
+          "Annual IMI property tax due December 2025 (€892)",
+          "Consider overpayment opportunities with current €1,620 monthly payment"
         ],
-        "sources": ["Land Registry Office"]
+        "sources": ["Instituto dos Registos e do Notariado", "Autoridade Tributária"]
       }
     }
   },
@@ -76,142 +86,180 @@ export const sampleLegalRecords = [
     "category": "personal_legal",
     "recordType": "insurance_policy",
     "date": "2023-01-15",
-    "description": "Term life insurance policy - $500,000 coverage",
-    "provider": "Sun Life Financial",
-    "location": "Policy #: SL-2023-4429847",
+    "description": "Term life insurance policy - €500,000 coverage",
+    "provider": "Irish Life",
+    "location": "Policy #: IL-2023-4429847",
     "expirationDate": "2033-01-15",
     "status": "active",
     "details": {
-      "coverage": "$500,000",
-      "beneficiary": "Catherine Conaghan",
-      "premium": "$45/month",
-      "termLength": "10 years"
+      "coverage": "€500,000",
+      "beneficiary": "Claire Murphy",
+      "premium": "€55/month",
+      "termLength": "10 years",
+      "medicalExam": "Completed 2023-01-10"
     },
     "insights": {
       "legal": {
-        "summary": "Policy is active with adequate coverage for current needs.",
+        "summary": "Policy is active with adequate coverage for current needs. Premium reflects Irish life expectancy rates.",
         "recommendations": [
           "Review coverage after major life events",
-          "Consider term renewal vs conversion options before expiry",
-          "Update beneficiary information if needed"
+          "Consider term renewal vs conversion options before 2033 expiry",
+          "Coordinate with VHI health insurance for potential premium discounts"
         ],
-        "sources": ["Insurance Bureau of Canada"]
+        "sources": ["Insurance Ireland", "Central Bank of Ireland"]
       }
     }
   },
   {
     "id": "legal-004",
-    "title": "Power of Attorney - Personal Care",
-    "category": "estate_planning",
-    "recordType": "power_of_attorney",
-    "date": "2024-03-15",
-    "description": "Power of attorney for personal care decisions",
-    "provider": "Smith & Associates Law Firm",
-    "location": "Toronto, ON",
-    "expirationDate": null,
+    "title": "Portuguese Residence Permit",
+    "category": "personal_legal",
+    "recordType": "residence_permit",
+    "date": "2023-06-15",
+    "description": "Temporary residence permit for Portugal (5-year renewable)",
+    "provider": "SEF - Serviço de Estrangeiros e Fronteiras",
+    "location": "Lagos, Portugal",
+    "expirationDate": "2028-06-15",
     "status": "current",
     "details": {
-      "attorney": "Catherine Conaghan",
-      "scope": "Personal Care Decisions",
-      "witnesses": ["John Smith", "Mary Johnson"],
-      "notarized": true
+      "permitNumber": "PT-2023-445678",
+      "permitType": "Temporary Residence - EU Citizen",
+      "renewalRequired": "2028-06-15",
+      "workAuthorization": "Unrestricted",
+      "familyMembers": ["Claire Murphy", "Ruby Murphy", "Riley Murphy"]
     },
     "insights": {
       "legal": {
-        "summary": "POA is properly executed and current.",
+        "summary": "Residence permit valid for 5 years. Renewal process begins 3 months before expiry.",
         "recommendations": [
-          "Ensure attorney understands your wishes",
-          "Review document every few years",
-          "Consider creating advance directives"
+          "Begin renewal process by March 2028",
+          "Maintain continuous residence for citizenship eligibility",
+          "Keep Portuguese tax obligations current for renewal",
+          "Consider permanent residence application after 5 years"
         ],
-        "sources": ["Ontario Ministry of Health"]
+        "sources": ["SEF Portugal", "Portuguese Immigration Law"]
       }
     }
   },
   {
     "id": "legal-005",
-    "title": "Property Insurance Policy",
+    "title": "Portuguese Property Insurance",
     "category": "property",
     "recordType": "insurance_policy",
     "date": "2024-09-01",
-    "description": "Home insurance policy for primary residence",
-    "provider": "Intact Insurance",
-    "location": "Policy #: IN-2024-8834729",
+    "description": "Home insurance policy for Lagos residence",
+    "provider": "Fidelidade Seguros",
+    "location": "Policy #: FID-2024-8834729",
     "expirationDate": "2025-09-01",
     "status": "active",
     "details": {
-      "coverage": "$750,000 dwelling, $100,000 contents",
-      "deductible": "$1,000",
-      "premium": "$1,800/year",
-      "specialRiders": ["Home Office Equipment"]
+      "coverage": "€520,000 dwelling, €85,000 contents",
+      "deductible": "€750",
+      "premium": "€890/year",
+      "specialRiders": ["Home Office Equipment", "Sea View Property Coverage"],
+      "earthquakeRider": "€25,000 coverage"
     },
     "insights": {
       "legal": {
-        "summary": "Insurance coverage is adequate for current property value.",
+        "summary": "Insurance coverage matches current property value. Portuguese requirements met.",
         "recommendations": [
-          "Review coverage annually",
-          "Consider increasing contents coverage",
-          "Shop for competitive rates at renewal"
+          "Review coverage annually before September renewal",
+          "Consider increasing contents coverage for tech equipment",
+          "Earthquake coverage adequate for Algarve region"
         ],
-        "sources": ["Insurance Bureau of Canada"]
+        "sources": ["Autoridade de Supervisão de Seguros", "Portuguese Insurance Law"]
       }
     }
   },
   {
     "id": "legal-006",
-    "title": "Birth Certificate",
+    "title": "Irish Birth Certificate",
     "category": "personal_legal",
     "recordType": "birth_certificate",
     "date": "1984-08-15",
-    "description": "Official birth certificate - Province of Ontario",
-    "provider": "ServiceOntario",
-    "location": "Toronto, ON",
+    "description": "Official birth certificate - Republic of Ireland",
+    "provider": "General Register Office",
+    "location": "Dublin, Ireland",
     "expirationDate": null,
     "status": "current",
     "details": {
-      "registrationNumber": "ON-1984-449832",
-      "placeOfBirth": "Toronto General Hospital",
+      "registrationNumber": "IE-1984-449832",
+      "placeOfBirth": "National Maternity Hospital, Dublin",
       "certifiedCopy": true,
-      "issueDate": "2022-03-10"
+      "issueDate": "2022-03-10",
+      "apostilleAvailable": true
     },
     "insights": {
       "legal": {
-        "summary": "Birth certificate is a certified copy and valid for all legal purposes.",
+        "summary": "Irish birth certificate is valid for all international legal purposes. Apostille available for Portuguese documentation.",
         "recommendations": [
-          "Keep in secure location",
-          "Order additional certified copies if needed",
-          "Use for passport applications and other official documents"
+          "Keep certified copy in secure location",
+          "Apostille copy useful for Portuguese legal matters",
+          "Required for Portuguese permanent residence application"
         ],
-        "sources": ["ServiceOntario"]
+        "sources": ["Department of Social Protection Ireland"]
       }
     }
   },
   {
     "id": "legal-007",
-    "title": "Employment Contract - Conas Consulting",
+    "title": "Aldr Vaults - Company Formation",
     "category": "business",
-    "recordType": "employment_contract",
-    "date": "2023-06-01",
-    "description": "Consulting agreement with Conas Consulting",
-    "provider": "Conas Consulting Ltd.",
-    "location": "Remote/Toronto, ON",
-    "expirationDate": "2024-06-01",
-    "status": "expired",
+    "recordType": "company_formation",
+    "date": "2024-01-15",
+    "description": "Portuguese company formation documents for Aldr Vaults, Lda",
+    "provider": "Casa do Notário Lagos",
+    "location": "Lagos, Portugal",
+    "expirationDate": null,
+    "status": "active",
     "details": {
-      "contractType": "Independent Contractor",
-      "compensation": "$75/hour",
-      "scope": "Digital Marketing and Event Management",
-      "termNotice": "30 days"
+      "companyName": "Aldr Vaults, Lda",
+      "nipc": "PT-515-789-456",
+      "registrationNumber": "PT-LGS-2024-1567",
+      "authorizedCapital": "€50,000",
+      "businessActivity": "Software Development and Data Management Services",
+      "taxObligation": "Quarterly VAT and annual corporate tax"
     },
     "insights": {
       "legal": {
-        "summary": "Contract has expired and may need renewal or new agreement.",
+        "summary": "Company legally established in Portugal. All registration requirements complete.",
         "recommendations": [
-          "Negotiate new contract terms if continuing work",
-          "Review payment terms and scope of work",
-          "Ensure proper tax documentation"
+          "Quarterly VAT filing due March 31, 2025",
+          "Annual corporate tax return due May 31, 2025",
+          "Consider Portuguese tax advisor for ongoing compliance",
+          "Maintain proper accounting records for Portuguese authorities"
         ],
-        "sources": ["Employment Standards Act"]
+        "sources": ["Registo Nacional de Pessoas Coletivas", "Autoridade Tributária"]
+      }
+    }
+  },
+  {
+    "id": "legal-008",
+    "title": "Portuguese Tax Number (NIF)",
+    "category": "personal_legal",
+    "recordType": "tax_document",
+    "date": "2023-05-20",
+    "description": "Portuguese tax identification number for residents",
+    "provider": "Finanças - Autoridade Tributária",
+    "location": "Lagos, Portugal",
+    "expirationDate": null,
+    "status": "current",
+    "details": {
+      "nif": "245-789-456",
+      "taxStatus": "Portuguese Tax Resident",
+      "filingObligation": "Annual IRS return due May 31",
+      "category": "Category A - Employment and Self-Employment"
+    },
+    "insights": {
+      "legal": {
+        "summary": "Portuguese tax residency established. Annual filing obligations current.",
+        "recommendations": [
+          "Annual IRS return due May 31, 2025",
+          "Consider Portuguese tax advisor for complex international income",
+          "Maintain records of all international income sources",
+          "Review double taxation treaties for optimization"
+        ],
+        "sources": ["Autoridade Tributária e Aduaneira"]
       }
     }
   }
