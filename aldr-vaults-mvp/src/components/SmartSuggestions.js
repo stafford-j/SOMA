@@ -217,29 +217,35 @@ const SmartSuggestions = () => {
                           style={{ backgroundColor: getUrgencyColor(reminder.urgency) }}
                         ></div>
                         <div className="flex-grow">
-                          <div className="flex items-start gap-3 mb-1">
-                            <h4 className="font-semibold text-gray-800">{reminder.title}</h4>
-                            {(() => {
-                              const dueInfo = getDaysUntilDue(reminder.dueDate);
-                              return (
-                                <span 
-                                  className="px-3 py-1 rounded text-sm font-medium bg-white border"
-                                  style={{ 
-                                    color: dueInfo.color,
-                                    borderColor: dueInfo.color
-                                  }}
-                                >
-                                  {dueInfo.text}
-                                </span>
-                              );
-                            })()}
-                          </div>
+                          <h4 className="font-semibold text-gray-800 mb-1">{reminder.title}</h4>
                           <p className="text-sm text-gray-600">
                             {reminder.cost && `Previous Cost: ${reminder.cost}`}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-3">
+                        {(() => {
+                          const dueInfo = getDaysUntilDue(reminder.dueDate);
+                          return (
+                            <span 
+                              className="rounded text-sm font-medium bg-white border"
+                              style={{ 
+                                color: dueInfo.color,
+                                borderColor: dueInfo.color,
+                                padding: '10px 18px',
+                                fontSize: '1rem',
+                                fontWeight: '600',
+                                width: '200px',
+                                textAlign: 'center',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                              }}
+                            >
+                              {dueInfo.text}
+                            </span>
+                          );
+                        })()}
                         <button 
                           style={{
                             background: 'linear-gradient(to right, #20B2AA, #8A2BE2)',
