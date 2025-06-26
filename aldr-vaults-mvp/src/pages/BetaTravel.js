@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { VaultHeader } from '../components/core';
 import { supabase } from '../config/supabase';
+import DocumentStats from '../components/DocumentStats';
+import DocumentSearch from '../components/DocumentSearch';
 import '../styles/Dashboard.css';
 
 const BetaTravel = () => {
@@ -16,6 +18,7 @@ const BetaTravel = () => {
   const { user, signOut } = useAuth();
   const [vault, setVault] = useState(null);
   const [documents, setDocuments] = useState([]);
+  const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('all');
   const [uploadFile, setUploadFile] = useState(null);
@@ -86,7 +89,9 @@ const BetaTravel = () => {
       if (error) {
         console.error('Error loading documents:', error);
       } else {
-        setDocuments(data || []);
+        const docs = data || [];
+        setDocuments(docs);
+        setFilteredDocuments(docs);
       }
     } catch (err) {
       console.error('Error loading documents:', err);
@@ -221,6 +226,20 @@ const BetaTravel = () => {
               Organize your passports, visas, bookings, and travel documentation
             </p>
           </div>
+
+          {/* Document Statistics */}
+          <DocumentStats 
+            documents={documents} 
+            vaultType="travel"
+            className="mb-6"
+          />
+
+          {/* Document Search */}
+          <DocumentSearch 
+            documents={documents}
+            onFilteredResults={setFilteredDocuments}
+            placeholder="Search travel documents..."
+          />
 
           {/* Upload Section */}
           <div className="bg-white rounded-lg shadow-lg p-6 mb-6">

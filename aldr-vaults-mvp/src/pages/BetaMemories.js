@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { VaultHeader } from '../components/core';
 import { supabase } from '../config/supabase';
+import DocumentStats from '../components/DocumentStats';
+import DocumentSearch from '../components/DocumentSearch';
 import '../styles/Dashboard.css';
 
 const BetaMemories = () => {
@@ -16,6 +18,7 @@ const BetaMemories = () => {
   const { user, signOut } = useAuth();
   const [vault, setVault] = useState(null);
   const [documents, setDocuments] = useState([]);
+  const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('all');
   const [uploadFile, setUploadFile] = useState(null);
@@ -87,7 +90,9 @@ const BetaMemories = () => {
       if (error) {
         console.error('Error loading documents:', error);
       } else {
-        setDocuments(data || []);
+        const docs = data || [];
+        setDocuments(docs);
+        setFilteredDocuments(docs);
       }
     } catch (err) {
       console.error('Error loading documents:', err);
@@ -222,6 +227,20 @@ const BetaMemories = () => {
               Document your life journey and preserve family memories for future generations
             </p>
           </div>
+
+          {/* Document Statistics */}
+          <DocumentStats 
+            documents={documents} 
+            vaultType="memories"
+            className="mb-6"
+          />
+
+          {/* Document Search */}
+          <DocumentSearch 
+            documents={documents}
+            onFilteredResults={setFilteredDocuments}
+            placeholder="Search memories and family documents..."
+          />
 
           {/* Upload Section */}
           <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
