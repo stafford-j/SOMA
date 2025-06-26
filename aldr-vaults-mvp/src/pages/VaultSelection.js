@@ -4,6 +4,7 @@ import '../styles/VaultSelection.css';
 import SmartSuggestions from '../components/SmartSuggestions';
 import SmartIngest from '../components/SmartIngest';
 import VaultInfoModal from '../components/VaultInfoModal';
+import { VaultCard } from '../components/core';
 import smartSuggestionsData from '../data/smart-suggestions-data';
 
 const VaultSelection = () => {
@@ -464,6 +465,10 @@ const VaultSelection = () => {
               </div>
             )}
           </div>
+          <a href="/login" className="dashboard-button white" style={{ background: 'linear-gradient(45deg, #20B2AA, #8A2BE2)', color: 'white', border: 'none' }}>
+            <i className="fas fa-rocket"></i>
+            <span className="hidden sm:inline">Try BETA</span>
+          </a>
           <a href="https://aldrvaults.com" className="dashboard-button white" target="_blank" rel="noopener noreferrer">
             <i className="fas fa-globe"></i>
             <span className="hidden sm:inline">AldrVaults.com</span>
@@ -511,12 +516,24 @@ const VaultSelection = () => {
             {/* Right: Vault Cards with Reminders (50%) */}
             <div className="vault-cards-section">
               <div className="vaults-grid-new">
-                {vaults.map((vault) => (
-                  <div key={vault.id} className="vault-card-with-reminder">
-                    {/* Vault Button */}
-                    <button 
-                      className="vault-button-with-reminder" 
-                      onClick={() => {
+                {vaults.map((vault) => {
+                  // Prepare reminders for this vault with full data
+                  const vaultReminders = vault.reminders.map(reminder => {
+                    const fullReminder = smartSuggestionsData.reminders.find(r => r.id === reminder.id) || reminder;
+                    return {
+                      ...fullReminder,
+                      title: fullReminder.title || reminder.title,
+                      dueDate: fullReminder.dueDate || reminder.dueDate,
+                      cost: fullReminder.cost || reminder.cost
+                    };
+                  });
+
+                  return (
+                    <VaultCard
+                      key={vault.id}
+                      vault={vault}
+                      reminders={vaultReminders}
+                      onVaultClick={(vault) => {
                         const routeMap = {
                           'identity': '/vault/aldr-id',
                           'health': '/vault/aldr-health', 
@@ -532,58 +549,15 @@ const VaultSelection = () => {
                           handleVaultNavigation(routeMap[vault.id] || `/vault/aldr-${vault.id}`);
                         }
                       }}
-                    >
-                      {/* Icon */}
-                      <i className={`fas ${vault.icon} vault-icon-reminder`} style={{ color: 'var(--teal)' }}></i>
-                      
-                      {/* Vault Name with Info Button */}
-                      <div className="vault-name-section-reminder">
-                        <span className="vault-name-reminder" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>
-                          {vault.name}
-                        </span>
-                        
-                        {/* Info icon - inline after name */}
-                        <div 
-                          className="vault-info-icon-reminder"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleInfoClick(vault);
-                          }}
-                          title="View vault information"
-                        >
-                          <i className="fas fa-info"></i>
-                        </div>
-                      </div>
-                      
-                      {/* Open Vault Button - styled like View All Reminders */}
-                      <div className="vault-open-button-reminder">
-                        <i className="fas fa-chevron-right mr-1"></i>
-                        {vault.id === 'builder' ? vault.fullName : `${vault.fullName} Vault`}
-                      </div>
-                    </button>
-                    
-                    {/* Reminder Section */}
-                    {vault.reminders.length > 0 && (
-                      <div className="vault-reminder-display">
-                        {vault.reminders.slice(0, 1).map((reminder) => {
-                          const fullReminder = smartSuggestionsData.reminders.find(r => r.id === reminder.id) || reminder;
-                          return (
-                            <div 
-                              key={reminder.id}
-                              className="reminder-item-format"
-                              onClick={() => handleReminderClick(fullReminder)}
-                            >
-                              <div className="reminder-details-single-line">
-                                <span className="up-next-label">Up Next:</span> {fullReminder.title || reminder.title} | {formatFullDate(fullReminder.dueDate || reminder.dueDate)}
-                                {fullReminder.cost && ` | ${fullReminder.cost}`}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                ))}
+                      onInfoClick={handleInfoClick}
+                      onReminderClick={handleReminderClick}
+                      formatters={{
+                        formatFullDate,
+                        getUrgencyColor
+                      }}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>

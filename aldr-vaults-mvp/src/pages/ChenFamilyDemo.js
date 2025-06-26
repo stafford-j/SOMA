@@ -4,6 +4,7 @@ import '../styles/VaultSelection.css';
 import SmartSuggestions from '../components/SmartSuggestions';
 import SmartIngest from '../components/SmartIngest';
 import VaultInfoModal from '../components/VaultInfoModal';
+import { VaultCard, VaultHeader, PersonSelector } from '../components/core';
 import chenFamilyData from '../data/chen-family-data';
 import smartSuggestionsData from '../data/smart-suggestions-data';
 
@@ -414,162 +415,91 @@ const ChenFamilyDemo = () => {
     }
   ];
 
+  const handleModeChange = (newFamilyMode, newSelectedPerson) => {
+    setFamilyMode(newFamilyMode);
+    setSelectedPerson(newSelectedPerson);
+  };
+
   return (
     <main className="landing-container">
-      {/* BETA Banner */}
-      <div className="banner">
-        Aldr Vaults is currently in BETA — this demo site is for partners, testers, and early collaborators
-      </div>
-
-      {/* Header */}
-      <header className="dashboard-header">
-        <div className="header-left">
-          <button 
-            onClick={() => window.location.href = '/'}
-            className="hover:opacity-80 transition-opacity"
-            title="Back to Home"
-          >
-            <img 
-              src="https://static.wixstatic.com/media/afc39f_0893f0ab1268414aa42e4126925267ff~mv2.png"
-              alt="Home" 
-              className="h-16 w-16 object-contain"
-              style={{ 
-                imageRendering: 'high-quality'
-              }}
+      <VaultHeader 
+        actions={
+          <>
+            <PersonSelector
+              familyMode={familyMode}
+              selectedPerson={selectedPerson}
+              showDropdown={showModeDropdown}
+              onToggleDropdown={setShowModeDropdown}
+              onModeChange={handleModeChange}
+              dropdownRef={modeDropdownRef}
             />
-          </button>
-        </div>
-        <div className="header-center flex flex-col items-center justify-center">
-          <h1 className="text-white text-4xl" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>Aldr Vaults</h1>
-          <div className="text-base text-white italic mt-1">
-            Aldr /ˈɑːl-dər/ — life, age, lifetime
-          </div>
-        </div>
-        <div className="header-actions">
-          {/* Unified Mode/Person Selector */}
-          <div className="relative" ref={modeDropdownRef}>
-            <button 
-              className="dashboard-button white flex items-center"
-              onClick={() => setShowModeDropdown(!showModeDropdown)}
-            >
-              <i className={`fas ${familyMode ? 'fa-users' : 'fa-user'} mr-2`}></i>
-              <span className="hidden sm:inline">
-                {familyMode 
-                  ? 'Family | David & Sarah'
-                  : `Individual | ${selectedPerson === 'sarah' ? 'Sarah Chen' : 'David Chen'}`
-                }
-              </span>
-              <i className="fas fa-chevron-down ml-2 text-xs"></i>
-            </button>
-            {showModeDropdown && (
-              <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                <div className="py-2">
-                  <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">Individual Mode</div>
-                  <button
-                    className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center ${!familyMode && selectedPerson === 'sarah' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'}`}
-                    onClick={() => {
-                      setFamilyMode(false);
-                      setSelectedPerson('sarah');
-                      setShowModeDropdown(false);
-                    }}
-                  >
-                    <i className="fas fa-user mr-3"></i>
-                    <span>Individual | Sarah Chen</span>
-                    {!familyMode && selectedPerson === 'sarah' && <i className="fas fa-check ml-auto text-blue-600"></i>}
-                  </button>
-                  <button
-                    className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center ${!familyMode && selectedPerson === 'david' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'}`}
-                    onClick={() => {
-                      setFamilyMode(false);
-                      setSelectedPerson('david');
-                      setShowModeDropdown(false);
-                    }}
-                  >
-                    <i className="fas fa-user mr-3"></i>
-                    <span>Individual | David Chen</span>
-                    {!familyMode && selectedPerson === 'david' && <i className="fas fa-check ml-auto text-blue-600"></i>}
-                  </button>
-                  <hr className="my-2" />
-                  <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">Family Mode</div>
-                  <button
-                    className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center ${familyMode ? 'bg-purple-50 text-purple-600' : 'text-gray-700'}`}
-                    onClick={() => {
-                      setFamilyMode(true);
-                      setSelectedPerson('family');
-                      setShowModeDropdown(false);
-                    }}
-                  >
-                    <i className="fas fa-users mr-3"></i>
-                    <span>Family | David & Sarah</span>
-                    {familyMode && <i className="fas fa-check ml-auto text-purple-600"></i>}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
 
-          <div className="relative" ref={dropdownRef}>
-            <button 
-              className="dashboard-button white"
-              onClick={() => setShowVaultDropdown(!showVaultDropdown)}
-            >
-              <img 
-                src="https://static.wixstatic.com/media/afc39f_40f8cc261df94f13974fc5756f1fafb9~mv2.png" 
-                alt="Vault Lock" 
-                className="w-5 h-5 mr-2"
-                style={{ objectFit: 'contain' }}
-              />
-              <span className="hidden sm:inline">Quick Access</span>
-              <i className="fas fa-chevron-down ml-1 text-xs"></i>
-            </button>
-            {showVaultDropdown && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                {vaults.map((vault) => (
-                  <button
-                    key={vault.id}
-                    className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center text-gray-700 first:rounded-t-lg last:rounded-b-lg"
-                    onClick={() => {
-                      if (vault.id === 'builder') {
-                        showComingSoon('Custom vault builder coming soon!');
-                      } else {
-                        showComingSoon(`${vault.fullName} opening soon!`);
-                      }
-                      setShowVaultDropdown(false);
-                    }}
-                  >
-                    <i className={`fas ${vault.icon} mr-3 text-gray-500`}></i>
-                    <span style={{ fontFamily: 'Playfair Display, serif' }}>{vault.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-          <a href="https://aldrvaults.com" className="dashboard-button white" target="_blank" rel="noopener noreferrer">
-            <i className="fas fa-globe"></i>
-            <span className="hidden sm:inline">AldrVaults.com</span>
-          </a>
-          <div className="relative">
-            <button 
-              className="dashboard-button white"
-              onMouseEnter={() => setShowLanguageTooltip(true)}
-              onMouseLeave={() => setShowLanguageTooltip(false)}
-              onClick={() => alert('Language toggle coming soon! Currently working on Portuguese translation support.')}
-            >
-              <i className="fas fa-language"></i>
-              <span className="hidden sm:inline">EN</span>
-            </button>
-            {showLanguageTooltip && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-black text-white text-sm p-2 rounded-lg shadow-lg z-50">
-                Coming Soon: Portuguese language support
-              </div>
-            )}
-          </div>
-          <a href="mailto:james@ruleyproductions.com" className="dashboard-button white">
-            <i className="fas fa-envelope"></i>
-            <span className="hidden sm:inline">Contact</span>
-          </a>
-        </div>
-      </header>
+            <div className="relative" ref={dropdownRef}>
+              <button 
+                className="dashboard-button white"
+                onClick={() => setShowVaultDropdown(!showVaultDropdown)}
+              >
+                <img 
+                  src="https://static.wixstatic.com/media/afc39f_40f8cc261df94f13974fc5756f1fafb9~mv2.png" 
+                  alt="Vault Lock" 
+                  className="w-5 h-5 mr-2"
+                  style={{ objectFit: 'contain' }}
+                />
+                <span className="hidden sm:inline">Quick Access</span>
+                <i className="fas fa-chevron-down ml-1 text-xs"></i>
+              </button>
+              {showVaultDropdown && (
+                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                  {vaults.map((vault) => (
+                    <button
+                      key={vault.id}
+                      className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center text-gray-700 first:rounded-t-lg last:rounded-b-lg"
+                      onClick={() => {
+                        if (vault.id === 'builder') {
+                          showComingSoon('Custom vault builder coming soon!');
+                        } else {
+                          showComingSoon(`${vault.fullName} opening soon!`);
+                        }
+                        setShowVaultDropdown(false);
+                      }}
+                    >
+                      <i className={`fas ${vault.icon} mr-3 text-gray-500`}></i>
+                      <span style={{ fontFamily: 'Playfair Display, serif' }}>{vault.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            <a href="https://aldrvaults.com" className="dashboard-button white" target="_blank" rel="noopener noreferrer">
+              <i className="fas fa-globe"></i>
+              <span className="hidden sm:inline">AldrVaults.com</span>
+            </a>
+            
+            <div className="relative">
+              <button 
+                className="dashboard-button white"
+                onMouseEnter={() => setShowLanguageTooltip(true)}
+                onMouseLeave={() => setShowLanguageTooltip(false)}
+                onClick={() => alert('Language toggle coming soon! Currently working on Portuguese translation support.')}
+              >
+                <i className="fas fa-language"></i>
+                <span className="hidden sm:inline">EN</span>
+              </button>
+              {showLanguageTooltip && (
+                <div className="absolute right-0 top-full mt-2 w-48 bg-black text-white text-sm p-2 rounded-lg shadow-lg z-50">
+                  Coming Soon: Portuguese language support
+                </div>
+              )}
+            </div>
+            
+            <a href="mailto:james@ruleyproductions.com" className="dashboard-button white">
+              <i className="fas fa-envelope"></i>
+              <span className="hidden sm:inline">Contact</span>
+            </a>
+          </>
+        }
+      />
 
       {/* Main Content Section */}
       <section className="main-content-section">
@@ -605,103 +535,61 @@ const ChenFamilyDemo = () => {
             <div className="vault-cards-section">
               <div className="vaults-grid-new">
                 {vaults.map((vault) => (
-                  <div key={vault.id} className="vault-card-with-reminder">
-                    {/* Vault Button */}
-                    <button 
-                      className="vault-button-with-reminder" 
-                      onClick={() => {
-                        if (vault.id === 'builder') {
-                          showComingSoon('Custom vault builder coming soon!');
-                        } else if (vault.id === 'identity') {
-                          // Navigate to Chen Identity vault with mode/person params
-                          const params = familyMode 
-                            ? '?mode=family'
-                            : `?mode=individual&person=${selectedPerson}`;
-                          navigate(`/chen-identity${params}`);
-                        } else if (vault.id === 'legal') {
-                          // Navigate to Chen Legal vault with mode/person params
-                          const params = familyMode 
-                            ? '?mode=family'
-                            : `?mode=individual&person=${selectedPerson}`;
-                          navigate(`/chen-legal${params}`);
-                        } else if (vault.id === 'travel') {
-                          // Navigate to Chen Travel vault with mode/person params
-                          const params = familyMode 
-                            ? '?mode=family'
-                            : `?mode=individual&person=${selectedPerson}`;
-                          navigate(`/chen-travel${params}`);
-                        } else if (vault.id === 'memories') {
-                          // Navigate to Chen Memories vault with mode/person params
-                          const params = familyMode 
-                            ? '?mode=family'
-                            : `?mode=individual&person=${selectedPerson}`;
-                          navigate(`/chen-memories${params}`);
-                        } else if (vault.id === 'learning') {
-                          // Navigate to Chen Learning vault with mode/person params
-                          const params = familyMode 
-                            ? '?mode=family'
-                            : `?mode=individual&person=${selectedPerson}`;
-                          navigate(`/chen-learning${params}`);
-                        } else {
-                          showComingSoon(`${vault.fullName} opening soon with ${familyMode ? 'family' : 'individual'} mode!`);
-                        }
-                      }}
-                    >
-                      {/* Icon */}
-                      <i className={`fas ${vault.icon} vault-icon-reminder`} style={{ color: 'var(--teal)' }}></i>
-                      
-                      {/* Vault Name with Info Button */}
-                      <div className="vault-name-section-reminder">
-                        <span className="vault-name-reminder" style={{ fontFamily: 'Lora, serif', fontWeight: '500' }}>
-                          {vault.name}
-                        </span>
-                        
-                        {/* Info icon */}
-                        <div 
-                          className="vault-info-icon-reminder"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleInfoClick(vault);
-                          }}
-                          title="View vault information"
-                        >
-                          <i className="fas fa-info"></i>
-                        </div>
-                      </div>
-                      
-                      {/* Open Vault Button - styled like View All Reminders */}
-                      <div className="vault-open-button-reminder">
-                        <i className="fas fa-chevron-right mr-1"></i>
-                        {vault.id === 'builder' ? vault.fullName : `${vault.fullName} Vault`}
-                      </div>
-                    </button>
-                    
-                    {/* Reminder Section */}
-                    {vault.reminders.length > 0 && (
-                      <div className="vault-reminder-display">
-                        {vault.reminders.slice(0, 1).map((reminder) => {
-                          return (
-                            <div 
-                              key={reminder.id}
-                              className="reminder-item-format"
-                              onClick={() => {
-                                // Navigate directly to the vault where this record lives
-                                const params = familyMode 
-                                  ? '?mode=family'
-                                  : `?mode=individual&person=${selectedPerson}`;
-                                navigate(`/chen-${vault.id}${params}`);
-                              }}
-                            >
-                              <div className="reminder-details-single-line">
-                                <span className="up-next-label">Up Next:</span> {reminder.title} | {formatFullDate(reminder.dueDate)}
-                                {familyMode && reminder.owner && ` | ${reminder.owner}`}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
+                  <VaultCard
+                    key={vault.id}
+                    vault={vault}
+                    reminders={vault.reminders}
+                    onVaultClick={(vault) => {
+                      if (vault.id === 'builder') {
+                        showComingSoon('Custom vault builder coming soon!');
+                      } else if (vault.id === 'identity') {
+                        // Navigate to Chen Identity vault with mode/person params
+                        const params = familyMode 
+                          ? '?mode=family'
+                          : `?mode=individual&person=${selectedPerson}`;
+                        navigate(`/chen-identity${params}`);
+                      } else if (vault.id === 'legal') {
+                        // Navigate to Chen Legal vault with mode/person params
+                        const params = familyMode 
+                          ? '?mode=family'
+                          : `?mode=individual&person=${selectedPerson}`;
+                        navigate(`/chen-legal${params}`);
+                      } else if (vault.id === 'travel') {
+                        // Navigate to Chen Travel vault with mode/person params
+                        const params = familyMode 
+                          ? '?mode=family'
+                          : `?mode=individual&person=${selectedPerson}`;
+                        navigate(`/chen-travel${params}`);
+                      } else if (vault.id === 'memories') {
+                        // Navigate to Chen Memories vault with mode/person params
+                        const params = familyMode 
+                          ? '?mode=family'
+                          : `?mode=individual&person=${selectedPerson}`;
+                        navigate(`/chen-memories${params}`);
+                      } else if (vault.id === 'learning') {
+                        // Navigate to Chen Learning vault with mode/person params
+                        const params = familyMode 
+                          ? '?mode=family'
+                          : `?mode=individual&person=${selectedPerson}`;
+                        navigate(`/chen-learning${params}`);
+                      } else {
+                        showComingSoon(`${vault.fullName} opening soon with ${familyMode ? 'family' : 'individual'} mode!`);
+                      }
+                    }}
+                    onInfoClick={handleInfoClick}
+                    onReminderClick={(reminder) => {
+                      // Navigate directly to the vault where this record lives
+                      const vaultId = reminder.vaultId || vault.id;
+                      const params = familyMode 
+                        ? '?mode=family'
+                        : `?mode=individual&person=${selectedPerson}`;
+                      navigate(`/chen-${vaultId}${params}`);
+                    }}
+                    formatters={{
+                      formatFullDate,
+                      getUrgencyColor
+                    }}
+                  />
                 ))}
               </div>
             </div>

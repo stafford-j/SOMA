@@ -2,6 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
+// BETA components
+import Login from './pages/Login';
+import BetaDashboard from './pages/BetaDashboard';
+import BetaVault from './pages/BetaVault';
+import BetaIdentity from './pages/BetaIdentity';
+import BetaLegal from './pages/BetaLegal';
+import { AuthProvider } from './contexts/AuthContext';
+
 // Layouts
 import MainLayout from './layouts/MainLayout';
 
@@ -31,8 +39,15 @@ import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <Router>
-      <Routes>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* BETA Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/beta" element={<BetaDashboard />} />
+          <Route path="/beta/vault/identity" element={<BetaIdentity />} />
+          <Route path="/beta/vault/legal" element={<BetaLegal />} />
+          <Route path="/beta/vault/:type" element={<BetaVault />} />
         {/* Vault Selection Landing Page */}
         <Route path="/" element={<VaultSelection />} />
         
@@ -79,6 +94,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 
