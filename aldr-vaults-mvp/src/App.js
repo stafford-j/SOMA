@@ -7,6 +7,12 @@ import MainLayout from './layouts/MainLayout';
 
 // Pages
 import VaultSelection from './pages/VaultSelection';
+import ChenFamilyDemo from './pages/ChenFamilyDemo';
+import ChenIdentity from './pages/ChenIdentity';
+import ChenLegal from './pages/ChenLegal';
+import ChenTravel from './pages/ChenTravel';
+import ChenMemories from './pages/ChenMemories';
+import ChenLearning from './pages/ChenLearning';
 import HomePage from './pages/HomePage';
 import AldrId from './pages/AldrId';
 import AldrLegal from './pages/AldrLegal';
@@ -29,6 +35,14 @@ function App() {
       <Routes>
         {/* Vault Selection Landing Page */}
         <Route path="/" element={<VaultSelection />} />
+        
+        {/* Demo Pages */}
+        <Route path="/chen-family" element={<ChenFamilyDemo />} />
+        <Route path="/chen-identity" element={<ChenIdentity />} />
+        <Route path="/chen-legal" element={<ChenLegal />} />
+        <Route path="/chen-travel" element={<ChenTravel />} />
+        <Route path="/chen-memories" element={<ChenMemories />} />
+        <Route path="/chen-learning" element={<ChenLearning />} />
         
         {/* Smart Ingestion Hub */}
         <Route path="/smart-ingestion" element={<SmartIngestion />} />

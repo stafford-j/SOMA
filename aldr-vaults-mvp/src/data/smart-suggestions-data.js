@@ -47,7 +47,7 @@ export const smartSuggestionsData = {
       crossVaultConnections: [
         {
           targetVault: 'memoirs',
-          targetVaultName: 'Aldr Memoirs',
+          targetVaultName: 'Aldr Memories',
           connection: 'Digital legacy planning may need updates',
           description: 'Recent family photos and journals may affect inheritance wishes'
         }
@@ -265,7 +265,7 @@ export const smartSuggestionsData = {
       dueDate: '2025-12-25',
       urgency: 'green',
       vault: 'memoirs',
-      vaultName: 'Aldr Memoirs',
+      vaultName: 'Aldr Memories',
       description: 'Annual family history update for Christmas',
       crossVaultConnections: [
         {
@@ -523,6 +523,100 @@ export const smartSuggestionsData = {
         urgency: 'green'
       }
     ]
+  },
+
+  // Chen Family specific reminders
+  chenFamily: {
+    sarah: {
+      identity: [
+        {
+          id: 'sarah-passport-renewal',
+          title: 'US Passport Renewal',
+          dueDate: '2030-03-15',
+          urgency: 'green'
+        }
+      ],
+      legal: [
+        {
+          id: 'sarah-residence-renewal',
+          title: 'Portuguese Residence Permit Renewal',
+          dueDate: '2028-02-20',
+          urgency: 'green'
+        },
+        {
+          id: 'sarah-contract-review',
+          title: 'McKinsey Contract Review',
+          dueDate: '2025-12-31',
+          urgency: 'amber'
+        }
+      ],
+      travel: [
+        {
+          id: 'sarah-madrid-fertility',
+          title: 'Madrid Fertility Consultation',
+          dueDate: '2025-02-08',
+          urgency: 'red'
+        }
+      ],
+      memories: [
+        {
+          id: 'sarah-fertility-journal',
+          title: 'Update Fertility Journey Documentation',
+          dueDate: '2025-02-01',
+          urgency: 'amber'
+        }
+      ],
+      learning: [
+        {
+          id: 'sarah-portuguese-exam',
+          title: 'Portuguese B2 Language Exam',
+          dueDate: '2025-06-30',
+          urgency: 'red'
+        }
+      ]
+    },
+    david: {
+      identity: [
+        {
+          id: 'david-license-renewal',
+          title: 'Portuguese Driver\'s License Check',
+          dueDate: '2033-04-15',
+          urgency: 'green'
+        }
+      ],
+      legal: [
+        {
+          id: 'david-freelance-contracts',
+          title: 'Q1 Client Contract Renewals',
+          dueDate: '2025-03-31',
+          urgency: 'amber'
+        }
+      ],
+      travel: [
+        {
+          id: 'david-berlin-conference',
+          title: 'DockerCon Europe Registration',
+          dueDate: '2025-05-15',
+          urgency: 'amber'
+        }
+      ],
+      memories: [
+        {
+          id: 'david-photography-project',
+          title: 'Azores Photography Trip Planning',
+          dueDate: '2025-04-10',
+          urgency: 'green'
+        }
+      ],
+      learning: [
+        {
+          id: 'david-kubernetes-cert',
+          title: 'Kubernetes Administrator Recertification',
+          dueDate: '2027-07-15',
+          urgency: 'green'
+        }
+      ]
+    }
   }
 };
 

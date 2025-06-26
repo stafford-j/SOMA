@@ -327,8 +327,8 @@ const VaultSelection = () => {
     },
     { 
       id: 'memoirs', 
-      name: 'Memoirs',
-      fullName: 'Aldr Memoirs',
+      name: 'Memories',
+      fullName: 'Aldr Memories',
       icon: 'fa-heart',
       color: 'bg-pink-600',
       description: 'Document family journals, preserve heritage stories, and build your family tree. Legacy planning connects seamlessly to Aldr Legal.',
