@@ -12,6 +12,8 @@ import { supabase, VAULT_TYPES } from '../config/supabase';
 import BetaReminders from '../components/BetaReminders';
 import BetaSmartIngest from '../components/BetaSmartIngest';
 import DocumentStats from '../components/DocumentStats';
+import QuickActions from '../components/QuickActions';
+import WelcomeBanner from '../components/WelcomeBanner';
 
 const BetaDashboard = () => {
   const navigate = useNavigate();
@@ -235,6 +237,9 @@ const BetaDashboard = () => {
             </p>
           </div>
 
+          {/* Welcome Banner for New Users */}
+          <WelcomeBanner totalDocuments={allDocuments.length} />
+
           <div className="main-content-grid-new">
             {/* Left: Smart Features (50%) */}
             <div className="smart-features-section">
@@ -252,32 +257,40 @@ const BetaDashboard = () => {
               </div>
               
               {/* Smart Ingestion */}
-              <div>
+              <div className="mb-8">
                 <BetaSmartIngest />
+              </div>
+
+              {/* Quick Actions */}
+              <div>
+                <QuickActions currentVault="dashboard" />
               </div>
             </div>
             
             {/* Right: Vault Cards (50%) */}
             <div className="vault-cards-section">
               <div className="vaults-grid-new">
-                {vaults.map((vault) => (
-                  <VaultCard
-                    key={vault.id}
-                    vault={{
-                      id: vault.type,
-                      name: vault.name,
-                      fullName: `Aldr ${vault.name}`,
-                      icon: vault.icon,
-                      color: vault.color,
-                      description: vault.description,
-                      coming_soon: vault.coming_soon
-                    }}
-                    reminders={[]}
-                    onVaultClick={() => handleVaultClick(vault)}
-                    onInfoClick={() => {}}
-                    showReminders={false}
-                  />
-                ))}
+                {vaults.map((vault) => {
+                  const vaultDocuments = allDocuments.filter(doc => doc.vaults?.type === vault.type);
+                  return (
+                    <VaultCard
+                      key={vault.id}
+                      vault={{
+                        id: vault.type,
+                        name: vault.name,
+                        fullName: `Aldr ${vault.name}`,
+                        icon: vault.icon,
+                        color: vault.color,
+                        description: vault.coming_soon ? vault.description : `${vault.description} (${vaultDocuments.length} documents)`,
+                        coming_soon: vault.coming_soon
+                      }}
+                      reminders={[]}
+                      onVaultClick={() => handleVaultClick(vault)}
+                      onInfoClick={() => {}}
+                      showReminders={false}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
