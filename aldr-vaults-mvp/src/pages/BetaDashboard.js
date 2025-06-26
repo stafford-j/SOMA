@@ -11,11 +11,13 @@ import { VaultCard, VaultHeader } from '../components/core';
 import { supabase, VAULT_TYPES } from '../config/supabase';
 import BetaReminders from '../components/BetaReminders';
 import BetaSmartIngest from '../components/BetaSmartIngest';
+import DocumentStats from '../components/DocumentStats';
 
 const BetaDashboard = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const [vaults, setVaults] = useState([]);
+  const [allDocuments, setAllDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,6 +28,12 @@ const BetaDashboard = () => {
     
     initializeUserVaults();
   }, [user, navigate]);
+
+  useEffect(() => {
+    if (vaults.length > 0) {
+      loadAllDocuments();
+    }
+  }, [vaults]);
 
   const initializeUserVaults = async () => {
     try {
@@ -150,6 +158,24 @@ const BetaDashboard = () => {
     }
   };
 
+  const loadAllDocuments = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('documents')
+        .select('*, vaults(name, type)')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error loading all documents:', error);
+      } else {
+        setAllDocuments(data || []);
+      }
+    } catch (err) {
+      console.error('Error loading all documents:', err);
+    }
+  };
+
   const handleSignOut = async () => {
     const { error } = await signOut();
     if (!error) {
@@ -212,6 +238,14 @@ const BetaDashboard = () => {
           <div className="main-content-grid-new">
             {/* Left: Smart Features (50%) */}
             <div className="smart-features-section">
+              {/* Document Statistics */}
+              <div className="mb-8">
+                <DocumentStats 
+                  documents={allDocuments} 
+                  vaultType="overview"
+                />
+              </div>
+              
               {/* Smart Reminders */}
               <div className="mb-8">
                 <BetaReminders />

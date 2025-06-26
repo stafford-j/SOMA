@@ -9,12 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { VaultHeader } from '../components/core';
 import { supabase } from '../config/supabase';
+import DocumentStats from '../components/DocumentStats';
 import '../styles/Dashboard.css';
 
 const BetaIdentity = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const [vault, setVault] = useState(null);
+  const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
@@ -167,8 +169,10 @@ const BetaIdentity = () => {
         }));
       }
 
-      // Map documents to profile structure
+      // Map documents to profile structure and store all documents
       if (documents) {
+        setDocuments(documents);
+        
         const docMap = {};
         documents.forEach(doc => {
           const docType = doc.metadata?.document_type || 'other';
@@ -430,6 +434,14 @@ const BetaIdentity = () => {
                 </button>
               </div>
             </div>
+          </div>
+
+          {/* Document Statistics */}
+          <div className="mb-6">
+            <DocumentStats 
+              documents={documents} 
+              vaultType="identity"
+            />
           </div>
 
           <div className="dashboard-grid">

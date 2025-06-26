@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { VaultHeader } from '../components/core';
 import { supabase } from '../config/supabase';
+import DocumentStats from '../components/DocumentStats';
+import DocumentSearch from '../components/DocumentSearch';
 import '../styles/Dashboard.css';
 
 const BetaLegal = () => {
@@ -16,6 +18,7 @@ const BetaLegal = () => {
   const { user, signOut } = useAuth();
   const [vault, setVault] = useState(null);
   const [documents, setDocuments] = useState([]);
+  const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [uploadFile, setUploadFile] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -113,7 +116,9 @@ const BetaLegal = () => {
       if (error) {
         console.error('Error loading documents:', error);
       } else {
-        setDocuments(data || []);
+        const docs = data || [];
+        setDocuments(docs);
+        setFilteredDocuments(docs);
       }
     } catch (err) {
       console.error('Error loading documents:', err);
@@ -230,7 +235,7 @@ const BetaLegal = () => {
     );
   }
 
-  const filteredDocuments = getFilteredDocuments();
+  const filteredDocumentsComputed = getFilteredDocuments();
   const documentsByCategory = getDocumentsByCategory();
 
   return (
@@ -281,6 +286,21 @@ const BetaLegal = () => {
               </div>
             </div>
           </div>
+
+          {/* Document Statistics */}
+          <div className="mb-6">
+            <DocumentStats 
+              documents={documents} 
+              vaultType="legal"
+            />
+          </div>
+
+          {/* Document Search */}
+          <DocumentSearch 
+            documents={documents}
+            onFilteredResults={setFilteredDocuments}
+            placeholder="Search legal documents..."
+          />
 
           <div className="dashboard-grid">
             {/* Upload Section */}
@@ -447,10 +467,10 @@ const BetaLegal = () => {
                     <i className={`fas ${legalCategories[selectedCategory]?.icon} mr-2`}></i>
                     {legalCategories[selectedCategory]?.name} Documents
                   </h3>
-                  <p className="card-subtitle">{filteredDocuments.length} documents</p>
+                  <p className="card-subtitle">{filteredDocumentsComputed.length} documents</p>
                 </div>
                 <div className="card-content">
-                  {filteredDocuments.length === 0 ? (
+                  {filteredDocumentsComputed.length === 0 ? (
                     <div className="text-center py-8 text-gray-500">
                       <i className="fas fa-folder-open text-4xl mb-4"></i>
                       <p>No documents in this category yet.</p>
@@ -458,7 +478,7 @@ const BetaLegal = () => {
                     </div>
                   ) : (
                     <div className="documents-grid">
-                      {filteredDocuments.map((doc) => (
+                      {filteredDocumentsComputed.map((doc) => (
                         <div key={doc.id} className="document-item">
                           <div className="document-header">
                             <h4 className="document-title">{doc.title}</h4>
