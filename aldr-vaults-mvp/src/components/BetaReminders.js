@@ -275,30 +275,34 @@ const BetaReminders = () => {
           </div>
         )}
 
-        <div className="reminders-list space-y-3">
+        <div className="reminders-list">
           {displayReminders.map((reminder) => (
             <div
               key={reminder.id}
-              className="reminder-item bg-gray-50 rounded-lg p-4 cursor-pointer hover:bg-gray-100 transition-colors"
+              className="reminder-item"
               onClick={() => handleReminderClick(reminder)}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center mb-2">
-                    <h3 className="font-semibold text-gray-800 mr-3">{reminder.title}</h3>
+                    <h3>{reminder.title}</h3>
                     <span 
-                      className="px-2 py-1 rounded-full text-xs font-medium text-white"
+                      className="reminder-urgency-badge"
                       style={{ backgroundColor: getUrgencyColor(reminder.urgency) }}
                     >
                       {getDaysUntilDue(reminder.dueDate)}
                     </span>
                   </div>
-                  <p className="text-gray-600 text-sm mb-2">{reminder.description}</p>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <i className="fas fa-calendar mr-1"></i>
-                    <span className="mr-4">{formatDate(reminder.dueDate)}</span>
-                    <i className="fas fa-folder mr-1"></i>
-                    <span>{reminder.vaultName}</span>
+                  <p>{reminder.description}</p>
+                  <div className="reminder-meta">
+                    <span>
+                      <i className="fas fa-calendar"></i>
+                      {formatDate(reminder.dueDate)}
+                    </span>
+                    <span>
+                      <i className="fas fa-folder"></i>
+                      {reminder.vaultName}
+                    </span>
                   </div>
                 </div>
                 <div className="ml-4">

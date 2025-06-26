@@ -87,8 +87,11 @@ const BetaLegal = () => {
       if (error) {
         console.error('Error loading vault:', error);
         setLoading(false);
-      } else {
+      } else if (data) {
         setVault(data);
+      } else {
+        console.log('BetaLegal: No vault data returned');
+        setLoading(false);
       }
     } catch (err) {
       console.error('Error loading vault:', err);

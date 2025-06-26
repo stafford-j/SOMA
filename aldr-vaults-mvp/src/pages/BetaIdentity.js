@@ -114,9 +114,12 @@ const BetaIdentity = () => {
         console.error('BetaIdentity: Error loading vault:', error);
         // If no vault found, still stop loading
         setLoading(false);
-      } else {
+      } else if (data) {
         console.log('BetaIdentity: Found vault:', data);
         setVault(data);
+      } else {
+        console.log('BetaIdentity: No vault data returned');
+        setLoading(false);
       }
     } catch (err) {
       console.error('BetaIdentity: Error loading vault:', err);

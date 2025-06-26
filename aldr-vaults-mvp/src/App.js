@@ -8,6 +8,9 @@ import BetaDashboard from './pages/BetaDashboard';
 import BetaVault from './pages/BetaVault';
 import BetaIdentity from './pages/BetaIdentity';
 import BetaLegal from './pages/BetaLegal';
+import BetaTravel from './pages/BetaTravel';
+import BetaMemories from './pages/BetaMemories';
+import BetaLearning from './pages/BetaLearning';
 import { AuthProvider } from './contexts/AuthContext';
 
 // Layouts
@@ -47,6 +50,9 @@ function App() {
           <Route path="/beta" element={<BetaDashboard />} />
           <Route path="/beta/vault/identity" element={<BetaIdentity />} />
           <Route path="/beta/vault/legal" element={<BetaLegal />} />
+          <Route path="/beta/vault/travel" element={<BetaTravel />} />
+          <Route path="/beta/vault/memories" element={<BetaMemories />} />
+          <Route path="/beta/vault/learning" element={<BetaLearning />} />
           <Route path="/beta/vault/:type" element={<BetaVault />} />
         {/* Vault Selection Landing Page */}
         <Route path="/" element={<VaultSelection />} />

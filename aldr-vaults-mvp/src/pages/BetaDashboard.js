@@ -163,13 +163,8 @@ const BetaDashboard = () => {
       return;
     }
     
-    if (vault.type === 'identity') {
-      navigate('/beta/vault/identity');
-    } else if (vault.type === 'legal') {
-      navigate('/beta/vault/legal');
-    } else {
-      alert('This vault is not yet available in BETA.');
-    }
+    // Navigate to the appropriate vault page
+    navigate(`/beta/vault/${vault.type}`);
   };
 
   if (loading) {

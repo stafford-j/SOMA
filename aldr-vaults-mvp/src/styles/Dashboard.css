@@ -969,3 +969,313 @@ body {
     flex-direction: column;
   }
 }
+
+/* ===== BETA REMINDERS STYLING ===== */
+
+.smart-suggestions-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  transition: var(--transition-standard);
+}
+
+.smart-suggestions-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.suggestions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.suggestions-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.suggestions-header p {
+  color: var(--gray-text);
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.info-panel {
+  background: #dbeafe;
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info-panel h3 {
+  color: #1e40af;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.info-panel p {
+  color: #1e40af;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.info-panel ul {
+  color: #1e40af;
+  font-size: 0.875rem;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.info-panel li {
+  margin-bottom: 0.25rem;
+}
+
+.reminders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.reminder-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: var(--transition-standard);
+}
+
+.reminder-item:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.reminder-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin: 0 0.75rem 0 0;
+}
+
+.reminder-item p {
+  color: var(--gray-text);
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.reminder-urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.reminder-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--gray-text);
+}
+
+.reminder-meta i {
+  margin-right: 0.25rem;
+}
+
+/* Loading spinner for reminders */
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #f3f4f6;
+  border-radius: 50%;
+  border-top-color: var(--primary-teal);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Smart Ingestion specific styles */
+.smart-ingest-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  transition: var(--transition-standard);
+}
+
+.smart-ingest-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.ingest-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.ingest-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin: 0;
+}
+
+.ingest-header p {
+  color: var(--gray-text);
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.upload-section {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: var(--transition-standard);
+}
+
+.upload-section:hover {
+  border-color: var(--primary-purple);
+  background-color: #fafafa;
+}
+
+.pending-documents {
+  margin-top: 1.5rem;
+}
+
+.pending-documents h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 0.75rem;
+}
+
+.document-item {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  margin-bottom: 0.75rem;
+}
+
+.document-item:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.document-item h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin: 0 0.75rem 0.5rem 0;
+}
+
+.document-item p {
+  color: var(--gray-text);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.document-confidence-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.document-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--gray-text);
+}
+
+.document-meta i {
+  margin-right: 0.25rem;
+}
+
+.document-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.document-actions button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.document-actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.document-actions button i {
+  margin-right: 0.25rem;
+}
+
+/* Responsive design for reminders and smart ingestion */
+@media (max-width: 768px) {
+  .smart-suggestions-section,
+  .smart-ingest-section {
+    padding: 1rem;
+  }
+  
+  .suggestions-header,
+  .ingest-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .reminder-meta,
+  .document-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .document-actions {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  .document-actions button {
+    flex: 1;
+    font-size: 0.75rem;
+  }
+}
