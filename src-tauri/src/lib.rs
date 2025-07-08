@@ -310,10 +310,24 @@ fn initialize_graph(
         Some(datastore) => datastore.get_graph_path(),
         None => return Err(Error::Message("Datastore not initialized".to_string())),
     };
-    let graph = Graph::open(&graph_path)?;
-    *state.graph.lock().unwrap() = Some(graph);
-    info!("Graph initialized");
-    Ok("Graph initialized".to_string())
+    
+    // Check if graph is already initialized to prevent multiple initializations
+    if state.graph.lock().unwrap().is_some() {
+        info!("Graph already initialized, skipping");
+        return Ok("Graph already initialized".to_string());
+    }
+    
+    match Graph::open(&graph_path) {
+        Ok(graph) => {
+            *state.graph.lock().unwrap() = Some(graph);
+            info!("Graph initialized successfully at {:?}", graph_path);
+            Ok("Graph initialized".to_string())
+        },
+        Err(e) => {
+            error!("Failed to initialize graph at {:?}: {}", graph_path, e);
+            Err(Error::Message(format!("Graph initialization failed: {}. The database may be locked by another process.", e)))
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -1118,7 +1132,17 @@ async fn init_client(environment: &str) -> Result<Client, Error> {
         },
         "alpha" | "testnet" => {
             info!("Connecting to Autonomi Alphanet (testnet)");
-            Ok(Client::init_alpha().await?)
+            match Client::init_alpha().await {
+                Ok(client) => {
+                    info!("Successfully connected to Autonomi Alphanet");
+                    Ok(client)
+                },
+                Err(e) => {
+                    error!("Failed to connect to Autonomi Alphanet: {}", e);
+                    info!("Alphanet connection failed, this may be due to network connectivity issues");
+                    Err(Error::Message(format!("Alphanet connection failed: {}. Check your internet connection and try again.", e)))
+                }
+            }
         },
         "mainnet" | "main" => {
             info!("Connecting to Autonomi Mainnet");

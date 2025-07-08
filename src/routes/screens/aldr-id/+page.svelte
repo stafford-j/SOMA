@@ -138,11 +138,11 @@
       // Step 3: Initialize Autonomi client with environment wallet
       const walletKey = '80cc290545387b17b49a6aace0d4a9a39e7a0443c645a29942c93e8e1c456f0f'; // Your wallet from .env
       
-      // Connect to Autonomi Mainnet only (no fallback for BETA safety)
-      statusMessage = 'Connecting to Autonomi Mainnet...';
-      await invoke('initialize_autonomi_client', { walletKey, network: 'mainnet' });
-      connectedNetwork = 'Mainnet';
-      statusMessage = '✅ Connected to Autonomi Mainnet';
+      // Connect to Autonomi Alphanet (testnet) for testing - switching from mainnet due to connectivity issues
+      statusMessage = 'Connecting to Autonomi Alphanet (testnet)...';
+      await invoke('initialize_autonomi_client', { walletKey, network: 'testnet' });
+      connectedNetwork = 'Alphanet (testnet)';
+      statusMessage = '✅ Connected to Autonomi Alphanet';
       
       // Step 4: Initialize graph
       await invoke('initialize_graph');
@@ -162,17 +162,17 @@
       await loadDiscoveredData();
       
     } catch (error) {
-      console.error('Mainnet connection error:', error);
+      console.error('Alphanet connection error:', error);
       
-      // Provide specific error messages for common mainnet issues
+      // Provide specific error messages for common network issues
       if (error.message && error.message.includes('NoReservation')) {
-        statusMessage = `❌ Mainnet connection failed: Network nodes unavailable. The Autonomi mainnet may be experiencing high load or connectivity issues. Please try again later.`;
+        statusMessage = `❌ Alphanet connection failed: Network nodes unavailable. The Autonomi testnet may be experiencing high load or connectivity issues. Please try again later.`;
       } else if (error.message && error.message.includes('Transport')) {
-        statusMessage = `❌ Mainnet connection failed: Network transport error. Please check your internet connection and try again.`;
+        statusMessage = `❌ Alphanet connection failed: Network transport error. Please check your internet connection and try again.`;
       } else if (error.message && error.message.includes('Dial')) {
-        statusMessage = `❌ Mainnet connection failed: Unable to connect to network nodes. The mainnet may be temporarily unavailable.`;
+        statusMessage = `❌ Alphanet connection failed: Unable to connect to network nodes. The testnet may be temporarily unavailable.`;
       } else {
-        statusMessage = `❌ Mainnet connection failed: ${error.message || 'Unknown network error'}. Please try again later.`;
+        statusMessage = `❌ Alphanet connection failed: ${error.message || 'Unknown network error'}. Please try again later.`;
       }
       
       // Reset connection state
@@ -196,7 +196,7 @@
       }
       
       // Load existing data from localStorage
-      statusMessage = 'Data loaded - click "Initialize Client" to connect to Autonomi Mainnet';
+      statusMessage = 'Data loaded - click "Initialize Client" to connect to Autonomi Alphanet (testnet)';
       const saved = localStorage.getItem('aldrId');
       
       if (saved) {
