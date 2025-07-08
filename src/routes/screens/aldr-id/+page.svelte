@@ -291,6 +291,19 @@
     }
   }
 
+  // Check initialization status for debugging
+  async function checkInitStatus() {
+    try {
+      statusMessage = 'Checking initialization status...';
+      const result = await invoke('check_initialization_status');
+      statusMessage = result;
+      console.log('Initialization status:', result);
+    } catch (error) {
+      statusMessage = `❌ Status check failed: ${JSON.stringify(error)}`;
+      console.error('Status check error:', error);
+    }
+  }
+
   // Calculate upload cost
   async function calculateCost() {
     if (!selectedDocumentType) {
@@ -1138,6 +1151,16 @@
       >
         <i class="fas fa-list"></i>
         Manage Shares
+      </button>
+
+      <!-- Debug: Check Initialization Status -->
+      <button 
+        class="dashboard-button outline"
+        on:click={checkInitStatus}
+        style="border-color: var(--warning-red); color: var(--warning-red);"
+      >
+        <i class="fas fa-bug"></i>
+        Debug Status
       </button>
 
     </div>

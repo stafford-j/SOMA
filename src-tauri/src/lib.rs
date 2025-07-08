@@ -765,46 +765,72 @@ async fn put_subject_data(
     state: State<'_, Mutex<AppState>>,
     request: PutSubjectDataRequest
 ) -> Result<String, Error> {
+    // Check that all required components are initialized first
+    {
+        let state = state.lock().unwrap();
+        if state.client.lock().unwrap().is_none() {
+            return Err(Error::Message("Client not initialized".to_string()));
+        }
+        if state.wallet.lock().unwrap().is_none() {
+            return Err(Error::Message("Wallet not initialized".to_string()));
+        }
+        if state.datastore.lock().unwrap().is_none() {
+            return Err(Error::Message("DataStore not initialized".to_string()));
+        }
+        if state.keystore.lock().unwrap().is_none() {
+            return Err(Error::Message("KeyStore not initialized".to_string()));
+        }
+        if state.graph.lock().unwrap().is_none() {
+            return Err(Error::Message("Graph not initialized".to_string()));
+        }
+    }
+
     // Extract all data we need and drop all locks before any await
     let (client, wallet, mut datastore, mut keystore, mut graph) = {
         let state = state.lock().unwrap();
 
         let client = state.client.lock().unwrap().as_ref()
-            .ok_or("Client not initialized")?
+            .unwrap()
             .clone();
 
         let wallet = state.wallet.lock().unwrap().as_ref()
-            .ok_or("Wallet not initialized")?
+            .unwrap()
             .clone();
 
         let datastore = state.datastore.lock().unwrap()
             .take()
-            .ok_or("DataStore not initialized")?;
+            .unwrap();
 
         let keystore = state.keystore.lock().unwrap()
             .take()
-            .ok_or("KeyStore not initialized")?;
+            .unwrap();
 
         let graph = state.graph.lock().unwrap()
             .take()
-            .ok_or("Graph not initialized")?;
+            .unwrap();
 
         (client, wallet, datastore, keystore, graph)
     }; // All MutexGuards are dropped here
 
-    // Now we can safely use async operations
-    let mut podman = PodManager::new(
-        client,
-        &wallet,
-        &mut datastore,
-        &mut keystore,
-        &mut graph
-    ).await?;
+    // Use a closure to ensure components are always put back, even on error
+    let result = async {
+        // Now we can safely use async operations
+        let mut podman = PodManager::new(
+            client,
+            &wallet,
+            &mut datastore,
+            &mut keystore,
+            &mut graph
+        ).await?;
 
-    // Use the PodManager
-    podman.put_subject_data(&request.pod_address, &request.subject_address, &request.data).await?;
+        // Use the PodManager
+        podman.put_subject_data(&request.pod_address, &request.subject_address, &request.data).await?;
 
-    // Put the components back
+        info!("Put data for subject {} in pod {}", &request.subject_address, &request.pod_address);
+        Ok(format!("Successfully put data for subject {} in pod {}", &request.subject_address, &request.pod_address))
+    }.await;
+
+    // Always put the components back, regardless of success or failure
     {
         let state = state.lock().unwrap();
         *state.datastore.lock().unwrap() = Some(datastore);
@@ -812,8 +838,7 @@ async fn put_subject_data(
         *state.graph.lock().unwrap() = Some(graph);
     }
 
-    info!("Put data for subject {} in pod {}", &request.subject_address, &request.pod_address);
-    Ok(format!("Successfully put data for subject {} in pod {}", &request.subject_address, &request.pod_address))
+    result
 }
 
 #[tauri::command]
@@ -1072,6 +1097,31 @@ async fn download_data(
               request.address, request.destination_path))
 }
 
+#[tauri::command]
+fn check_initialization_status(
+    state: State<'_, Mutex<AppState>>,
+) -> Result<String, Error> {
+    let state = state.lock().unwrap();
+    
+    let client_init = state.client.lock().unwrap().is_some();
+    let wallet_init = state.wallet.lock().unwrap().is_some();
+    let datastore_init = state.datastore.lock().unwrap().is_some();
+    let keystore_init = state.keystore.lock().unwrap().is_some();
+    let graph_init = state.graph.lock().unwrap().is_some();
+    
+    let status = format!(
+        "Initialization Status:\n- Client: {}\n- Wallet: {}\n- DataStore: {}\n- KeyStore: {}\n- Graph: {}",
+        if client_init { "✅ Initialized" } else { "❌ Not initialized" },
+        if wallet_init { "✅ Initialized" } else { "❌ Not initialized" },
+        if datastore_init { "✅ Initialized" } else { "❌ Not initialized" },
+        if keystore_init { "✅ Initialized" } else { "❌ Not initialized" },
+        if graph_init { "✅ Initialized" } else { "❌ Not initialized" }
+    );
+    
+    info!("{}", status);
+    Ok(status)
+}
+
 ////////////////////////////////////////////////////////////////////
 // Tauri App
 ////////////////////////////////////////////////////////////////////
@@ -1115,7 +1165,8 @@ pub fn run() {
             upload_cost,
             upload_data,
             discover_user_data,
-            download_data
+            download_data,
+            check_initialization_status
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
