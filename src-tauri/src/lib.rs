@@ -1197,16 +1197,27 @@ async fn init_client(environment: &str) -> Result<Client, Error> {
         },
         "mainnet" | "main" => {
             info!("Connecting to Autonomi Mainnet");
-            // Try mainnet connection with better error handling
+            // Try mainnet connection with detailed error logging
             match Client::init().await {
                 Ok(client) => {
-                    info!("Successfully connected to Autonomi Mainnet");
+                    info!("✅ Successfully connected to Autonomi Mainnet");
                     Ok(client)
                 },
                 Err(e) => {
-                    error!("Failed to connect to Autonomi Mainnet: {}", e);
-                    info!("Mainnet connection failed, you might want to try Alphanet for testing");
-                    Err(Error::Message(format!("Mainnet connection failed: {}. Consider using 'testnet' for development.", e)))
+                    error!("❌ Mainnet connection failed: {}", e);
+                    error!("Error type: {:?}", e);
+                    
+                    // Check specific error types to provide better guidance
+                    let error_str = format!("{:?}", e);
+                    if error_str.contains("Transport") {
+                        error!("Transport error detected - likely network connectivity issue");
+                    } else if error_str.contains("Timeout") {
+                        error!("Timeout error detected - network may be slow or unreachable");
+                    } else if error_str.contains("HandshakeTimedOut") {
+                        error!("Handshake timeout - P2P connection issues");
+                    }
+                    
+                    Err(Error::Message(format!("Mainnet connection failed: {}. You may want to try Alphanet (testnet) for testing instead.", e)))
                 }
             }
         },

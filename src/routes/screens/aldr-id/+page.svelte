@@ -121,7 +121,7 @@
   }
 
   // Initialize Autonomi client
-  async function initializeClient() {
+  async function initializeClient(network = 'testnet') {
     if (clientInitialized) return;
     
     initializing = true;
@@ -138,11 +138,12 @@
       // Step 3: Initialize Autonomi client with environment wallet
       const walletKey = '80cc290545387b17b49a6aace0d4a9a39e7a0443c645a29942c93e8e1c456f0f'; // Your wallet from .env
       
-      // Connect to Autonomi Alphanet (testnet) for testing - switching from mainnet due to connectivity issues
-      statusMessage = 'Connecting to Autonomi Alphanet (testnet)...';
-      await invoke('initialize_autonomi_client', { walletKey, network: 'testnet' });
-      connectedNetwork = 'Alphanet (testnet)';
-      statusMessage = '✅ Connected to Autonomi Alphanet';
+      // Connect to selected network
+      const networkName = network === 'mainnet' ? 'Mainnet' : 'Alphanet (testnet)';
+      statusMessage = `Connecting to Autonomi ${networkName}...`;
+      await invoke('initialize_autonomi_client', { walletKey, network });
+      connectedNetwork = networkName;
+      statusMessage = `✅ Connected to Autonomi ${networkName}`;
       
       // Step 4: Initialize graph
       await invoke('initialize_graph');
@@ -162,17 +163,19 @@
       await loadDiscoveredData();
       
     } catch (error) {
-      console.error('Alphanet connection error:', error);
+      console.error(`${network} connection error:`, error);
+      
+      const networkName = network === 'mainnet' ? 'Mainnet' : 'Alphanet';
       
       // Provide specific error messages for common network issues
       if (error.message && error.message.includes('NoReservation')) {
-        statusMessage = `❌ Alphanet connection failed: Network nodes unavailable. The Autonomi testnet may be experiencing high load or connectivity issues. Please try again later.`;
+        statusMessage = `❌ ${networkName} connection failed: Network nodes unavailable. The Autonomi ${network} may be experiencing high load or connectivity issues. Please try again later.`;
       } else if (error.message && error.message.includes('Transport')) {
-        statusMessage = `❌ Alphanet connection failed: Network transport error. Please check your internet connection and try again.`;
+        statusMessage = `❌ ${networkName} connection failed: Network transport error. Please check your internet connection and try again.`;
       } else if (error.message && error.message.includes('Dial')) {
-        statusMessage = `❌ Alphanet connection failed: Unable to connect to network nodes. The testnet may be temporarily unavailable.`;
+        statusMessage = `❌ ${networkName} connection failed: Unable to connect to network nodes. The ${network} may be temporarily unavailable.`;
       } else {
-        statusMessage = `❌ Alphanet connection failed: ${error.message || 'Unknown network error'}. Please try again later.`;
+        statusMessage = `❌ ${networkName} connection failed: ${error.message || 'Unknown network error'}. Please try again later.`;
       }
       
       // Reset connection state
@@ -195,8 +198,15 @@
         return;
       }
       
+      // Parse setup data to get network choice
+      const setup = JSON.parse(setupData);
+      const selectedNetwork = setup.network || 'testnet';
+      
+      // Auto-initialize client since setup is already complete
+      statusMessage = `Connecting to Autonomi ${selectedNetwork === 'mainnet' ? 'Mainnet' : 'Alphanet (testnet)'}...`;
+      await initializeClient(selectedNetwork);
+      
       // Load existing data from localStorage
-      statusMessage = 'Data loaded - click "Initialize Client" to connect to Autonomi Alphanet (testnet)';
       const saved = localStorage.getItem('aldrId');
       
       if (saved) {
@@ -296,11 +306,40 @@
     try {
       statusMessage = 'Checking initialization status...';
       const result = await invoke('check_initialization_status');
-      statusMessage = result;
-      console.log('Initialization status:', result);
+      
+      // Also check localStorage
+      const setupData = localStorage.getItem('aldrIdSetup');
+      const savedAldrId = localStorage.getItem('aldrId');
+      
+      const debugInfo = `${result}\n\nLocalStorage Debug:\n- Setup Data: ${setupData ? 'EXISTS' : 'MISSING'}\n- Profile Data: ${savedAldrId ? 'EXISTS' : 'MISSING'}\n- Client Initialized: ${clientInitialized}\n- Connected Network: ${connectedNetwork}`;
+      
+      statusMessage = debugInfo;
+      console.log('Full debug info:', debugInfo);
+      console.log('Setup data:', setupData);
+      console.log('Profile data:', savedAldrId);
     } catch (error) {
       statusMessage = `❌ Status check failed: ${JSON.stringify(error)}`;
       console.error('Status check error:', error);
+    }
+  }
+
+  // Force save current state (for debugging)
+  function forceSaveState() {
+    try {
+      // Save current aldrId data
+      localStorage.setItem('aldrId', JSON.stringify(aldrId));
+      
+      // Create/update setup data if missing
+      const setupData = {
+        completed: true,
+        network: connectedNetwork.includes('Mainnet') ? 'mainnet' : 'testnet',
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem('aldrIdSetup', JSON.stringify(setupData));
+      
+      statusMessage = '✅ State forcibly saved to localStorage';
+    } catch (error) {
+      statusMessage = `❌ Failed to save state: ${error.message}`;
     }
   }
 
@@ -1089,20 +1128,20 @@
         </button>
       {/if}
 
-      <!-- Initialize Client Button -->
-      {#if !clientInitialized}
+      <!-- Auto-connect status info (no manual button needed) -->
+      {#if !clientInitialized && initializing}
+        <div class="dashboard-button purple disabled-state" style="cursor: default;">
+          <i class="fas fa-spinner fa-spin"></i>
+          Auto-connecting to network...
+        </div>
+      {:else if !clientInitialized}
         <button 
-          class="dashboard-button purple"
-          on:click={initializeClient}
-          disabled={initializing}
+          class="dashboard-button outline"
+          on:click={() => initializeClient()}
+          style="border-color: var(--warning-red); color: var(--warning-red);"
         >
-          {#if initializing}
-            <i class="fas fa-spinner fa-spin"></i>
-            Initializing...
-          {:else}
-            <i class="fas fa-power-off"></i>
-            Initialize Client
-          {/if}
+          <i class="fas fa-wifi"></i>
+          Retry Connection
         </button>
       {/if}
 
@@ -1161,6 +1200,16 @@
       >
         <i class="fas fa-bug"></i>
         Debug Status
+      </button>
+
+      <!-- Debug: Force Save State -->
+      <button 
+        class="dashboard-button outline"
+        on:click={forceSaveState}
+        style="border-color: var(--primary-purple); color: var(--primary-purple);"
+      >
+        <i class="fas fa-save"></i>
+        Force Save
       </button>
 
     </div>

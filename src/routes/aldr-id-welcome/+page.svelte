@@ -6,7 +6,7 @@
   let walletInput = '';
   let confirmWalletInput = '';
   let walletInputType = 'address'; // 'address' or 'privatekey'
-  let networkChoice = 'testnet'; // Temporarily use Alphanet to test wallet functionality, then switch to mainnet
+  let networkChoice = 'mainnet'; // Default to mainnet for production use
   let isInitializing = false;
   let statusMessage = '';
   let clientInitialized = false;
@@ -164,10 +164,26 @@
     statusMessage = '';
   }
 
-  // Auto-clear setup on component mount to force fresh setup
+  // Check if setup already exists before clearing
   onMount(async () => {
-    // Clear any existing setup to ensure fresh wallet configuration
-    localStorage.removeItem('aldrIdSetup');
+    // Only clear setup if user is specifically trying to reset setup
+    // Don't automatically clear completed setups
+    const existingSetup = localStorage.getItem('aldrIdSetup');
+    
+    // If setup exists and is completed, redirect to main app instead of clearing
+    if (existingSetup) {
+      try {
+        const setup = JSON.parse(existingSetup);
+        if (setup.completed) {
+          console.log('Setup already completed, redirecting to main app');
+          window.location.href = '/screens/aldr-id';
+          return;
+        }
+      } catch (error) {
+        console.warn('Invalid setup data found, clearing:', error);
+        localStorage.removeItem('aldrIdSetup');
+      }
+    }
     
     // More aggressive Tauri readiness check
     let attempts = 0;
