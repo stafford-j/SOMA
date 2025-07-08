@@ -151,16 +151,28 @@
       // Step 5: Initialize pod manager
       await invoke('initialize_pod_manager');
       
+      // Mark as initialized BEFORE discovery (so it doesn't block functionality)
       clientInitialized = true;
       statusMessage = '✅ Autonomi client initialized successfully!';
       
-      // Step 6: Discover existing user data from network
-      statusMessage = 'Discovering existing data from Autonomi network...';
-      const discoveryResult = await invoke('discover_user_data');
-      statusMessage = `✅ Client initialized. ${discoveryResult}`;
+      // Step 6: Run discovery in background (don't await - let it complete async)
+      statusMessage = '✅ Client ready! You can now upload documents and save your profile.';
       
-      // Step 7: Try to load discovered data
-      await loadDiscoveredData();
+      // Run discovery in background without blocking the UI
+      (async () => {
+        try {
+          statusMessage = 'Running background data discovery...';
+          const discoveryResult = await invoke('discover_user_data');
+          console.log('Background discovery completed:', discoveryResult);
+          
+          // Try to load discovered data
+          await loadDiscoveredData();
+          statusMessage = '✅ Background discovery completed. Data loaded if available.';
+        } catch (discoveryError) {
+          console.warn('Background discovery failed:', discoveryError);
+          statusMessage = '✅ Client ready. Background discovery failed (app fully functional).';
+        }
+      })();
       
     } catch (error) {
       console.error(`${network} connection error:`, error);
@@ -340,6 +352,18 @@
       statusMessage = '✅ State forcibly saved to localStorage';
     } catch (error) {
       statusMessage = `❌ Failed to save state: ${error.message}`;
+    }
+  }
+
+  // Reset setup and go back to welcome screen
+  function resetSetup() {
+    if (confirm('This will clear all setup data and return to the welcome screen. Continue?')) {
+      localStorage.removeItem('aldrIdSetup');
+      localStorage.removeItem('aldrId');
+      statusMessage = '🔄 Setup reset - redirecting to welcome screen...';
+      setTimeout(() => {
+        window.location.href = '/aldr-id-welcome';
+      }, 1000);
     }
   }
 
@@ -1210,6 +1234,16 @@
       >
         <i class="fas fa-save"></i>
         Force Save
+      </button>
+
+      <!-- Reset Setup -->
+      <button 
+        class="dashboard-button outline"
+        on:click={resetSetup}
+        style="border-color: var(--warning-red); color: var(--warning-red);"
+      >
+        <i class="fas fa-redo"></i>
+        Reset Setup
       </button>
 
     </div>

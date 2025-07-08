@@ -1044,9 +1044,9 @@ async fn discover_user_data(
         &mut graph
     ).await?;
 
-    // Refresh pod references to discover existing data
+    // Refresh pod references to discover existing data (reduced depth for speed)
     info!("Discovering existing user data from Autonomi network...");
-    let discovery_result = podman.refresh_ref(3).await; // Depth 3 should be sufficient
+    let discovery_result = podman.refresh_ref(1).await; // Reduced to depth 1 for faster discovery
 
     // Put the components back
     {
