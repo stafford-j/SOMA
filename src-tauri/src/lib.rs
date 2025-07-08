@@ -174,6 +174,29 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
+async fn select_file(app_handle: tauri::AppHandle) -> Result<String, String> {
+    use tauri_plugin_dialog::DialogExt;
+    use tokio::sync::oneshot;
+    
+    let (tx, rx) = oneshot::channel();
+    
+    app_handle.dialog()
+        .file()
+        .add_filter("Document Files", &["pdf", "jpg", "jpeg", "png", "doc", "docx"])
+        .set_title("Select Document File")
+        .pick_file(move |file_path| {
+            let _ = tx.send(file_path);
+        });
+    
+    // Wait for result
+    match rx.await {
+        Ok(Some(path)) => Ok(path.to_string()),
+        Ok(None) => Err("No file selected".to_string()),
+        Err(_) => Err("File selection dialog failed".to_string()),
+    }
+}
+
+#[tauri::command]
 fn get_new_seed_phrase() -> Result<String, String> {
     //Ok(generate_seed_phrase())
     let seed_phrase = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about".to_string();
@@ -930,9 +953,80 @@ async fn upload_data(
     let data = Bytes::from(data);
 
     let payment = PaymentOption::Wallet(wallet);
+    // Extract original filename from path
+    let filename = std::path::Path::new(&request.file_path)
+        .file_name()
+        .and_then(|name| name.to_str())
+        .unwrap_or("unknown_file");
+
     let (cost, data_addr) = client.data_put_public(data, payment).await?;
 
-    Ok(format!("File {} uploaded to address {} for {}", request.file_path, data_addr, cost.to_string()))
+    Ok(format!("File {} uploaded to address {} for {} with filename {}", 
+               request.file_path, data_addr, cost.to_string(), filename))
+}
+
+#[tauri::command]
+async fn discover_user_data(
+    state: State<'_, Mutex<AppState>>,
+) -> Result<String, Error> {
+    // Extract all data we need and drop all locks before any await
+    let (client, wallet, mut datastore, mut keystore, mut graph) = {
+        let state = state.lock().unwrap();
+
+        let client = state.client.lock().unwrap().as_ref()
+            .ok_or("Client not initialized")?
+            .clone();
+
+        let wallet = state.wallet.lock().unwrap().as_ref()
+            .ok_or("Wallet not initialized")?
+            .clone();
+
+        let datastore = state.datastore.lock().unwrap()
+            .take()
+            .ok_or("DataStore not initialized")?;
+
+        let keystore = state.keystore.lock().unwrap()
+            .take()
+            .ok_or("KeyStore not initialized")?;
+
+        let graph = state.graph.lock().unwrap()
+            .take()
+            .ok_or("Graph not initialized")?;
+
+        (client, wallet, datastore, keystore, graph)
+    }; // All MutexGuards are dropped here
+
+    // Try to discover existing data using pod manager
+    let mut podman = PodManager::new(
+        client,
+        &wallet,
+        &mut datastore,
+        &mut keystore,
+        &mut graph
+    ).await?;
+
+    // Refresh pod references to discover existing data
+    info!("Discovering existing user data from Autonomi network...");
+    let discovery_result = podman.refresh_ref(3).await; // Depth 3 should be sufficient
+
+    // Put the components back
+    {
+        let state = state.lock().unwrap();
+        *state.datastore.lock().unwrap() = Some(datastore);
+        *state.keystore.lock().unwrap() = Some(keystore);
+        *state.graph.lock().unwrap() = Some(graph);
+    }
+
+    match discovery_result {
+        Ok(_) => {
+            info!("Successfully discovered pod-based user data from network");
+            Ok("✅ Pod data discovery completed - checking for structured data".to_string())
+        },
+        Err(e) => {
+            info!("No pod-based data found or discovery failed: {}", e);
+            Ok("ℹ️ No pod data found - may have legacy file-based data from previous uploads".to_string())
+        }
+    }
 }
 
 #[tauri::command]
@@ -981,9 +1075,11 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_dialog::init())
         .manage(Mutex::new(app_state))
         .invoke_handler(tauri::generate_handler![
             greet,
+            select_file,
             get_new_seed_phrase,
             initialize_pod_manager,
             add_pod,
@@ -1004,6 +1100,7 @@ pub fn run() {
             initialize_graph,
             upload_cost,
             upload_data,
+            discover_user_data,
             download_data
         ])
         .run(tauri::generate_context!())
@@ -1012,9 +1109,35 @@ pub fn run() {
 
 // Helper functions that aren't tauri commands
 async fn init_client(environment: &str) -> Result<Client, Error> {
+    info!("Initializing Autonomi client for environment: {}", environment);
+    
     match environment {
-        "local" => Ok(Client::init_local().await?),
-        "alpha" => Ok(Client::init_alpha().await?),
-        _ => Ok(Client::init().await?), // main net
+        "local" => {
+            info!("Connecting to local Autonomi network");
+            Ok(Client::init_local().await?)
+        },
+        "alpha" | "testnet" => {
+            info!("Connecting to Autonomi Alphanet (testnet)");
+            Ok(Client::init_alpha().await?)
+        },
+        "mainnet" | "main" => {
+            info!("Connecting to Autonomi Mainnet");
+            // Try mainnet connection with better error handling
+            match Client::init().await {
+                Ok(client) => {
+                    info!("Successfully connected to Autonomi Mainnet");
+                    Ok(client)
+                },
+                Err(e) => {
+                    error!("Failed to connect to Autonomi Mainnet: {}", e);
+                    info!("Mainnet connection failed, you might want to try Alphanet for testing");
+                    Err(Error::Message(format!("Mainnet connection failed: {}. Consider using 'testnet' for development.", e)))
+                }
+            }
+        },
+        _ => {
+            error!("Unknown network environment: {}", environment);
+            Err(Error::Message(format!("Unknown network: {}. Use 'local', 'testnet', or 'mainnet'", environment)))
+        }
     }
 }

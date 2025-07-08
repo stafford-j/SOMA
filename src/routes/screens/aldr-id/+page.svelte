@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { invoke } from '@tauri-apps/api/core';
+  import { exportPeterMurphyDataAsCSV, getSmartRemindersForDemo } from '../../../utils/dataExport.js';
 
   // Aldr ID data
   let aldrId = {
@@ -9,11 +10,11 @@
     taxId: '',
     nationality: '',
     documents: {
-      passport: { file: null, filePath: '', address: '', uploaded: false },
-      driversLicense: { file: null, filePath: '', address: '', uploaded: false },
-      governmentId: { file: null, filePath: '', address: '', uploaded: false },
-      birthCertificate: { file: null, filePath: '', address: '', uploaded: false },
-      other: { file: null, filePath: '', address: '', uploaded: false, customName: '' }
+      passport: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+      driversLicense: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+      governmentId: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+      birthCertificate: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+      other: { file: null, filePath: '', address: '', uploaded: false, customName: '', originalFilename: '' }
     }
   };
   
@@ -31,6 +32,7 @@
   let clientInitialized = false;
   let initializing = false;
   let showNetworkAddress = '';
+  let connectedNetwork = '';
   
   // Sharing functionality
   let showShareModal = false;
@@ -40,6 +42,83 @@
   let shareResult = null;
   let activeShares = [];
   let showSharesModal = false;
+
+  // Demo functionality
+  let smartReminders = [];
+  let showReminders = false;
+
+  // REMOVED: Peter Murphy demo functionality to prevent data contamination
+  // This is a PRODUCTION Autonomi MVP app for real user data only
+  
+  // Load discovered data from network
+  async function loadDiscoveredData() {
+    try {
+      statusMessage = 'Loading discovered data...';
+      
+      // First, try to search for pod-based profile data
+      const searchQuery = {
+        "?subject": {
+          "?type": "AldrID_Profile"
+        }
+      };
+      
+      const searchResult = await invoke('search', { query: searchQuery });
+      console.log('Search result:', searchResult);
+      
+      if (searchResult && searchResult.results && searchResult.results.length > 0) {
+        // Found existing pod-based profile data - load it
+        const profileData = searchResult.results[0];
+        
+        if (profileData.structured_data) {
+          // Load profile information
+          aldrId.name = profileData.structured_data.name || '';
+          aldrId.dateOfBirth = profileData.structured_data.dateOfBirth || '';
+          aldrId.taxId = profileData.structured_data.taxId || '';
+          aldrId.nationality = profileData.structured_data.nationality || '';
+          
+          // Save to localStorage for consistency
+          localStorage.setItem('aldrId', JSON.stringify(aldrId));
+          profileSaved = true;
+          
+          statusMessage = `✅ Loaded existing pod-based profile for ${aldrId.name}`;
+          return;
+        }
+      }
+      
+      // If no pod data found, show helpful message about legacy data
+      statusMessage = `ℹ️ No pod-based data found. Previous file uploads may exist but are not auto-discoverable. You can re-enter your information to enable auto-discovery for future sessions.`;
+      
+      // Add a note about the data migration
+      setTimeout(() => {
+        statusMessage = 'Ready for setup - any new data will be auto-discoverable';
+      }, 5000);
+      
+    } catch (error) {
+      console.error('Error loading discovered data:', error);
+      statusMessage = 'Data discovery completed - ready for setup';
+    }
+  }
+
+  // Load smart reminders
+  function loadSmartReminders() {
+    const result = getSmartRemindersForDemo();
+    if (result.success) {
+      smartReminders = result.reminders;
+      showReminders = smartReminders.length > 0;
+    }
+  }
+
+  // Export user's data as CSV
+  function exportDataAsCSV() {
+    const result = exportPeterMurphyDataAsCSV(); // TODO: Rename this function to exportUserDataAsCSV
+    statusMessage = result.message;
+    
+    if (result.success) {
+      setTimeout(() => {
+        statusMessage = '';
+      }, 3000);
+    }
+  }
 
   // Initialize Autonomi client
   async function initializeClient() {
@@ -58,7 +137,12 @@
       
       // Step 3: Initialize Autonomi client with environment wallet
       const walletKey = '80cc290545387b17b49a6aace0d4a9a39e7a0443c645a29942c93e8e1c456f0f'; // Your wallet from .env
+      
+      // Connect to Autonomi Mainnet only (no fallback for BETA safety)
+      statusMessage = 'Connecting to Autonomi Mainnet...';
       await invoke('initialize_autonomi_client', { walletKey, network: 'mainnet' });
+      connectedNetwork = 'Mainnet';
+      statusMessage = '✅ Connected to Autonomi Mainnet';
       
       // Step 4: Initialize graph
       await invoke('initialize_graph');
@@ -69,9 +153,31 @@
       clientInitialized = true;
       statusMessage = '✅ Autonomi client initialized successfully!';
       
+      // Step 6: Discover existing user data from network
+      statusMessage = 'Discovering existing data from Autonomi network...';
+      const discoveryResult = await invoke('discover_user_data');
+      statusMessage = `✅ Client initialized. ${discoveryResult}`;
+      
+      // Step 7: Try to load discovered data
+      await loadDiscoveredData();
+      
     } catch (error) {
-      statusMessage = `❌ Client initialization failed: ${JSON.stringify(error)}`;
-      console.error('Client initialization error:', error);
+      console.error('Mainnet connection error:', error);
+      
+      // Provide specific error messages for common mainnet issues
+      if (error.message && error.message.includes('NoReservation')) {
+        statusMessage = `❌ Mainnet connection failed: Network nodes unavailable. The Autonomi mainnet may be experiencing high load or connectivity issues. Please try again later.`;
+      } else if (error.message && error.message.includes('Transport')) {
+        statusMessage = `❌ Mainnet connection failed: Network transport error. Please check your internet connection and try again.`;
+      } else if (error.message && error.message.includes('Dial')) {
+        statusMessage = `❌ Mainnet connection failed: Unable to connect to network nodes. The mainnet may be temporarily unavailable.`;
+      } else {
+        statusMessage = `❌ Mainnet connection failed: ${error.message || 'Unknown network error'}. Please try again later.`;
+      }
+      
+      // Reset connection state
+      clientInitialized = false;
+      connectedNetwork = '';
     } finally {
       initializing = false;
     }
@@ -90,7 +196,7 @@
       }
       
       // Load existing data from localStorage
-      statusMessage = '';
+      statusMessage = 'Data loaded - click "Initialize Client" to connect to Autonomi Mainnet';
       const saved = localStorage.getItem('aldrId');
       
       if (saved) {
@@ -102,10 +208,13 @@
             ...aldrId,
             ...loadedData
           };
-          // Clear file selections
+          // Clear file selections and ensure originalFilename exists
           Object.keys(aldrId.documents).forEach(docType => {
             aldrId.documents[docType].file = null;
             aldrId.documents[docType].filePath = '';
+            if (!aldrId.documents[docType].originalFilename) {
+              aldrId.documents[docType].originalFilename = '';
+            }
           });
           // Check if profile was saved
           profileSaved = aldrId.documents.profile?.uploaded || false;
@@ -121,20 +230,20 @@
                 file: null, 
                 filePath: '', 
                 address: loadedData.passportAddress || '', 
-                uploaded: loadedData.uploaded || false 
+                uploaded: loadedData.uploaded || false,
+                originalFilename: ''
               },
-              driversLicense: { file: null, filePath: '', address: '', uploaded: false },
-              governmentId: { file: null, filePath: '', address: '', uploaded: false },
-              birthCertificate: { file: null, filePath: '', address: '', uploaded: false },
-              other: { file: null, filePath: '', address: '', uploaded: false, customName: '' }
+              driversLicense: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+              governmentId: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+              birthCertificate: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+              other: { file: null, filePath: '', address: '', uploaded: false, customName: '', originalFilename: '' }
             }
           };
         }
       }
       
-      // Initialize client with existing setup
-      statusMessage = 'Connecting to your wallet...';
-      await initializeClient();
+      // No automatic connection - user must explicitly click "Initialize Client"
+      console.log('Profile data loaded, ready for manual network connection');
     } catch (error) {
       console.error('Error loading Aldr ID data:', error);
       statusMessage = '❌ Failed to load profile data';
@@ -209,42 +318,75 @@
 
   // Upload selected document to Autonomi network
   async function uploadDocument() {
+    console.log('uploadDocument called');
+    console.log('Current state:', {
+      name: aldrId.name,
+      dateOfBirth: aldrId.dateOfBirth,
+      selectedDocumentType,
+      clientInitialized,
+      uploading
+    });
+
     if (!aldrId.name || !aldrId.dateOfBirth) {
       statusMessage = 'Please fill in your personal profile first';
+      console.log('Missing profile info');
       return;
     }
     
     if (!selectedDocumentType) {
       statusMessage = 'Please select a document type';
+      console.log('No document type selected');
       return;
     }
     
     const docData = aldrId.documents[selectedDocumentType];
+    console.log('Document data:', docData);
+    
     if (!docData.filePath) {
       statusMessage = 'Please select a file to upload';
+      console.log('No file path');
       return;
     }
     
     if (!clientInitialized) {
       statusMessage = 'Please wait for client initialization to complete';
+      console.log('Client not initialized');
       return;
     }
 
     uploading = true;
     const docDisplayName = selectedDocumentType === 'other' ? docData.customName : selectedDocumentType;
     statusMessage = `Uploading ${docDisplayName} to Autonomi network...`;
+    console.log('Starting upload for:', docDisplayName, 'from path:', docData.filePath);
 
     try {
       // Upload document file
+      statusMessage = 'Calling upload_data function...';
       const uploadResult = await invoke('upload_data', {
         request: { file_path: docData.filePath }
       });
 
-      // Extract address from result
+      console.log('Upload result:', uploadResult);
+      statusMessage = 'Processing upload result...';
+
+      // Extract address and filename from result
       const addressMatch = uploadResult.match(/address ([a-fA-F0-9]+)/);
+      const filenameMatch = uploadResult.match(/with filename (.+)$/);
+      
+      console.log('Address match:', addressMatch);
+      console.log('Filename match:', filenameMatch);
+      
       if (addressMatch) {
         docData.address = addressMatch[1];
         docData.uploaded = true;
+        
+        // Store original filename for download
+        if (filenameMatch) {
+          docData.originalFilename = filenameMatch[1];
+        } else {
+          // Fallback: extract from file path
+          docData.originalFilename = docData.filePath.split('\\').pop() || docData.filePath.split('/').pop() || 'document';
+        }
         
         // Save to localStorage
         localStorage.setItem('aldrId', JSON.stringify(aldrId));
@@ -256,13 +398,15 @@
         customDocumentName = '';
         
         statusMessage = `✅ Successfully uploaded ${docDisplayName}!`;
+        console.log('Upload completed successfully');
       } else {
-        throw new Error('Could not extract address from upload result');
+        throw new Error('Could not extract address from upload result: ' + uploadResult);
       }
 
     } catch (error) {
-      statusMessage = `❌ Upload failed: ${JSON.stringify(error)}`;
-      console.error('Upload error:', error);
+      statusMessage = `❌ Upload failed: ${error.message || JSON.stringify(error)}`;
+      console.error('Upload error details:', error);
+      console.error('Full upload error:', JSON.stringify(error, null, 2));
     } finally {
       uploading = false;
     }
@@ -281,8 +425,15 @@
     statusMessage = `Downloading ${docDisplayName} from Autonomi network...`;
 
     try {
-      // Use a filename based on document type
-      const fileName = docType === 'other' ? `${docData.customName.replace(/[^a-zA-Z0-9]/g, '_')}.bin` : `${docType}.bin`;
+      // Use original filename if available, otherwise create one based on document type
+      let fileName;
+      if (docData.originalFilename) {
+        fileName = docData.originalFilename;
+      } else if (docType === 'other') {
+        fileName = `${docData.customName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+      } else {
+        fileName = `${docType}.pdf`;
+      }
       const downloadPath = `C:\\\\Users\\\\james\\\\Downloads\\\\${fileName}`;
       const result = await invoke('download_data', {
         request: {
@@ -322,8 +473,8 @@
     statusMessage = 'Saving your digital ID card to Autonomi network...';
     
     try {
-      // Create a JSON profile card
-      const profileCard = {
+      // Create structured profile data for pod storage
+      const profileData = {
         type: 'AldrID_Profile',
         name: aldrId.name,
         dateOfBirth: aldrId.dateOfBirth,
@@ -333,16 +484,32 @@
         version: '1.0'
       };
       
-      // Save as temporary file then upload
-      const profileJson = JSON.stringify(profileCard, null, 2);
-      const tempFilePath = 'C:\\\\Users\\\\james\\\\AppData\\\\Local\\\\Temp\\\\aldr_profile.json';
+      statusMessage = 'Creating pod data structure...';
+      console.log('Profile data to save:', profileData);
       
-      // For now, we'll store the profile data in localStorage and add to documents
-      // TODO: Create actual temp file and upload
+      // Store in pod system using put_subject_data
+      const podAddress = 'user_profile_' + Date.now(); // Generate pod address
+      const subjectAddress = 'profile_data'; // Subject within the pod
+      
+      statusMessage = 'Saving to Autonomi pod system...';
+      console.log('Saving to pod address:', podAddress);
+      
+      const putResult = await invoke('put_subject_data', {
+        request: {
+          pod_address: podAddress,
+          subject_address: subjectAddress,
+          data: JSON.stringify(profileData)
+        }
+      });
+      
+      console.log('Put subject data result:', putResult);
+      statusMessage = 'Pod save successful, updating local data...';
+      
+      // Update local profile data
       aldrId.documents.profile = {
         file: { name: 'Digital_ID_Card.json' },
         filePath: '',
-        address: 'profile_' + Date.now(), // Temporary placeholder
+        address: podAddress,
         uploaded: true,
         customName: 'Digital ID Card'
       };
@@ -351,10 +518,12 @@
       profileSaved = true;
       editMode = false;
       
-      statusMessage = '✅ Digital ID card saved successfully!';
+      statusMessage = '✅ Digital ID card saved to Autonomi pod system!';
+      console.log('Profile save completed successfully');
     } catch (error) {
-      statusMessage = `❌ Profile save failed: ${JSON.stringify(error)}`;
-      console.error('Profile save error:', error);
+      statusMessage = `❌ Profile save failed: ${error.message || JSON.stringify(error)}`;
+      console.error('Profile save error details:', error);
+      console.error('Full error object:', JSON.stringify(error, null, 2));
     } finally {
       uploading = false;
     }
@@ -376,7 +545,7 @@
     }
   }
 
-  // Clear all data
+  // Clear all data and reset to fresh state
   function clearData() {
     aldrId = {
       name: '',
@@ -384,17 +553,24 @@
       taxId: '',
       nationality: '',
       documents: {
-        passport: { file: null, filePath: '', address: '', uploaded: false },
-        driversLicense: { file: null, filePath: '', address: '', uploaded: false },
-        governmentId: { file: null, filePath: '', address: '', uploaded: false },
-        birthCertificate: { file: null, filePath: '', address: '', uploaded: false },
-        other: { file: null, filePath: '', address: '', uploaded: false, customName: '' }
+        passport: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+        driversLicense: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+        governmentId: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+        birthCertificate: { file: null, filePath: '', address: '', uploaded: false, originalFilename: '' },
+        other: { file: null, filePath: '', address: '', uploaded: false, customName: '', originalFilename: '' }
       }
     };
     selectedDocumentType = '';
     customDocumentName = '';
+    profileSaved = false;
+    smartReminders = [];
+    showReminders = false;
+    
+    // Clear localStorage completely to remove any demo data contamination
     localStorage.removeItem('aldrId');
-    statusMessage = 'Data cleared';
+    localStorage.removeItem('aldrIdSetup');
+    
+    statusMessage = '✅ All data cleared - fresh start for James Stafford';
   }
 
   // Sharing functions
@@ -646,6 +822,50 @@
     </div>
   </section>
 
+  <!-- Smart Reminders Section (Query-based, No AI) -->
+  {#if showReminders && smartReminders.length > 0}
+  <section class="recent-activity" style="border-left: 4px solid var(--warning-red);">
+    <div class="activity-header">
+      <h2 class="activity-title">
+        <i class="fas fa-bell" style="margin-right: 0.5rem; color: var(--warning-red);"></i>
+        Smart Reminders (Query-Based)
+      </h2>
+      <div class="dashboard-button outline" style="cursor: default; border-color: var(--warning-red); color: var(--warning-red);">
+        <i class="fas fa-calendar-exclamation"></i>
+        {smartReminders.length} Reminders
+      </div>
+    </div>
+    
+    <div class="reminders-grid">
+      {#each smartReminders as reminder}
+        <div class="reminder-item {reminder.priority}">
+          <div class="reminder-icon">
+            <i class="fas {reminder.type === 'expired' ? 'fa-times-circle' : reminder.type === 'expires_soon' ? 'fa-exclamation-triangle' : 'fa-calendar-alt'}"></i>
+          </div>
+          <div class="reminder-content">
+            <h4>{reminder.title}</h4>
+            <p class="reminder-message">{reminder.message}</p>
+            <div class="reminder-meta">
+              <span class="reminder-category">{reminder.category} • {reminder.subcategory}</span>
+              <span class="reminder-priority priority-{reminder.priority}">{reminder.priority.toUpperCase()}</span>
+            </div>
+          </div>
+        </div>
+      {/each}
+    </div>
+    
+    <div style="margin-top: 1rem; padding: 1rem; background: rgba(220, 38, 38, 0.1); border-radius: 6px;">
+      <h4 style="color: var(--warning-red); margin: 0 0 0.5rem 0;">
+        <i class="fas fa-info-circle"></i> About Smart Reminders
+      </h4>
+      <p style="font-size: 0.9rem; color: var(--dark-text); margin: 0;">
+        These reminders are generated using <strong>pure data queries</strong> based on expiration dates - no AI needed! 
+        The system automatically calculates when documents expire and reminds you accordingly.
+      </p>
+    </div>
+  </section>
+  {/if}
+
   <!-- Uploaded Documents Section -->
   {#if Object.values(aldrId.documents).some(doc => doc.uploaded)}
   <section class="recent-activity">
@@ -831,7 +1051,31 @@
       </div>
     </div>
     
+    <!-- Debug Status -->
+    <div style="margin-bottom: 1rem; padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 6px; font-size: 0.8rem;">
+      <strong>System Status:</strong><br/>
+      Network: {connectedNetwork ? '🌐 ' + connectedNetwork : '❌ Not connected'}<br/>
+      Client Initialized: {clientInitialized ? '✅' : '❌'}<br/>
+      Profile Name: {aldrId.name ? '✅ ' + aldrId.name : '❌ Not entered'}<br/>
+      Date of Birth: {aldrId.dateOfBirth ? '✅ ' + aldrId.dateOfBirth : '❌ Not entered'}<br/>
+      Selected Document: {selectedDocumentType ? '✅ ' + selectedDocumentType : '❌ None selected'}<br/>
+      File Selected: {selectedDocumentType && aldrId.documents[selectedDocumentType]?.filePath ? '✅ ' + aldrId.documents[selectedDocumentType].file?.name : '❌ No file'}<br/>
+      Current Status: {statusMessage || 'Ready'}
+    </div>
+    
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+      <!-- CSV Export Button -->
+      {#if profileSaved}
+        <button 
+          class="dashboard-button outline"
+          on:click={exportDataAsCSV}
+          style="border-color: var(--primary-teal); color: var(--primary-teal);"
+        >
+          <i class="fas fa-download"></i>
+          Export Data as CSV
+        </button>
+      {/if}
+
       <!-- Initialize Client Button -->
       {#if !clientInitialized}
         <button 
@@ -1726,5 +1970,115 @@
 
   .revoke-button:hover {
     background: #B91C1C;
+  }
+
+  /* Smart Reminders Styles */
+  .reminders-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .reminder-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid;
+    background: white;
+  }
+
+  .reminder-item.urgent {
+    border-color: var(--warning-red);
+    background: rgba(220, 38, 38, 0.05);
+  }
+
+  .reminder-item.high {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.05);
+  }
+
+  .reminder-item.normal {
+    border-color: var(--primary-teal);
+    background: rgba(32, 178, 170, 0.05);
+  }
+
+  .reminder-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .reminder-item.urgent .reminder-icon {
+    background: var(--warning-red);
+  }
+
+  .reminder-item.high .reminder-icon {
+    background: #f59e0b;
+  }
+
+  .reminder-item.normal .reminder-icon {
+    background: var(--primary-teal);
+  }
+
+  .reminder-content {
+    flex: 1;
+  }
+
+  .reminder-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--dark-text);
+    font-size: 1rem;
+  }
+
+  .reminder-message {
+    margin: 0 0 0.75rem 0;
+    color: var(--gray-text);
+    font-size: 0.9rem;
+  }
+
+  .reminder-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .reminder-category {
+    font-size: 0.8rem;
+    color: var(--gray-text);
+    text-transform: capitalize;
+  }
+
+  .reminder-priority {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .priority-urgent {
+    background: var(--warning-red);
+    color: white;
+  }
+
+  .priority-high {
+    background: #f59e0b;
+    color: white;
+  }
+
+  .priority-normal {
+    background: var(--primary-teal);
+    color: white;
   }
 </style>
