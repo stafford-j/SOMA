@@ -89,6 +89,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "aldr-autonomi-mvp"
+version = "0.1.0"
+dependencies = [
+ "autonomi",
+ "chrono",
+ "colonylib",
+ "dotenv",
+ "multiaddr",
+ "ruint",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-dialog",
+ "tauri-plugin-notification",
+ "tauri-plugin-opener",
+ "thiserror 2.0.12",
+ "tokio",
+ "tokio-test",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "alloc-no-stdlib"
 version = "2.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2143,30 +2167,6 @@ dependencies = [
  "rand 0.8.5",
  "sha2 0.9.9",
  "zeroize",
-]
-
-[[package]]
-name = "colony"
-version = "0.1.0"
-dependencies = [
- "autonomi",
- "chrono",
- "colonylib",
- "dotenv",
- "multiaddr",
- "ruint",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-dialog",
- "tauri-plugin-notification",
- "tauri-plugin-opener",
- "thiserror 2.0.12",
- "tokio",
- "tokio-test",
- "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]

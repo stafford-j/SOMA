@@ -1,10 +1,10 @@
 [package]
-name = "colony"
+name = "aldr-autonomi-mvp"
 version = "0.1.0"
-description = "A GUI frontend to the Autonomi network with a client side search engine"
-authors = ["Chuck McClish", "Maxx Rodriguez"]
+description = "Aldr Autonomi MVP - Secure identity vault on the Autonomi network, built on Colony infrastructure"
+authors = ["James Stafford", "Chuck McClish", "Maxx Rodriguez"]
 edition = "2021"
-homepage = "https://github.com/zettawatt/colony"
+homepage = "https://github.com/stafford-j/SOMA"
 license = "GPL-3.0-only"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
