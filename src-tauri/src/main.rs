@@ -14,7 +14,7 @@ async fn main() {
     let subscriber = tracing_subscriber::registry()
         .with(filter::Targets::new()
             .with_target("colonylib", Level::DEBUG) // INFO level for colonylib
-            .with_target("colony", Level::DEBUG)      // INFO level for main.rs
+            .with_target("aldr_autonomi_mvp", Level::DEBUG)      // INFO level for main.rs
             .with_default(Level::ERROR))          // ERROR level for other modules
         .with(tracing_subscriber::fmt::layer());
     
@@ -25,5 +25,5 @@ async fn main() {
     //tracing_subscriber::fmt::init();
 
     // Run the Tauri application
-    colony::run()
+    aldr_autonomi_mvp::run()
 }

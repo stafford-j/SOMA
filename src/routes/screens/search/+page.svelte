@@ -5,6 +5,7 @@
   let greetMsg = $state("");
   let statusMessage = $state("");
   let isLoading = $state(false);
+  let clientInitialized = $state(false);
 
   // Type definitions for Tauri commands
   interface CreatePodRequest {
@@ -22,6 +23,15 @@
     greetMsg = await invoke("greet", { name });
   }
 
+  // Function to ensure client is ready for operations
+  function ensureClientReady() {
+    if (!clientInitialized) {
+      statusMessage = '❌ Client not properly initialized. Please initialize the client first.';
+      return false;
+    }
+    return true;
+  }
+
   async function handleInitializeAutonomiClient() {
     // const walletKey = prompt("Enter wallet key:");
     // if (!walletKey) {
@@ -37,14 +47,20 @@
     try {
       const result = await invoke("initialize_autonomi_client", { walletKey });
       statusMessage = `Success: ${result}`;
+      clientInitialized = true;
     } catch (error) {
       statusMessage = `Error: ${error}`;
+      clientInitialized = false;
     } finally {
       isLoading = false;
     }
   }
 
   async function handleInitializePodManager() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     const password = prompt("Enter keystore password:");
     if (!password) {
       statusMessage = "Password is required";
@@ -79,6 +95,10 @@
   }
 
   async function handleAddPod() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     const podName = prompt("Enter pod name:");
     if (!podName) {
       statusMessage = "Pod name is required";

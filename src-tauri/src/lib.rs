@@ -1122,6 +1122,32 @@ fn check_initialization_status(
     Ok(status)
 }
 
+#[tauri::command]
+async fn get_wallet_balance(
+    state: State<'_, Mutex<AppState>>,
+) -> Result<String, Error> {
+    let wallet = {
+        let app_state = state.lock().unwrap();
+        let wallet_guard = app_state.wallet.lock().unwrap();
+        wallet_guard.as_ref()
+            .ok_or("Wallet not initialized")?
+            .clone()
+    };
+
+    match wallet.balance_of_tokens().await {
+        Ok(balance) => {
+            let balance_str = format!("Wallet balance: {} ANT tokens", balance);
+            info!("{}", balance_str);
+            Ok(balance_str)
+        },
+        Err(e) => {
+            let error_msg = format!("Failed to get wallet balance: {}", e);
+            info!("{}", error_msg);
+            Err(Error::from(error_msg.as_str()))
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////
 // Tauri App
 ////////////////////////////////////////////////////////////////////
@@ -1166,7 +1192,8 @@ pub fn run() {
             upload_data,
             discover_user_data,
             download_data,
-            check_initialization_status
+            check_initialization_status,
+            get_wallet_balance
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

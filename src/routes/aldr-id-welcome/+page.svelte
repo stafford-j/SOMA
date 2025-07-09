@@ -166,18 +166,27 @@
 
   // Check if setup already exists before clearing
   onMount(async () => {
-    // Only clear setup if user is specifically trying to reset setup
-    // Don't automatically clear completed setups
+    // Check for existing setup but allow user to go through setup again
+    // This ensures they can change network/wallet if needed
     const existingSetup = localStorage.getItem('aldrIdSetup');
     
-    // If setup exists and is completed, redirect to main app instead of clearing
     if (existingSetup) {
       try {
         const setup = JSON.parse(existingSetup);
         if (setup.completed) {
-          console.log('Setup already completed, redirecting to main app');
-          window.location.href = '/screens/aldr-id';
-          return;
+          console.log('Previous setup found, but allowing user to reconfigure');
+          console.log('Previous setup details:', setup);
+          
+          // Pre-populate the form with previous values but don't auto-redirect
+          if (setup.network) {
+            networkChoice = setup.network;
+          }
+          
+          // Show a message about previous setup but don't block the flow
+          statusMessage = `Previous setup found (${setup.network}, ${new Date(setup.timestamp).toLocaleDateString()}). You can proceed with current settings or change them.`;
+          
+          // Continue with normal flow instead of returning early
+          console.log('Continuing with normal flow despite previous setup');
         }
       } catch (error) {
         console.warn('Invalid setup data found, clearing:', error);
@@ -185,33 +194,16 @@
       }
     }
     
-    // More aggressive Tauri readiness check
-    let attempts = 0;
-    const maxAttempts = 20; // Try for 10 seconds
-    
-    while (!tauriReady && attempts < maxAttempts) {
-      try {
-        if (typeof window !== 'undefined' && (window.__TAURI__ || invoke)) {
-          // Try a simple invoke to test if Tauri is actually working
-          tauriReady = true;
-          console.log('Tauri is ready!');
-          break;
-        }
-      } catch (error) {
-        console.log(`Tauri check attempt ${attempts + 1}:`, error);
+    // Simplified Tauri readiness check - don't get stuck waiting
+    setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        tauriReady = true;
+        console.log('Tauri readiness forced after timeout');
       }
-      
-      await new Promise(resolve => setTimeout(resolve, 500));
-      attempts++;
-    }
-    
-    if (!tauriReady) {
-      console.warn('Tauri may not be fully ready, but proceeding anyway');
-      tauriReady = true; // Force it to be ready
-    }
+    }, 2000); // Force ready after 2 seconds
 
-    // Skip welcome screen and go straight to wallet setup
-    step = 'setup-wallet';
+    // Start with welcome screen - let user choose to proceed
+    step = 'welcome';
     clientInitialized = false;
   });
 </script>

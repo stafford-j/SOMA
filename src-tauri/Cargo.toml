@@ -19,7 +19,7 @@ tauri-plugin-dialog = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tauri-plugin-notification = "2"
-colonylib = "0.2.2"
+colonylib = { path = "../local-colonylib-fix" }
 autonomi = "0.4.6"
 tracing = "0.1.41"
 tokio = { version = "1", features = ["full"] }

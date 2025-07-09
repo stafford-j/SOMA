@@ -52,17 +52,21 @@
   
   // Load discovered data from network
   async function loadDiscoveredData() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     try {
       statusMessage = 'Loading discovered data...';
       
-      // First, try to search for pod-based profile data
+      // First, try to search for pod-based profile data using generic search
       const searchQuery = {
         "?subject": {
           "?type": "AldrID_Profile"
         }
       };
       
-      const searchResult = await invoke('search', { query: searchQuery });
+      const searchResult = await invoke('search', { request: { query: searchQuery } });
       console.log('Search result:', searchResult);
       
       if (searchResult && searchResult.results && searchResult.results.length > 0) {
@@ -85,8 +89,74 @@
         }
       }
       
-      // If no pod data found, show helpful message about legacy data
-      statusMessage = `ℹ️ No pod-based data found. Previous file uploads may exist but are not auto-discoverable. You can re-enter your information to enable auto-discovery for future sessions.`;
+      // Try alternative method: search for profile data by attempting to get subject data
+      // This searches for data that was stored using put_subject_data
+      console.log('Trying alternative profile discovery method...');
+      
+      // Since we can't easily search for specific subject data, we'll rely on the refresh_ref
+      // to populate the local cache and then try to find profile data
+      const searchResults = await invoke('search', { request: { query: {} } });
+      console.log('All search results:', searchResults);
+      
+      if (searchResults && searchResults.results) {
+        for (const result of searchResults.results) {
+          // Look for profile data in the results
+          if (result.data && typeof result.data === 'string') {
+            try {
+              const parsedData = JSON.parse(result.data);
+              if (parsedData.type === 'AldrID_Profile') {
+                // Found profile data!
+                aldrId.name = parsedData.name || '';
+                aldrId.dateOfBirth = parsedData.dateOfBirth || '';
+                aldrId.taxId = parsedData.taxId || '';
+                aldrId.nationality = parsedData.nationality || '';
+                
+                // Mark profile as saved
+                profileSaved = true;
+                
+                // Save to localStorage for consistency
+                localStorage.setItem('aldrId', JSON.stringify(aldrId));
+                
+                statusMessage = `✅ Loaded existing profile for ${aldrId.name}`;
+                console.log('Profile loaded successfully:', aldrId);
+                return;
+              }
+            } catch (parseError) {
+              // Not JSON data, skip
+              continue;
+            }
+          }
+        }
+      }
+      
+      // If no pod data found, provide detailed feedback to help user understand the state
+      console.log('No profile data found in discovery results');
+      console.log('Search results structure:', searchResults);
+      
+      // Check if user has any local data from previous sessions
+      const localData = localStorage.getItem('aldrId');
+      if (localData) {
+        try {
+          const parsed = JSON.parse(localData);
+          if (parsed.name || parsed.documents) {
+            statusMessage = `ℹ️ No network data found, but local data exists. Your previous information is still available locally. To sync with the network, please re-save your profile.`;
+            console.log('Found local data:', parsed);
+          } else {
+            statusMessage = `ℹ️ No data found. This appears to be a fresh start. You can enter your information and save it to the network.`;
+          }
+        } catch (error) {
+          statusMessage = `ℹ️ No data found. This appears to be a fresh start. You can enter your information and save it to the network.`;
+        }
+      } else {
+        statusMessage = `ℹ️ No data found. This appears to be a fresh start. You can enter your information and save it to the network.`;
+      }
+      
+      // Add debugging information for troubleshooting
+      console.log('Data discovery summary:');
+      console.log('- Search query results:', searchResults?.results?.length || 0);
+      console.log('- Local storage data:', !!localData);
+      console.log('- Client initialized:', clientInitialized);
+      console.log('- Connected network:', connectedNetwork);
       
       // Add a note about the data migration
       setTimeout(() => {
@@ -210,13 +280,93 @@
         return;
       }
       
-      // Parse setup data to get network choice
-      const setup = JSON.parse(setupData);
+      // Parse and validate setup data
+      let setup;
+      try {
+        setup = JSON.parse(setupData);
+        
+        // Validate setup data structure
+        if (!setup.completed || !setup.network || !setup.timestamp) {
+          console.warn('Invalid setup data found, clearing and redirecting to setup');
+          localStorage.removeItem('aldrIdSetup');
+          window.location.href = '/aldr-id-welcome';
+          return;
+        }
+        
+        // Check if setup is too old (older than 24 hours) - optional validation
+        const setupTime = new Date(setup.timestamp);
+        const now = new Date();
+        const hoursSinceSetup = (now - setupTime) / (1000 * 60 * 60);
+        
+        if (hoursSinceSetup > 24) {
+          console.warn('Setup data is stale (>24 hours), requiring re-setup for security');
+          localStorage.removeItem('aldrIdSetup');
+          window.location.href = '/aldr-id-welcome';
+          return;
+        }
+        
+      } catch (error) {
+        console.error('Failed to parse setup data:', error);
+        localStorage.removeItem('aldrIdSetup');
+        window.location.href = '/aldr-id-welcome';
+        return;
+      }
+      
       const selectedNetwork = setup.network || 'testnet';
       
       // Auto-initialize client since setup is already complete
       statusMessage = `Connecting to Autonomi ${selectedNetwork === 'mainnet' ? 'Mainnet' : 'Alphanet (testnet)'}...`;
-      await initializeClient(selectedNetwork);
+      
+      try {
+        await initializeClient(selectedNetwork);
+        
+        // Validate that client is actually working
+        if (!clientInitialized) {
+          console.error('Client initialization completed but clientInitialized is false');
+          statusMessage = '❌ Client initialization failed. Redirecting to setup...';
+          localStorage.removeItem('aldrIdSetup');
+          setTimeout(() => {
+            window.location.href = '/aldr-id-welcome';
+          }, 3000);
+          return;
+        }
+        
+        // Test client functionality with a simple operation
+        statusMessage = 'Validating network connection...';
+        try {
+          const balanceResult = await invoke('get_wallet_balance');
+          console.log('Client validation successful:', balanceResult);
+          statusMessage = '✅ Network connection validated';
+          
+          // Add detailed connection info for debugging
+          console.log('=== CONNECTION DEBUG INFO ===');
+          console.log('Network:', selectedNetwork);
+          console.log('Wallet balance:', balanceResult);
+          console.log('Setup timestamp:', setup.timestamp);
+          console.log('Connected network state:', connectedNetwork);
+          console.log('==============================');
+          
+        } catch (balanceError) {
+          console.warn('Balance check failed but proceeding:', balanceError);
+          statusMessage = '⚠️ Connected but balance check failed';
+          
+          // Add debug info even when balance fails
+          console.log('=== CONNECTION DEBUG INFO (Balance Failed) ===');
+          console.log('Network:', selectedNetwork);
+          console.log('Balance error:', balanceError);
+          console.log('Setup timestamp:', setup.timestamp);
+          console.log('============================================');
+        }
+        
+      } catch (initError) {
+        console.error('Client initialization failed:', initError);
+        statusMessage = '❌ Failed to connect to network. Redirecting to setup...';
+        localStorage.removeItem('aldrIdSetup');
+        setTimeout(() => {
+          window.location.href = '/aldr-id-welcome';
+        }, 3000);
+        return;
+      }
       
       // Load existing data from localStorage
       const saved = localStorage.getItem('aldrId');
@@ -272,6 +422,70 @@
     }
   });
 
+  // Runtime validation to ensure client stays functional
+  function startClientHealthCheck() {
+    if (typeof window !== 'undefined') {
+      // Check client health every 30 seconds
+      const healthCheckInterval = setInterval(() => {
+        // Only run health check if we think we're initialized
+        if (clientInitialized && !initializing) {
+          checkClientHealth();
+        }
+      }, 30000); // 30 seconds
+
+      // Clean up interval when component is destroyed
+      if (typeof window !== 'undefined') {
+        window.addEventListener('beforeunload', () => {
+          clearInterval(healthCheckInterval);
+        });
+      }
+    }
+  }
+
+  async function checkClientHealth() {
+    try {
+      // Simple health check - try to get wallet balance
+      await invoke('get_wallet_balance');
+      console.log('Client health check passed');
+    } catch (error) {
+      console.error('Client health check failed:', error);
+      
+      // If health check fails, mark client as not initialized
+      clientInitialized = false;
+      statusMessage = '⚠️ Network connection lost. Please refresh the page to reconnect.';
+      
+      // If it's a critical error, redirect back to setup
+      if (error.message && (
+        error.message.includes('not initialized') || 
+        error.message.includes('No client') ||
+        error.message.includes('Connection refused')
+      )) {
+        console.warn('Critical client error detected, redirecting to setup');
+        localStorage.removeItem('aldrIdSetup');
+        setTimeout(() => {
+          window.location.href = '/aldr-id-welcome';
+        }, 3000);
+      }
+    }
+  }
+
+  // Function to ensure client is ready for operations
+  function ensureClientReady() {
+    if (!clientInitialized) {
+      statusMessage = '❌ Client not properly initialized. Please refresh the page or go to setup.';
+      return false;
+    }
+    return true;
+  }
+
+  // Start health checking after component mounts
+  onMount(() => {
+    // Start health checking with a delay to allow initialization to complete
+    setTimeout(() => {
+      startClientHealthCheck();
+    }, 10000); // Start after 10 seconds
+  });
+
   // Handle file selection using Tauri dialog
   async function selectDocumentFile() {
     if (!selectedDocumentType) {
@@ -303,6 +517,10 @@
 
   // Check wallet balance
   async function checkBalance() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     try {
       statusMessage = 'Checking wallet balance...';
       const result = await invoke('get_wallet_balance');
@@ -315,6 +533,10 @@
 
   // Check initialization status for debugging
   async function checkInitStatus() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     try {
       statusMessage = 'Checking initialization status...';
       const result = await invoke('check_initialization_status');
@@ -369,6 +591,10 @@
 
   // Calculate upload cost
   async function calculateCost() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     if (!selectedDocumentType) {
       statusMessage = 'Please select a document type first';
       return;
@@ -394,6 +620,10 @@
 
   // Upload selected document to Autonomi network
   async function uploadDocument() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     console.log('uploadDocument called');
     console.log('Current state:', {
       name: aldrId.name,
@@ -490,6 +720,10 @@
 
   // Download document from Autonomi network
   async function downloadDocument(docType) {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     const docData = aldrId.documents[docType];
     if (!docData.address) {
       statusMessage = 'No network address available for this document';
@@ -535,6 +769,10 @@
   
   // Save profile to Autonomi as digital ID card
   async function saveProfile() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     if (!aldrId.name || !aldrId.dateOfBirth) {
       statusMessage = 'Please fill in at least name and date of birth';
       return;
@@ -562,6 +800,15 @@
       
       statusMessage = 'Creating pod data structure...';
       console.log('Profile data to save:', profileData);
+      
+      // Ensure DataStore is initialized before profile saving
+      try {
+        statusMessage = 'Ensuring system components are ready...';
+        await invoke('initialize_datastore');
+        console.log('DataStore re-initialized for profile saving');
+      } catch (datastoreError) {
+        console.log('DataStore already initialized:', datastoreError);
+      }
       
       // Store in pod system using put_subject_data
       const podAddress = 'user_profile_' + Date.now(); // Generate pod address
@@ -677,6 +924,10 @@
   }
 
   async function createShare() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     if (selectedDocuments.length === 0) {
       statusMessage = 'Please select at least one document to share';
       return;
@@ -726,6 +977,10 @@
   }
 
   async function loadActiveShares() {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     try {
       const result = await invoke('list_active_shares');
       activeShares = result.shares || [];
@@ -736,6 +991,10 @@
   }
 
   async function revokeShare(podAddress) {
+    if (!ensureClientReady()) {
+      return;
+    }
+
     try {
       await invoke('revoke_share', { podAddress });
       statusMessage = '✅ Share revoked successfully';
@@ -1151,6 +1410,17 @@
           Export Data as CSV
         </button>
       {/if}
+
+      <!-- Refresh Data Button -->
+      <button 
+        class="dashboard-button outline"
+        on:click={loadDiscoveredData}
+        disabled={!clientInitialized || initializing}
+        style="border-color: var(--holistic-green); color: var(--holistic-green);"
+      >
+        <i class="fas fa-sync-alt"></i>
+        Refresh Data Discovery
+      </button>
 
       <!-- Auto-connect status info (no manual button needed) -->
       {#if !clientInitialized && initializing}
