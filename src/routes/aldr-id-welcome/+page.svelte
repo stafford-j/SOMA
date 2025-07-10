@@ -13,9 +13,6 @@
   let tauriReady = false;
 
 
-  function proceedToSetup() {
-    step = 'setup-wallet';
-  }
 
   function handleWalletInput(event) {
     walletInput = event.target.value;
@@ -129,7 +126,7 @@
       clientInitialized = true;
       
       setTimeout(() => {
-        step = 'dashboard';
+        window.location.href = '/screens/aldr-id';
       }, 2000);
 
     } catch (error) {
@@ -202,111 +199,47 @@
       }
     }, 2000); // Force ready after 2 seconds
 
-    // Start with welcome screen - let user choose to proceed
-    step = 'welcome';
+    // Skip welcome screen, start directly with setup
+    step = 'setup-wallet';
     clientInitialized = false;
   });
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-teal-500 to-purple-600">
+<!-- BETA Banner -->
+<div class="banner">
+  Aldr Vaults is currently in BETA — this site is for partners, testers, and early collaborators.
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img src="https://static.wixstatic.com/media/afc39f_58839957210f4f9cba1dfba53ed6adda~mv2.png" alt="Aldr Vaults" class="nav-logo" />
+      <span class="tagline">Moving forward in life shouldn't mean losing your past.</span>
+    </div>
+    <div class="header-buttons">
+      <a href="https://aldrvaults.com" class="nav-button" target="_blank">aldrvaults.com</a>
+      <a href="mailto:james@ruleyproductions.com" class="contact-button">Contact</a>
+    </div>
+  </div>
+</header>
+
+<div class="min-h-screen bg-gray-50">
   <div class="container mx-auto px-4 py-8">
     
-    {#if step === 'welcome'}
-      <!-- Welcome Screen -->
-      <div class="setup-container">
-        <!-- Progress Indicator -->
-        <div class="progress-bar">
-          <div class="progress-step active">
-            <div class="step-circle">1</div>
-            <span>Welcome</span>
-          </div>
-          <div class="progress-line"></div>
-          <div class="progress-step">
-            <div class="step-circle">2</div>
-            <span>Setup</span>
-          </div>
-          <div class="progress-line"></div>
-          <div class="progress-step">
-            <div class="step-circle">3</div>
-            <span>Complete</span>
-          </div>
-        </div>
-
-        <div class="welcome-content">
-          <div class="brand-showcase">
-            <img src="/aldr-id-logo-white.png" alt="Aldr ID" class="welcome-logo" />
-            <h1 class="welcome-title">Welcome to Aldr ID</h1>
-            <p class="welcome-subtitle">
-              Your secure identity vault on the Autonomi network
-            </p>
-          </div>
-
-        <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-8 mb-8">
-          <h2 class="text-2xl font-semibold mb-6">What is Aldr ID?</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-            <div class="flex flex-col items-center text-center">
-              <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                <i class="fas fa-shield-alt text-xl"></i>
-              </div>
-              <h3 class="font-semibold mb-2">Secure Storage</h3>
-              <p class="text-sm opacity-90">Your documents are encrypted and stored on the decentralized Autonomi network</p>
-            </div>
-            <div class="flex flex-col items-center text-center">
-              <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                <i class="fas fa-key text-xl"></i>
-              </div>
-              <h3 class="font-semibold mb-2">You Own Your Data</h3>
-              <p class="text-sm opacity-90">Only you have access to your identity documents and personal information</p>
-            </div>
-            <div class="flex flex-col items-center text-center">
-              <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
-                <i class="fas fa-globe text-xl"></i>
-              </div>
-              <h3 class="font-semibold mb-2">Global Access</h3>
-              <p class="text-sm opacity-90">Access your documents from anywhere in the world, anytime</p>
-            </div>
-          </div>
-        </div>
-
-        <button 
-          on:click={proceedToSetup}
-          class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-opacity-90 transition-all duration-200 shadow-lg"
-        >
-          Get Started
-          <i class="fas fa-arrow-right ml-2"></i>
-        </button>
-        </div>
-      </div>
-
-    {:else if step === 'setup-wallet'}
+    {#if step === 'setup-wallet'}
       <!-- Wallet Setup Screen -->
       <div class="setup-container">
-        <!-- Progress Indicator -->
-        <div class="progress-bar">
-          <div class="progress-step completed">
-            <div class="step-circle">✓</div>
-            <span>Welcome</span>
-          </div>
-          <div class="progress-line completed"></div>
-          <div class="progress-step active">
-            <div class="step-circle">2</div>
-            <span>Setup</span>
-          </div>
-          <div class="progress-line"></div>
-          <div class="progress-step">
-            <div class="step-circle">3</div>
-            <span>Complete</span>
-          </div>
-        </div>
 
         <div class="setup-card">
-          <div class="text-center mb-8">
-            <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-teal-500 to-purple-600 rounded-full flex items-center justify-center">
-              <i class="fas fa-wallet text-white text-2xl"></i>
-            </div>
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">Setup Your Wallet</h1>
-            <p class="text-gray-600">Connect your Autonomi wallet to store documents securely</p>
+          <!-- Aldr ID Header Strip -->
+          <div class="vault-header-strip">
+            <img src="https://static.wixstatic.com/media/afc39f_1bbcbb95a63243fcbc33d15fa0b8315c~mv2.png" alt="Aldr ID" class="vault-logo" />
           </div>
+          
+          <div class="setup-content">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Initialize Your <span class="aldr-text">Aldr Vault</span></h1>
+            <p class="text-gray-600 mb-8">Select network and wallet configuration to access your secure identity vault</p>
 
           <form on:submit|preventDefault={initializeAldrId}>
             <!-- Network Selection -->
@@ -325,9 +258,8 @@
                        class:bg-teal-50={networkChoice === 'testnet'}
                        class:border-gray-300={networkChoice !== 'testnet'}>
                     <i class="fas fa-flask text-2xl mb-2" class:text-teal-500={networkChoice === 'testnet'}></i>
-                    <div class="font-medium">Alphanet (Test)</div>
-                    <div class="text-sm text-gray-500">Free testing - no real tokens</div>
-                    <div class="text-xs text-gray-500 mt-1">ArbitrumSepoliaTest</div>
+                    <div class="font-medium">Alphanet</div>
+                    <div class="text-sm text-gray-500">Free Testing | No ANT Required</div>
                   </div>
                 </label>
                 <label class="cursor-pointer">
@@ -343,8 +275,7 @@
                        class:border-gray-300={networkChoice !== 'mainnet'}>
                     <i class="fas fa-network-wired text-2xl mb-2" class:text-blue-500={networkChoice === 'mainnet'}></i>
                     <div class="font-medium">Mainnet</div>
-                    <div class="text-sm text-gray-500">Production - uses ANT tokens</div>
-                    <div class="text-xs text-gray-500 mt-1">ArbitrumOne | Your balance: 0.02 ANT</div>
+                    <div class="text-sm text-gray-500">Production | ANT Tokens Required</div>
                   </div>
                 </label>
               </div>
@@ -518,50 +449,10 @@
               Back
             </button>
           </div>
-        </div>
-      </div>
-
-    {:else if step === 'dashboard'}
-      <!-- Redirect to main Aldr ID dashboard -->
-      <div class="setup-container">
-        <!-- Progress Indicator -->
-        <div class="progress-bar">
-          <div class="progress-step completed">
-            <div class="step-circle">✓</div>
-            <span>Welcome</span>
-          </div>
-          <div class="progress-line completed"></div>
-          <div class="progress-step completed">
-            <div class="step-circle">✓</div>
-            <span>Setup</span>
-          </div>
-          <div class="progress-line completed"></div>
-          <div class="progress-step active">
-            <div class="step-circle">✓</div>
-            <span>Complete</span>
-          </div>
-        </div>
-
-        <div class="completion-card">
-          <img src="https://static.wixstatic.com/media/afc39f_c8d410bd02984aea991c785eb1e5f45c~mv2.png" alt="Aldr ID" class="completion-logo" />
-          <h1 class="text-3xl font-bold mb-4">Your Secure Identity Vault is Ready</h1>
-          <a 
-            href="/screens/aldr-id" 
-            class="inline-block bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-opacity-90 transition-all duration-200 shadow-lg"
-          >
-            Open Your Aldr ID Vault
-            <i class="fas fa-arrow-right ml-2"></i>
-          </a>
-          <div class="mt-4">
-            <button 
-              on:click={resetSetup}
-              class="text-white opacity-75 hover:opacity-100 text-sm"
-            >
-              Reset Setup
-            </button>
           </div>
         </div>
       </div>
+
     {/if}
 
     <!-- Powered by Colony Footer -->
@@ -594,11 +485,82 @@
     --shadow-lg: 0 8px 30px rgba(138, 43, 226, 0.2);
   }
 
+  /* BETA Banner */
+  .banner {
+    background: linear-gradient(45deg, var(--primary-teal), var(--primary-purple));
+    color: white;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary-teal), var(--primary-purple));
+    padding: 12px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tagline {
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+    font-size: 12px;
+    margin-top: 4px;
+    max-width: 300px;
+  }
+
+  .nav-logo {
+    height: 40px;
+    width: auto;
+  }
+
+  .header-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .nav-button, .contact-button {
+    background-color: white;
+    color: var(--primary-purple);
+    border: 2px solid white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 14px;
+  }
+
+  .nav-button:hover, .contact-button:hover {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+  }
+
   /* Setup Container */
   .setup-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     color: white;
+    padding: 0 40px;
   }
 
   /* Progress Bar */
@@ -707,9 +669,33 @@
   .setup-card {
     background: white;
     border-radius: 20px;
-    padding: 3rem;
+    padding: 0;
     box-shadow: var(--shadow-lg);
     color: var(--dark-text);
+    overflow: hidden;
+  }
+  
+  .vault-header-strip {
+    background: linear-gradient(135deg, var(--primary-teal), var(--primary-purple));
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .vault-logo {
+    height: 60px;
+    object-fit: contain;
+  }
+  
+  .setup-content {
+    padding: 3rem 5rem;
+    text-align: center;
+  }
+  
+  .aldr-text {
+    font-family: 'Trebuchet MS', sans-serif;
   }
 
   /* Completion Card */
