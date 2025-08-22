@@ -1,0 +1,406 @@
+/**
+ * Dashboard.css - Aldr Opinion Mode Alpha Styling
+ * 
+ * Adapted from Aldr Vaults MVP with updated color scheme for opinion mode alpha
+ * Professional medical companion app aesthetic with blue/indigo colors
+ * 
+ * Color scheme:
+ * - Blue: Primary brand color (#0B7EC8)
+ * - Indigo: Secondary brand color (#6366F1)
+ * - Updated for non-triggering clean clinical aesthetic
+ */
+:root {
+  --primary-blue: #0B7EC8;
+  --primary-indigo: #6366F1;
+  --primary-teal: #20B2AA;
+  --primary-purple: #8A2BE2;
+  --dark-text: #333;
+  --light-bg: #f8f9fa;
+  --gray-text: #6c757d;
+  --aldr-dark: #333;
+  --aldr-gray: #6c757d;
+  --aldr-light: #f8f9fa;
+  --aldr-teal: #0B7EC8;
+  --aldr-purple: #6366F1;
+  --medical-blue: #4169E1;
+  --holistic-green: #228B22;
+  --mental-purple: #9932CC;
+  --warning-red: #DC2626;
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 5px 15px rgba(11, 126, 200, 0.15);
+  --shadow-lg: 0 8px 30px rgba(99, 102, 241, 0.2);
+  --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base styling with larger fonts */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 18px; /* Increased from 16px */
+  line-height: 1.6;
+  color: var(--dark-text);
+  background-color: var(--light-bg);
+}
+
+/* Main container styles */
+.dashboard-container {
+  padding: 2rem;
+  width: 100%;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Header section with blue gradient */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 2rem; /* Increased padding */
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-indigo));
+  border-radius: 0px;
+  color: white;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem; /* Increased gap */
+  align-items: center;
+}
+
+.dashboard-title {
+  font-size: 2.5rem; /* Increased from 1.8rem */
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Aldr gradient background */
+.bg-aldr-gradient {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-indigo));
+}
+
+/* Cards with proper spacing */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem; /* Increased padding */
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #dee2e6;
+  margin-bottom: 2rem;
+  transition: var(--transition-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Button styles with larger touch targets */
+.dashboard-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem; /* Increased padding */
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem; /* Increased font size */
+  text-decoration: none;
+  transition: var(--transition-standard);
+  cursor: pointer;
+  border: 2px solid transparent;
+  min-height: 48px; /* Touch target compliance */
+  white-space: nowrap;
+}
+
+.dashboard-button.white {
+  background: white;
+  color: var(--primary-blue);
+  border-color: white;
+}
+
+.dashboard-button.white:hover {
+  background: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.dashboard-button.outline {
+  background: transparent;
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.dashboard-button.outline:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.btn-primary {
+  background: var(--primary-blue);
+  color: white;
+  border: 2px solid var(--primary-blue);
+  padding: 1rem 2rem; /* Increased padding */
+  font-size: 1.1rem; /* Larger font */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+}
+
+.btn-primary:hover {
+  background: #0967A3;
+  border-color: #0967A3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(11, 126, 200, 0.3);
+}
+
+.btn-secondary {
+  background: var(--primary-indigo);
+  color: white;
+  border: 2px solid var(--primary-indigo);
+  padding: 1rem 2rem; /* Increased padding */
+  font-size: 1.1rem; /* Larger font */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+}
+
+.btn-secondary:hover {
+  background: #4F46E5;
+  border-color: #4F46E5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Text sizing improvements */
+h1 { 
+  font-size: 3rem; /* Increased from 2.5rem */
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h2 { 
+  font-size: 2.25rem; /* Increased from 2rem */
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+h3 { 
+  font-size: 1.75rem; /* Increased from 1.5rem */
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+h4 { 
+  font-size: 1.4rem; /* Increased from 1.25rem */
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1.1rem; /* Increased from 1rem */
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Form elements with larger text */
+input, select, textarea {
+  font-size: 1.1rem; /* Increased font size */
+  line-height: 1.5;
+  padding: 0.75rem 1rem; /* Increased padding */
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  transition: var(--transition-standard);
+  min-height: 48px; /* Touch target compliance */
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(11, 126, 200, 0.1);
+}
+
+/* Labels with larger text */
+label {
+  font-size: 1.1rem; /* Increased font size */
+  font-weight: 500;
+  color: var(--dark-text);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  
+  .dashboard-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.875rem; }
+  h3 { font-size: 1.5rem; }
+  
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Health records specific styling */
+.health-records-section {
+  margin-top: 2rem;
+}
+
+.health-record-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #dee2e6;
+  transition: var(--transition-standard);
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.health-record-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.record-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.record-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
+
+.record-title {
+  font-size: 1.25rem; /* Increased font size */
+  font-weight: 600;
+  color: var(--dark-text);
+  margin: 0 0 0.25rem 0;
+}
+
+.record-date {
+  font-size: 1rem; /* Increased font size */
+  color: var(--gray-text);
+}
+
+.record-description {
+  color: var(--gray-text);
+  font-size: 1.1rem; /* Increased font size */
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Mode toggle styling */
+.mode-toggle-container {
+  display: flex;
+  background-color: var(--light-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+  margin-bottom: 1.5rem;
+}
+
+.mode-toggle {
+  padding: 1rem 1.5rem; /* Increased padding */
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gray-text);
+  transition: var(--transition-standard);
+  min-height: 48px;
+  font-weight: 500;
+  font-size: 1.1rem; /* Increased font size */
+}
+
+.mode-toggle.active {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.mode-toggle.active.opinion-mode {
+  background-color: var(--primary-indigo);
+}
+
+/* Utility classes */
+.text-aldr-dark { color: var(--aldr-dark); }
+.text-aldr-gray { color: var(--aldr-gray); }
+.bg-aldr-light { background-color: var(--aldr-light); }
+.text-aldr-teal { color: var(--aldr-teal); }
