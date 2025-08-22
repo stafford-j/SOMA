@@ -163,10 +163,14 @@ const BetaLearning = () => {
     e.target.value = '';
   };
 
-  const filteredDocuments = documents.filter(doc => {
-    if (activeFilter === 'all') return true;
-    return doc.metadata?.category === activeFilter;
-  });
+  // Filter documents based on active filter
+  useEffect(() => {
+    const filtered = documents.filter(doc => {
+      if (activeFilter === 'all') return true;
+      return doc.metadata?.category === activeFilter;
+    });
+    setFilteredDocuments(filtered);
+  }, [documents, activeFilter]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
