@@ -1,0 +1,60 @@
+{
+  "recordType": "bloodwork",
+  "date": "2025-01-15",
+  "patient": {
+    "name": "Mock Patient",
+    "age": 35,
+    "gender": "Male"
+  },
+  "results": {
+    "hemoglobin": {
+      "value": 13.2,
+      "unit": "g/dL",
+      "referenceRange": "13.8-17.2",
+      "status": "low"
+    },
+    "hematocrit": {
+      "value": 39.5,
+      "unit": "%",
+      "referenceRange": "41-50",
+      "status": "low"
+    },
+    "ferritin": {
+      "value": 15,
+      "unit": "ng/mL",
+      "referenceRange": "20-200",
+      "status": "low"
+    },
+    "iron": {
+      "value": 45,
+      "unit": "μg/dL",
+      "referenceRange": "60-170",
+      "status": "low"
+    },
+    "totalIronBindingCapacity": {
+      "value": 420,
+      "unit": "μg/dL",
+      "referenceRange": "250-400",
+      "status": "high"
+    },
+    "ironSaturation": {
+      "value": 10.7,
+      "unit": "%",
+      "referenceRange": "20-55",
+      "status": "low"
+    },
+    "vitaminB12": {
+      "value": 350,
+      "unit": "pg/mL",
+      "referenceRange": "200-900",
+      "status": "normal"
+    },
+    "folate": {
+      "value": 8.2,
+      "unit": "ng/mL",
+      "referenceRange": "3.1-20.5",
+      "status": "normal"
+    }
+  },
+  "clinicalNotes": "Laboratory findings consistent with iron deficiency anemia. Patient reports fatigue and shortness of breath on exertion. Recommend dietary modifications and possible iron supplementation."
+}
